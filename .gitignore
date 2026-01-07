@@ -5,3 +5,10 @@ x86/
 Win32/
 build/
 out/
+
+.vs/
+*.user
+*.userosscache
+*.suo
+*.VC.db
+*.VC.opendb
