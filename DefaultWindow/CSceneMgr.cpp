@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CSceneMgr.h"
 #include "CMenu.h"
+#include "CKJJScene.h"
 
 CSceneMgr* CSceneMgr::m_pInstance = nullptr;
 
@@ -28,9 +29,13 @@ void CSceneMgr::Scene_Change(SCENEID eID)
 
 			break;
 
-
 		case SC_STAGE:
 		
+			break;
+
+		case SC_KJJ:
+
+			m_pScene = new CKJJScene;
 			break;
 
 		}

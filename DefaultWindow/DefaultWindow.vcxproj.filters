@@ -64,6 +64,21 @@
     <Filter Include="KJJ">
       <UniqueIdentifier>{c5669117-d8ee-4a20-b705-b01841f3b429}</UniqueIdentifier>
     </Filter>
+    <Filter Include="KJJ\00. Scene">
+      <UniqueIdentifier>{d87fae0e-7d07-4953-843e-07c8f3e5cb8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\01. Obj">
+      <UniqueIdentifier>{62e87332-304c-4853-933a-44acdff03159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\01. Obj\00. Obj">
+      <UniqueIdentifier>{d0155403-4075-4295-b1bc-be07fd1a9652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\01. Obj\01. Player">
+      <UniqueIdentifier>{b6f9ac29-2824-4019-bb87-832dcbc8d52e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\01. Obj\02. Hammer">
+      <UniqueIdentifier>{5788555b-90b9-47fd-abcf-f7d3d91e758e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -126,9 +141,6 @@
     <ClInclude Include="CLSYObj.h">
       <Filter>LSY</Filter>
     </ClInclude>
-    <ClInclude Include="CKJJObj.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CKMSObj.h">
       <Filter>KMS</Filter>
     </ClInclude>
@@ -138,11 +150,20 @@
     <ClInclude Include="CKJJObj.h">
       <Filter>KJJ</Filter>
     </ClInclude>
+    <ClInclude Include="CKJJScene.h">
+      <Filter>KJJ\00. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CKJJObj.h">
+      <Filter>KJJ\01. Obj\00. Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="CKJJ_Player.h">
+      <Filter>KJJ\01. Obj\01. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CHammer.h">
+      <Filter>KJJ\01. Obj\02. Hammer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DefaultWindow.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -185,12 +206,6 @@
     <ClCompile Include="CLSYObj.cpp">
       <Filter>LSY</Filter>
     </ClCompile>
-    <ClCompile Include="CKJJObj.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="FileName.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CKMSObj.cpp">
       <Filter>KMS</Filter>
     </ClCompile>
@@ -202,6 +217,21 @@
     </ClCompile>
     <ClCompile Include="CKJJObj.cpp">
       <Filter>KJJ</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultWindow.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CKJJScene.cpp">
+      <Filter>KJJ\00. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CKJJObj.cpp">
+      <Filter>KJJ\01. Obj\00. Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="CKJJ_Player.cpp">
+      <Filter>KJJ\01. Obj\01. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CHammer.cpp">
+      <Filter>KJJ\01. Obj\02. Hammer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
