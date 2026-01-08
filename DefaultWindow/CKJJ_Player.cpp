@@ -13,10 +13,10 @@ CKJJ_Player::~CKJJ_Player()
 
 void CKJJ_Player::Initialize()
 {
-	m_vPoint[0] = { -50.f, -50.f, 0.f };
-	m_vPoint[1] = { 50.f, -50.f, 0.f };
-	m_vPoint[2] = { 50.f, 50.f, 0.f };
-	m_vPoint[3] = { -50.f, 50.f, 0.f };
+	m_vPoint[0] = { -30.f, -30.f, 0.f };
+	m_vPoint[1] = { 30.f, -30.f, 0.f };
+	m_vPoint[2] = { 30.f, 30.f, 0.f };
+	m_vPoint[3] = { -30.f, 30.f, 0.f };
 
 	m_tInfo.vPos = { 400.f, 300.f, 0.f };
 	m_tInfo.vDir = { 0.f, 1.f, 0.f };

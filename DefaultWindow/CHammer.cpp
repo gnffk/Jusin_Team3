@@ -32,8 +32,8 @@ int CHammer::Update()
 
 	D3DXVECTOR3 vMouse_Movement = m_vCurrMouse - m_vPrevMouse;
 
-	m_fAngle			+= vMouse_Movement.x*9/40;
-	m_fHead_Distance	-= vMouse_Movement.y/6;
+	m_fAngle			+= vMouse_Movement.x*9/20;
+	m_fHead_Distance	-= vMouse_Movement.y/4;
 
 	if (m_fAngle > 180.f)
 	{
@@ -49,18 +49,19 @@ int CHammer::Update()
 	else if (m_fHead_Distance > 150.f)
 		m_fHead_Distance = 150.f;
 
-	D3DXMATRIX		matScale, matRotZ, matTrans;
+	D3DXMATRIX		matScale, matRotZ, matTrans, matTrans2;
 
 	float fRadian = D3DXToRadian(m_fAngle);
 
-	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+	D3DXMatrixScaling(&matScale, 2.f, 2.f, 2.f);
 	D3DXMatrixRotationZ(&matRotZ, fRadian);
-	D3DXMatrixTranslation(&matTrans,
-		m_pPlayer->Get_Info().vPos.x + m_fHead_Distance,
+	D3DXMatrixTranslation(&matTrans, m_fHead_Distance, 0.f, 0.f);
+	D3DXMatrixTranslation(&matTrans2,
+		m_pPlayer->Get_Info().vPos.x,
 		m_pPlayer->Get_Info().vPos.y,
 		m_pPlayer->Get_Info().vPos.z);
 
-	m_tInfo.matWorld = matScale * matTrans * matRotZ;
+	m_tInfo.matWorld = matScale * matTrans * matRotZ * matTrans2;
 
 	for (int i = 0; i < 5; ++i)
 	{
