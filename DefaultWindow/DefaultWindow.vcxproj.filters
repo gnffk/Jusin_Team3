@@ -58,6 +58,9 @@
     <Filter Include="LSY">
       <UniqueIdentifier>{8e7aed05-3060-4d6c-8631-4758f112b759}</UniqueIdentifier>
     </Filter>
+    <Filter Include="KMS">
+      <UniqueIdentifier>{91ac3ffd-395e-4410-9922-6458253bf295}</UniqueIdentifier>
+    </Filter>
     <Filter Include="KJJ">
       <UniqueIdentifier>{c5669117-d8ee-4a20-b705-b01841f3b429}</UniqueIdentifier>
     </Filter>
@@ -123,6 +126,12 @@
     <ClInclude Include="CLSYObj.h">
       <Filter>LSY</Filter>
     </ClInclude>
+    <ClInclude Include="CKJJObj.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CKMSObj.h">
+      <Filter>KMS</Filter>
+    </ClInclude>
     <ClInclude Include="CKMSObj.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -175,6 +184,15 @@
     </ClCompile>
     <ClCompile Include="CLSYObj.cpp">
       <Filter>LSY</Filter>
+    </ClCompile>
+    <ClCompile Include="CKJJObj.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="FileName.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CKMSObj.cpp">
+      <Filter>KMS</Filter>
     </ClCompile>
     <ClCompile Include="CKMSObj.cpp">
       <Filter>소스 파일</Filter>
