@@ -1,10 +1,11 @@
 #include "pch.h"
 #include "CSceneMgr.h"
 #include "CMenu.h"
+#include "CKMSScene.h"
 
 CSceneMgr* CSceneMgr::m_pInstance = nullptr;
 
-CSceneMgr::CSceneMgr() : m_pScene(nullptr), m_ePreScene(SC_END), m_eCurScene(SC_MENU)
+CSceneMgr::CSceneMgr() : m_pScene(nullptr), m_ePreScene(SC_END), m_eCurScene(SC_MINSU)
 {
 }
 
@@ -28,11 +29,13 @@ void CSceneMgr::Scene_Change(SCENEID eID)
 
 			break;
 
-
 		case SC_STAGE:
 		
 			break;
 
+		case SC_MINSU:
+			m_pScene = new CKMSScene;
+			break;
 		}
 
 		m_pScene->Initialize();
