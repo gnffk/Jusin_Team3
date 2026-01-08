@@ -5,10 +5,12 @@ x86/
 Win32/
 build/
 out/
-!*.vcxproj.filters
+
 .vs/
 *.user
 *.userosscache
 *.suo
 *.VC.db
 *.VC.opendb
+
+!*.vcxproj.filters
