@@ -17,5 +17,9 @@ public:
 
 	void Release() override;
 
+
+private:
+	D3DXVECTOR3		m_vPoint[5];
+	D3DXVECTOR3		m_vOriginPoint[5];
 };
 

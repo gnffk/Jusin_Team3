@@ -82,7 +82,10 @@
     <Filter Include="KMS\01. Obj\Player\Body">
       <UniqueIdentifier>{004fa1ba-c19f-4891-958d-c87f142f35fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="KMS\01. Obj\Player\Root">
+    <Filter Include="KMS\01. Obj\Player\Body\Bottom">
+      <UniqueIdentifier>{b715ba06-2abf-4097-bfc2-88398ea2a9a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body\Root">
       <UniqueIdentifier>{e226096e-2b51-43a6-ba6f-7ca4fa347728}</UniqueIdentifier>
     </Filter>
     <Filter Include="KJJ">
@@ -102,6 +105,12 @@
     </Filter>
     <Filter Include="KJJ\01. Obj\02. Hammer">
       <UniqueIdentifier>{c9d271c2-9839-4b97-8a74-455199a404d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body\Bottom\LeftLeg">
+      <UniqueIdentifier>{cf6b3bd9-101b-4f9b-8cfb-4ca9bffe75e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body\Bottom\RightLeg">
+      <UniqueIdentifier>{1cb12635-0556-4660-815b-b7f7b0be3c43}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -171,11 +180,20 @@
     <ClInclude Include="CKMSScene.h">
       <Filter>KMS\02. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="CPelvis.h">
-      <Filter>KMS\01. Obj\Player\Body</Filter>
-    </ClInclude>
     <ClInclude Include="CKMSPlayer.h">
-      <Filter>KMS\01. Obj\Player\Root</Filter>
+      <Filter>KMS\01. Obj\Player\Body\Root</Filter>
+    </ClInclude>
+    <ClInclude Include="CPelvis.h">
+      <Filter>KMS\01. Obj\Player\Body\Bottom</Filter>
+    </ClInclude>
+    <ClInclude Include="CLeftUpLeg.h">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\LeftLeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CLeftDownLeg.h">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\LeftLeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CRightLeg.h">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\RightLeg</Filter>
     </ClInclude>
     <ClInclude Include="CKJJObj.h">
       <Filter>KJJ\01. Obj\00. Obj</Filter>
@@ -248,11 +266,20 @@
     <ClCompile Include="CKMSScene.cpp">
       <Filter>KMS\02. Scene</Filter>
     </ClCompile>
-    <ClCompile Include="CPelvis.cpp">
-      <Filter>KMS\01. Obj\Player\Body</Filter>
-    </ClCompile>
     <ClCompile Include="CKMSPlayer.cpp">
-      <Filter>KMS\01. Obj\Player\Root</Filter>
+      <Filter>KMS\01. Obj\Player\Body\Root</Filter>
+    </ClCompile>
+    <ClCompile Include="CPelvis.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Bottom</Filter>
+    </ClCompile>
+    <ClCompile Include="CLeftDownLeg.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\LeftLeg</Filter>
+    </ClCompile>
+    <ClCompile Include="CLeftUpLeg.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\LeftLeg</Filter>
+    </ClCompile>
+    <ClCompile Include="CRightLeg.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\RightLeg</Filter>
     </ClCompile>
     <ClCompile Include="DefaultWindow.cpp">
       <Filter>소스 파일</Filter>

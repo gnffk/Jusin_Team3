@@ -3,6 +3,7 @@
 #include "CMenu.h"
 #include "CKJJScene.h"
 #include "CKMSScene.h"
+#include "CSceneLSYTest.h"
 
 CSceneMgr* CSceneMgr::m_pInstance = nullptr;
 
@@ -32,6 +33,10 @@ void CSceneMgr::Scene_Change(SCENEID eID)
 
 		case SC_STAGE:
 		
+			break;
+
+		case SC_LSY_TEST:
+			m_pScene = new CSceneLSYTest;
 			break;
 
 		case SC_KJJ:
