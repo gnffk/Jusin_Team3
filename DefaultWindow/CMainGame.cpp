@@ -32,7 +32,21 @@ void CMainGame::Initialize()
 	HBITMAP prev = (HBITMAP)SelectObject(_hdcBack, _bmpBack);
 	DeleteObject(prev);
 
-	CSceneMgr::Get_Instance()->Scene_Change(SC_MINSU);
+	CSceneMgr::Get_Instance()->Scene_Change(SC_MENU);
+
+
+#ifdef _DEBUG
+
+	if (::AllocConsole() == TRUE)
+	{
+		FILE* nfp[3];
+		freopen_s(nfp + 0, "CONOUT$", "rb", stdin);
+		freopen_s(nfp + 1, "CONOUT$", "wb", stdout);
+		freopen_s(nfp + 2, "CONOUT$", "wb", stderr);
+		std::ios::sync_with_stdio();
+	}
+
+#endif // _DEBUG
 }
 
 void CMainGame::Update()
@@ -40,7 +54,6 @@ void CMainGame::Update()
 	CDeltaMgr::Get_Instance()->TickUpdate();
 
 	CSceneMgr::Get_Instance()->Update();
-
 }
 
 void CMainGame::Late_Update()
@@ -75,6 +88,12 @@ void CMainGame::Render()
 
 void CMainGame::Release()
 {
+#ifdef _DEBUG
+
+	FreeConsole();
+
+#endif // _DEBUG
+
 	CDeltaMgr::Destroy_Instacne();
 	CBmpMgr::Destroy_Instacne();
 	CKeyMgr::Destroy_Instacne();

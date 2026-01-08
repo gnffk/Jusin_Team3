@@ -12,5 +12,13 @@ public:
 	void Late_Update() override;
 	void Render(HDC hDC) override;
 	void Release() override;
+
+private:
+	RECT m_mouseRect;
+
+	RECT m_msRect;
+	RECT m_jjRect;
+	RECT m_syRect;
+
 };
 
