@@ -144,6 +144,7 @@
     <ClInclude Include="CCollisionMgr.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CKJJObj.h" />
+    <ClInclude Include="CKMSObj.h" />
     <ClInclude Include="CLSYObj.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CMenu.h" />
@@ -166,6 +167,7 @@
     <ClCompile Include="CCollisionMgr.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CKJJObj.cpp" />
+    <ClCompile Include="CKMSObj.cpp" />
     <ClCompile Include="CLSYObj.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMenu.cpp" />
