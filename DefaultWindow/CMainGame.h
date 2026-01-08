@@ -22,6 +22,11 @@ private:
 
 
 
+	RECT _rect;
+	HDC _hdcBack{};
+	HBITMAP _bmpBack{};
+
+
 	TCHAR		m_szFPS[128];
 	int			m_iFPS;
 	DWORD		m_dwTime;

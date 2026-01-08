@@ -7,6 +7,7 @@
 #include "CKeyMgr.h"
 #include "CBmpMgr.h"
 #include "CSceneMgr.h"
+#include "CDeltaMgr.h"
 
 CMainGame::CMainGame()
 	: m_iFPS(0), m_dwTime(GetTickCount())
@@ -23,11 +24,21 @@ void CMainGame::Initialize()
 {
 	m_hDC = GetDC(g_hWnd);
 	
-	CSceneMgr::Get_Instance()->Scene_Change(SC_KJJ);
+
+	GetClientRect(g_hWnd, &_rect);
+
+	_hdcBack = CreateCompatibleDC(m_hDC);
+	_bmpBack = CreateCompatibleBitmap(m_hDC, _rect.right, _rect.bottom);
+	HBITMAP prev = (HBITMAP)SelectObject(_hdcBack, _bmpBack);
+	DeleteObject(prev);
+
+	CSceneMgr::Get_Instance()->Scene_Change(SC_MINSU);
 }
 
 void CMainGame::Update()
 {		
+	CDeltaMgr::Get_Instance()->TickUpdate();
+
 	CSceneMgr::Get_Instance()->Update();
 
 }
@@ -53,24 +64,18 @@ void CMainGame::Render()
 		m_dwTime = GetTickCount();
 	}
 
-	HDC		hBackDC = CBmpMgr::Get_Instance()->Find_Image(L"Back");
+	
+	Rectangle(_hdcBack, 0, 0, WINCX, WINCY);
 
-	CSceneMgr::Get_Instance()->Render(hBackDC);
-
-	BitBlt(m_hDC,				// 복사 받을 DC
-		0,	// 복사 받을 공간의 LEFT	
-		0,	// 복사 받을 공간의 TOP
-		WINCX,			// 복사 받을 공간의 가로 
-		WINCY,			// 복사 받을 공간의 세로 
-		hBackDC,				// 복사 할 DC
-		0,					// 복사할 이미지의 LEFT, TOP
-		0,
-		SRCCOPY);			// 그대로 복사
+	CSceneMgr::Get_Instance()->Render(_hdcBack);
+	BitBlt(m_hDC, 0, 0, _rect.right, _rect.bottom, _hdcBack, 0, 0, SRCCOPY);
+	PatBlt(_hdcBack, 0, 0, _rect.right, _rect.bottom, WHITENESS);
 
 }
 
 void CMainGame::Release()
 {
+	CDeltaMgr::Destroy_Instacne();
 	CBmpMgr::Destroy_Instacne();
 	CKeyMgr::Destroy_Instacne();
 	CScrollMgr::Destroy_Instance();
