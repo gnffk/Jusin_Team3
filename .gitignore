@@ -5,7 +5,7 @@ x86/
 Win32/
 build/
 out/
-
+!*.vcxproj.filters
 .vs/
 *.user
 *.userosscache
