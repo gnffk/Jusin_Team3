@@ -55,6 +55,9 @@
     <Filter Include="03. Scene\Menu">
       <UniqueIdentifier>{f8fad336-02fb-4620-9b26-dd577c3bfb38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LSY">
+      <UniqueIdentifier>{8e7aed05-3060-4d6c-8631-4758f112b759}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -114,6 +117,9 @@
     <ClInclude Include="CMenu.h">
       <Filter>03. Scene\Menu</Filter>
     </ClInclude>
+    <ClInclude Include="CLSYObj.h">
+      <Filter>LSY</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultWindow.cpp">
@@ -157,6 +163,9 @@
     </ClCompile>
     <ClCompile Include="CMenu.cpp">
       <Filter>03. Scene\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="CLSYObj.cpp">
+      <Filter>LSY</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
