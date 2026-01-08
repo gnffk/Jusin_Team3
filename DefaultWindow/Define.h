@@ -119,3 +119,13 @@ typedef struct tagFrame
 
 
 extern HWND g_hWnd;
+
+// 2601081425 KJJ 마우스 위치 좌표 함수 추가
+static D3DXVECTOR3		Get_Mouse()
+{
+	POINT		ptMouse{};
+	GetCursorPos(&ptMouse);
+	ScreenToClient(g_hWnd, &ptMouse);
+
+	return { (float)ptMouse.x, (float)ptMouse.y, 0.f };
+}
