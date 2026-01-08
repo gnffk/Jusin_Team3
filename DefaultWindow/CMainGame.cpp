@@ -7,6 +7,7 @@
 #include "CKeyMgr.h"
 #include "CBmpMgr.h"
 #include "CSceneMgr.h"
+#include "CDeltaMgr.h"
 
 CMainGame::CMainGame()
 	: m_iFPS(0), m_dwTime(GetTickCount())
@@ -36,6 +37,8 @@ void CMainGame::Initialize()
 
 void CMainGame::Update()
 {		
+	CDeltaMgr::Get_Instance()->TickUpdate();
+
 	CSceneMgr::Get_Instance()->Update();
 
 }
@@ -72,6 +75,7 @@ void CMainGame::Render()
 
 void CMainGame::Release()
 {
+	CDeltaMgr::Destroy_Instacne();
 	CBmpMgr::Destroy_Instacne();
 	CKeyMgr::Destroy_Instacne();
 	CScrollMgr::Destroy_Instance();
