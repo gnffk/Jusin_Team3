@@ -12,10 +12,12 @@ public:
 	int Late_Update() override;
 	void Render(HDC hDC) override;
 	void Release() override;
-
+public:
+	void Key_Input();
 private:
-	D3DXVECTOR3		m_vPoint[4];
-	D3DXVECTOR3		m_vOriginPoint[4];
+	D3DXVECTOR3		m_vPoint[5];
+	D3DXVECTOR3		m_vOriginPoint[5];
+
 
 };
 

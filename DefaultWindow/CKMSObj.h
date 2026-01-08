@@ -12,6 +12,8 @@ public:
 	void Set_ParentObject(CObj* m_fParentObject) {m_pParentObject = m_fParentObject;}
 	void Add_SubObject(CObj* m_fPelvisObject) { m_vecSubObject.push_back(m_fPelvisObject); }
 
+public:
+	virtual void Key_Input() PURE;
 protected:
 	CObj* m_pParentObject;
 	vector<CObj*>m_vecSubObject;

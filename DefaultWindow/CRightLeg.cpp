@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CRightLeg.h"
+#include "CKeyMgr.h"
 
 CRightLeg::CRightLeg()
 {
@@ -30,3 +31,4 @@ void CRightLeg::Render(HDC hDC)
 void CRightLeg::Release()
 {
 }
+

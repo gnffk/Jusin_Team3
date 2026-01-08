@@ -15,7 +15,7 @@ void CKMSPlayer::Initialize()
 {
 	// 크 -> 자 -> 이 -> 공 -> 부
 	// 월드 좌표계 차이
-	m_tInfo.vPos = { 400.f, 350.f, 0.f };
+	m_tInfo.vPos = { 400.f, 300.f, 0.f };
 
 	m_tInfo.vLook = { 0.f, -1.f, 0.f };
 	m_fAngle = 0.f;
@@ -62,13 +62,13 @@ void CKMSPlayer::Release()
 
 void CKMSPlayer::Key_Input()
 {
-	if (CKeyMgr::Get_Instance()->Key_Pressing('Q')) {
-		m_fAngle -= D3DXToRadian(3.f);
-	}
-	
-	if (CKeyMgr::Get_Instance()->Key_Pressing('W')) {
-		m_fAngle += D3DXToRadian(3.f);
-	}
+	//if (CKeyMgr::Get_Instance()->Key_Pressing('Q')) {
+	//	m_fAngle -= D3DXToRadian(3.f);
+	//}
+	//
+	//if (CKeyMgr::Get_Instance()->Key_Pressing('W')) {
+	//	m_fAngle += D3DXToRadian(3.f);
+	//}
 
 
 

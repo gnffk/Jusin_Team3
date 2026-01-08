@@ -12,7 +12,8 @@ public:
 	int Late_Update() override;
 	void Render(HDC hDC) override;
 	void Release() override;
-
+public:
+	void Key_Input() override;
 
 private:
 	D3DXVECTOR3		m_vPoint[5];

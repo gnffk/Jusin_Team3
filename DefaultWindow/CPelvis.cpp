@@ -18,11 +18,11 @@ void CPelvis::Initialize()
 
 		m_tInfo.vPos = m_pParentObject->Get_Info().vPos;
 	}
-	m_vPoint[0] = { m_tInfo.vPos.x - 50.f, m_tInfo.vPos.y - 10.f, 0.f };
-	m_vPoint[1] = { m_tInfo.vPos.x + 50.f, m_tInfo.vPos.y - 10.f, 0.f };
-	m_vPoint[2] = { m_tInfo.vPos.x + 50.f, m_tInfo.vPos.y + 30.f, 0.f };
-	m_vPoint[3] = { m_tInfo.vPos.x - 50.f, m_tInfo.vPos.y + 30.f, 0.f };
-	m_vPoint[4] = { m_tInfo.vPos.x - 50.f, m_tInfo.vPos.y - 10.f, 0.f };
+	m_vPoint[0] = { m_tInfo.vPos.x - 25.f, m_tInfo.vPos.y - 10.f, 0.f };
+	m_vPoint[1] = { m_tInfo.vPos.x + 25.f, m_tInfo.vPos.y - 10.f, 0.f };
+	m_vPoint[2] = { m_tInfo.vPos.x + 25.f, m_tInfo.vPos.y + 30.f, 0.f };
+	m_vPoint[3] = { m_tInfo.vPos.x - 25.f, m_tInfo.vPos.y + 30.f, 0.f };
+	m_vPoint[4] = { m_tInfo.vPos.x - 25.f, m_tInfo.vPos.y - 10.f, 0.f };
 
 	for (int i = 0; i < 5; ++i)
 		m_vOriginPoint[i] = m_vPoint[i];
@@ -75,6 +75,10 @@ void CPelvis::Render(HDC hDC)
 }
 
 void CPelvis::Release()
+{
+}
+
+void CPelvis::Key_Input()
 {
 }
 
