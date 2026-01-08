@@ -1,5 +1,6 @@
 #pragma once
 // CObj.h입니다. 허허 ^^
+// asdfasdf
 #include "Define.h"
 
 class CObj abstract
