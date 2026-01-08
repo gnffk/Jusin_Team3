@@ -2,5 +2,5 @@
 #include "CObj.h"
 class CKJJObj :
     public CObj
-{    
+{
 };
