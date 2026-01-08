@@ -32,7 +32,7 @@ void CMainGame::Initialize()
 	HBITMAP prev = (HBITMAP)SelectObject(_hdcBack, _bmpBack);
 	DeleteObject(prev);
 
-	CSceneMgr::Get_Instance()->Scene_Change(SC_MINSU);
+	CSceneMgr::Get_Instance()->Scene_Change(SC_KJJ);
 }
 
 void CMainGame::Update()

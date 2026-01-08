@@ -37,10 +37,7 @@ void CSceneMgr::Scene_Change(SCENEID eID)
 		case SC_KJJ:
 
 			m_pScene = new CKJJScene;
-		case SC_STAGE:
-		
 			break;
-
 		case SC_MINSU:
 			m_pScene = new CKMSScene;
 			break;

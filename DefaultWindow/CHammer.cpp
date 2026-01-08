@@ -21,6 +21,8 @@ void CHammer::Initialize()
 
 	for (int i = 0; i < 5; ++i)
 		m_vOriginPoint[i] = m_vPoint[i];
+
+	m_vCurrMouse = ::Get_Mouse();
 }
 
 int CHammer::Update()
@@ -30,8 +32,8 @@ int CHammer::Update()
 
 	D3DXVECTOR3 vMouse_Movement = m_vCurrMouse - m_vPrevMouse;
 
-	m_fAngle			+= vMouse_Movement.x;
-	m_fHead_Distance	-= vMouse_Movement.y;
+	m_fAngle			+= vMouse_Movement.x*9/40;
+	m_fHead_Distance	-= vMouse_Movement.y/6;
 
 	if (m_fAngle > 180.f)
 	{

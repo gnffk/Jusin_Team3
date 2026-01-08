@@ -61,10 +61,6 @@ int CKJJ_Player::Update()
 
 int CKJJ_Player::Late_Update()
 {
-	float fRadian = D3DXToRadian(m_fAngle);
-
-	m_tInfo.vDir = { cosf(fRadian),sinf(fRadian),0.f };
-
 	return 0;
 }
 
@@ -77,11 +73,6 @@ void CKJJ_Player::Render(HDC hDC)
 		LineTo(hDC, m_vPoint[i].x, m_vPoint[i].y);
 	}
 
-	MoveToEx(hDC, m_tInfo.vPos.x, m_tInfo.vPos.y, nullptr);
-
-	LineTo(hDC, m_vHandPoint.x, m_vHandPoint.y);
-
-	Ellipse(hDC, m_vHandPoint.x - 5, m_vHandPoint.y - 5, m_vHandPoint.x + 5, m_vHandPoint.y + 5);
 }
 
 void CKJJ_Player::Release()

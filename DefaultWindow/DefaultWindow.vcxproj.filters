@@ -64,12 +64,6 @@
     <Filter Include="KMS\01. Obj">
       <UniqueIdentifier>{1239b3b3-cd3a-4b37-96a9-57c9e83a50ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="KJJ\00. Scene">
-      <UniqueIdentifier>{d87fae0e-7d07-4953-843e-07c8f3e5cb8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="KJJ\01. Obj">
-      <UniqueIdentifier>{62e87332-304c-4853-933a-44acdff03159}</UniqueIdentifier>
-    </Filter>
     <Filter Include="KJJ\01. Obj\00. Obj">
       <UniqueIdentifier>{d0155403-4075-4295-b1bc-be07fd1a9652}</UniqueIdentifier>
     </Filter>
@@ -90,6 +84,24 @@
     </Filter>
     <Filter Include="KMS\01. Obj\Player\Root">
       <UniqueIdentifier>{e226096e-2b51-43a6-ba6f-7ca4fa347728}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ">
+      <UniqueIdentifier>{0952e29d-a0bf-4eb2-aaed-c0cacd327167}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\00. Scene">
+      <UniqueIdentifier>{82e033c7-05ae-47b9-8bc5-c8424b922933}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\01. Obj">
+      <UniqueIdentifier>{5fdbe64f-a70f-4c2f-b29d-f960dfb95fd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\01. Obj\00. Obj">
+      <UniqueIdentifier>{68723418-4c99-4f44-bb77-d399698a278f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\01. Obj\01. Player">
+      <UniqueIdentifier>{d78dcb6f-12a7-47e9-a622-361cb72a4c07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\01. Obj\02. Hammer">
+      <UniqueIdentifier>{c9d271c2-9839-4b97-8a74-455199a404d7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -165,9 +177,6 @@
     <ClInclude Include="CKMSPlayer.h">
       <Filter>KMS\01. Obj\Player\Root</Filter>
     </ClInclude>
-    <ClInclude Include="CKJJScene.h">
-      <Filter>KJJ\00. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="CKJJObj.h">
       <Filter>KJJ\01. Obj\00. Obj</Filter>
     </ClInclude>
@@ -176,6 +185,18 @@
     </ClInclude>
     <ClInclude Include="CHammer.h">
       <Filter>KJJ\01. Obj\02. Hammer</Filter>
+    </ClInclude>
+    <ClInclude Include="CLSyObjFruit.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CDeltaMgr.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneLSYTest.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CKJJScene.h">
+      <Filter>KJJ\00. Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,9 +242,6 @@
     <ClCompile Include="CLSYObj.cpp">
       <Filter>LSY</Filter>
     </ClCompile>
-    <ClCompile Include="CKJJObj.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CKMSObj.cpp">
       <Filter>KMS\01. Obj</Filter>
     </ClCompile>
@@ -239,9 +257,6 @@
     <ClCompile Include="DefaultWindow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CKJJScene.cpp">
-      <Filter>KJJ\00. Scene</Filter>
-    </ClCompile>
     <ClCompile Include="CKJJObj.cpp">
       <Filter>KJJ\01. Obj\00. Obj</Filter>
     </ClCompile>
@@ -250,6 +265,21 @@
     </ClCompile>
     <ClCompile Include="CHammer.cpp">
       <Filter>KJJ\01. Obj\02. Hammer</Filter>
+    </ClCompile>
+    <ClCompile Include="CLSYObjFruit.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CDeltaMgr.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneLSYTest.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CKJJObj.cpp">
+      <Filter>KJJ\01. Obj\00. Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="CKJJScene.cpp">
+      <Filter>KJJ\00. Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
