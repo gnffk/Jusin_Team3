@@ -61,6 +61,21 @@
     <Filter Include="KMS">
       <UniqueIdentifier>{91ac3ffd-395e-4410-9922-6458253bf295}</UniqueIdentifier>
     </Filter>
+    <Filter Include="KMS\01. Obj">
+      <UniqueIdentifier>{1239b3b3-cd3a-4b37-96a9-57c9e83a50ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\02. Scene">
+      <UniqueIdentifier>{fe071216-1bc2-476e-a3db-66b1a6291d90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player">
+      <UniqueIdentifier>{4470c11a-e47f-4422-84d0-6185c23509e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body">
+      <UniqueIdentifier>{004fa1ba-c19f-4891-958d-c87f142f35fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Root">
+      <UniqueIdentifier>{e226096e-2b51-43a6-ba6f-7ca4fa347728}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -127,7 +142,16 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CKMSObj.h">
-      <Filter>KMS</Filter>
+      <Filter>KMS\01. Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="CKMSScene.h">
+      <Filter>KMS\02. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CPelvis.h">
+      <Filter>KMS\01. Obj\Player\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="CKMSPlayer.h">
+      <Filter>KMS\01. Obj\Player\Root</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -180,7 +204,16 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CKMSObj.cpp">
-      <Filter>KMS</Filter>
+      <Filter>KMS\01. Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="CKMSScene.cpp">
+      <Filter>KMS\02. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CPelvis.cpp">
+      <Filter>KMS\01. Obj\Player\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="CKMSPlayer.cpp">
+      <Filter>KMS\01. Obj\Player\Root</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -15,7 +15,7 @@
 
 enum OBJID { OBJ_PLAYER, OBJ_FRUIT, OBJ_END };
 
-enum SCENEID { SC_MENU,SC_STAGE, SC_LSY_TEST, SC_END };
+enum SCENEID { SC_MENU, SC_STAGE, SC_MINSU, SC_LSY_TEST, SC_END };
 
 template<typename T>
 void Safe_Delete(T& p)
