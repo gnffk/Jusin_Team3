@@ -93,7 +93,7 @@ void CMenu::Late_Update()
 	}
 	if ( CKeyMgr::Get_Instance()->Key_Pressing(VK_LBUTTON) && IntersectRect(&rc, &m_mouseRect, &m_jjRect))
 	{
-		//CSceneMgr::Get_Instance()->Scene_Change(SC_JJ);
+		CSceneMgr::Get_Instance()->Scene_Change(SC_KJJ);
 	}
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LBUTTON) && IntersectRect(&rc, &m_mouseRect, &m_syRect))
 	{

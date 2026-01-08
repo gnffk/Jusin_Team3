@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CSceneMgr.h"
 #include "CMenu.h"
+#include "CKJJScene.h"
 #include "CKMSScene.h"
 #include "CSceneLSYTest.h"
 
@@ -38,6 +39,10 @@ void CSceneMgr::Scene_Change(SCENEID eID)
 			m_pScene = new CSceneLSYTest;
 			break;
 
+		case SC_KJJ:
+
+			m_pScene = new CKJJScene;
+			break;
 		case SC_MINSU:
 			m_pScene = new CKMSScene;
 			break;

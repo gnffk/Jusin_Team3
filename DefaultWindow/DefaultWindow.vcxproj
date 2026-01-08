@@ -142,8 +142,11 @@
     <ClInclude Include="CAbstractFactory.h" />
     <ClInclude Include="CBmpMgr.h" />
     <ClInclude Include="CCollisionMgr.h" />
+    <ClInclude Include="CHammer.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CKJJObj.h" />
+    <ClInclude Include="CKJJScene.h" />
+    <ClInclude Include="CKJJ_Player.h" />
     <ClInclude Include="CKMSObj.h" />
     <ClInclude Include="CKMSPlayer.h" />
     <ClInclude Include="CKMSScene.h" />
@@ -174,8 +177,11 @@
   <ItemGroup>
     <ClCompile Include="CBmpMgr.cpp" />
     <ClCompile Include="CCollisionMgr.cpp" />
+    <ClCompile Include="CHammer.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CKJJObj.cpp" />
+    <ClCompile Include="CKJJScene.cpp" />
+    <ClCompile Include="CKJJ_Player.cpp" />
     <ClCompile Include="CKMSObj.cpp" />
     <ClCompile Include="CKMSPlayer.cpp" />
     <ClCompile Include="CKMSScene.cpp" />
