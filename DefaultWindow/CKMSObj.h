@@ -7,6 +7,8 @@ public:
 	virtual ~CKMSObj();
 
 public:
+	float Get_Angle() { return m_fAngle; }
+
 	void Set_ParentObject(CObj* m_fParentObject) {m_pParentObject = m_fParentObject;}
 	void Add_SubObject(CObj* m_fPelvisObject) { m_vecSubObject.push_back(m_fPelvisObject); }
 
@@ -14,5 +16,6 @@ protected:
 	CObj* m_pParentObject;
 	vector<CObj*>m_vecSubObject;
 
+	float m_fAngle;
 };
 

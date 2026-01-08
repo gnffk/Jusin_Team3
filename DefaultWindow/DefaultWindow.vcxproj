@@ -147,6 +147,8 @@
     <ClInclude Include="CKMSObj.h" />
     <ClInclude Include="CKMSPlayer.h" />
     <ClInclude Include="CKMSScene.h" />
+    <ClInclude Include="CLeftDownLeg.h" />
+    <ClInclude Include="CLeftUpLeg.h" />
     <ClInclude Include="CLSYObj.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CMenu.h" />
@@ -154,6 +156,7 @@
     <ClInclude Include="CObj.h" />
     <ClInclude Include="CObjMgr.h" />
     <ClInclude Include="CPelvis.h" />
+    <ClInclude Include="CRightLeg.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneMgr.h" />
     <ClInclude Include="CScrollMgr.h" />
@@ -173,6 +176,8 @@
     <ClCompile Include="CKMSObj.cpp" />
     <ClCompile Include="CKMSPlayer.cpp" />
     <ClCompile Include="CKMSScene.cpp" />
+    <ClCompile Include="CLeftDownLeg.cpp" />
+    <ClCompile Include="CLeftUpLeg.cpp" />
     <ClCompile Include="CLSYObj.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMenu.cpp" />
@@ -180,6 +185,7 @@
     <ClCompile Include="CObj.cpp" />
     <ClCompile Include="CObjMgr.cpp" />
     <ClCompile Include="CPelvis.cpp" />
+    <ClCompile Include="CRightLeg.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneMgr.cpp" />
     <ClCompile Include="CScrollMgr.cpp" />

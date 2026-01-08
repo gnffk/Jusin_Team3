@@ -3,7 +3,7 @@
 
 CKMSObj::CKMSObj() : m_pParentObject(nullptr)
 {
-	m_vecSubObject.reserve(5);
+	m_vecSubObject.reserve(15);
 }
 
 CKMSObj::~CKMSObj()

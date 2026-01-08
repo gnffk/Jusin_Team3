@@ -5,6 +5,9 @@
 #include "CKMSPlayer.h"
 #include "CObjMgr.h"
 
+#include "CLeftUpLeg.h"
+#include "CLeftDownLeg.h"
+
 CKMSScene::CKMSScene()
 {
 }
@@ -21,6 +24,17 @@ void CKMSScene::Initialize()
 	CObj* p_Pelvis = CAbstractFactory<CPelvis>::Create();
 	dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_Pelvis);
 	dynamic_cast<CKMSObj*>(p_Pelvis)->Set_ParentObject(p_Player);
+
+	// Left Leg
+	CObj* p_LeftUpLeg = CAbstractFactory<CLeftUpLeg>::Create();
+	dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftUpLeg);
+	dynamic_cast<CKMSObj*>(p_LeftUpLeg)->Set_ParentObject(p_Pelvis);
+	p_LeftUpLeg->Initialize();
+
+	//CObj* p_LeftDownLeg = CAbstractFactory<CPelvis>::Create();
+	//dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftDownLeg);
+	//dynamic_cast<CKMSObj*>(p_LeftDownLeg)->Set_ParentObject(p_LeftUpLeg);
+
 
 
 }
