@@ -1,5 +1,6 @@
 #pragma once
 #include "CScene.h"
+#include "CObj.h"
 
 class CKMSScene : public CScene
 {
@@ -15,6 +16,7 @@ public:
 	void Release() override;
 
 public:
-
+	CObj* p_Line;
+	CObj* p_LeftShose;
 };
 
