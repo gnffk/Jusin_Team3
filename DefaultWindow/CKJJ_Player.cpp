@@ -39,7 +39,7 @@ void CKJJ_Player::Initialize()
 
 int CKJJ_Player::Update()
 {
-	D3DXVECTOR3		vGravity = { 0.f,0.5f,0.f };
+	D3DXVECTOR3		vGravity = { 0.f,0.01f,0.f };
 	D3DXVECTOR3		vMovement = m_tInfo.vDir * m_fSpeed + vGravity;
 	m_fSpeed = D3DXVec3Length(&vMovement);
 	D3DXVec3Normalize(&m_tInfo.vDir, &vMovement);
@@ -93,4 +93,5 @@ void CKJJ_Player::Release()
 
 void CKJJ_Player::Collision(CKJJObj* pObj)
 {
+	m_fSpeed = 0;
 }
