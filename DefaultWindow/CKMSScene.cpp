@@ -30,18 +30,28 @@ void CKMSScene::Initialize()
 	CObj* p_LeftUpLeg = CAbstractFactory<CLeftUpLeg>::Create();
 	dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftUpLeg);
 	dynamic_cast<CKMSObj*>(p_LeftUpLeg)->Set_ParentObject(p_Pelvis);
-	p_LeftUpLeg->Initialize();
 	
-	// Constraint - Left Up  <-> Left Down
-	CObj* p_LeftUpConstraint = CAbstractFactory<CConstraint>::Create();
-	dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftUpConstraint);
-	dynamic_cast<CKMSObj*>(p_LeftUpLeg)->Set_Constraint(p_LeftUpConstraint);
-
+	
 	// Left Down Leg
 	CObj* p_LeftDownLeg = CAbstractFactory<CLeftDownLeg>::Create();
 	dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftDownLeg);
 	dynamic_cast<CKMSObj*>(p_LeftDownLeg)->Set_ParentObject(p_LeftUpLeg);
+
+	// Constraint - Left Up  <-> Left Down
+	CObj* p_LeftUpDownConstraint = CAbstractFactory<CConstraint>::Create();
+	dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftUpDownConstraint);
+	dynamic_cast<CKMSObj*>(p_LeftUpLeg)->Set_Constraint(p_LeftUpDownConstraint);
+	dynamic_cast<CKMSObj*>(p_LeftDownLeg)->Set_Constraint(p_LeftUpDownConstraint);
+	dynamic_cast<CKMSObj*>(p_LeftUpDownConstraint)->Set_ParentObject(p_Player);
+	dynamic_cast<CConstraint*>(p_LeftUpDownConstraint)->Set_Up(p_LeftUpLeg);
+	dynamic_cast<CConstraint*>(p_LeftUpDownConstraint)->Set_Down(p_LeftDownLeg);
+
+
+	p_LeftUpLeg->Initialize();
 	p_LeftDownLeg->Initialize();
+
+
+
 
 }
 

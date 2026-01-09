@@ -17,6 +17,9 @@ public:
 
 	void Add_SubObject(CObj* m_fPelvisObject) { m_vecSubObject.push_back(m_fPelvisObject); }
 
+	void Set_StartPos(D3DXVECTOR3 _StartVector) { m_StartVector = _StartVector; }
+
+	void Set_Pos(D3DXVECTOR3 _Vector) { m_tInfo.vPos = _Vector; }
 
 public:
 	virtual void Key_Input() PURE;
@@ -27,5 +30,6 @@ protected:
 
 	float m_fAngle;
 	D3DXVECTOR3	m_StartVector;
+	D3DXVECTOR3	m_OriginVector;
 };
 

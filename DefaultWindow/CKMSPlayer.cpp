@@ -27,6 +27,21 @@ int CKMSPlayer::Update()
 {
 	Key_Input();
 
+	// 크 -> 자 -> 이 -> 공 -> 부
+	D3DXMATRIX		matScale, matRotZ, matTrans, matParRotZ, matParMat;
+	D3DXVECTOR3		VecParPos;
+	float			ParAngle = 0;
+
+
+	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+	D3DXMatrixRotationZ(&matRotZ, m_fAngle);
+	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
+
+
+
+	m_tInfo.matWorld = matScale * matRotZ * matTrans;
+
+
 
 	for (auto iter : m_vecSubObject) {
 		iter->Update();
@@ -74,8 +89,8 @@ void CKMSPlayer::Key_Input()
 
 	if (GetAsyncKeyState(VK_UP))
 	{
-		//m_tInfo.vDir.x = m_tInfo.vLook.x * cosf(m_fAngle) - m_tInfo.vLook.y * sinf(m_fAngle);
-		//m_tInfo.vDir.y = m_tInfo.vLook.x * sinf(m_fAngle) + m_tInfo.vLook.y * cosf(m_fAngle);
+		m_tInfo.vDir.x = m_tInfo.vLook.x * cosf(m_fAngle) - m_tInfo.vLook.y * sinf(m_fAngle);
+		m_tInfo.vDir.y = m_tInfo.vLook.x * sinf(m_fAngle) + m_tInfo.vLook.y * cosf(m_fAngle);
 
 		D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
 
@@ -84,8 +99,8 @@ void CKMSPlayer::Key_Input()
 
 	if (GetAsyncKeyState(VK_DOWN))
 	{
-		//m_tInfo.vDir.x = m_tInfo.vLook.x * cosf(m_fAngle) - m_tInfo.vLook.y * sinf(m_fAngle);
-		//m_tInfo.vDir.y = m_tInfo.vLook.x * sinf(m_fAngle) + m_tInfo.vLook.y * cosf(m_fAngle);
+		m_tInfo.vDir.x = m_tInfo.vLook.x * cosf(m_fAngle) - m_tInfo.vLook.y * sinf(m_fAngle);
+		m_tInfo.vDir.y = m_tInfo.vLook.x * sinf(m_fAngle) + m_tInfo.vLook.y * cosf(m_fAngle);
 
 		D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
 

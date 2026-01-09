@@ -14,5 +14,11 @@ public:
 	void Render(HDC hDC) override;
 	void Release() override;
 	void Key_Input() override;
+
+	void Set_Up(CObj* _up) { UpObject = _up; }
+	void Set_Down(CObj* _down) { DownObject = _down; }
+public:
+	CObj* UpObject;
+	CObj* DownObject;
 };
 
