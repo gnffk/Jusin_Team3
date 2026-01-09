@@ -1,38 +1,37 @@
 #include "pch.h"
-#include "CLeftUpLeg.h"
+#include "CRightUpLeg.h"
 #include "CKeyMgr.h"
 
-CLeftUpLeg::CLeftUpLeg()
+CRightUpLeg::CRightUpLeg()
 {
 }
 
-CLeftUpLeg::~CLeftUpLeg()
+CRightUpLeg::~CRightUpLeg()
 {
 }
 
-void CLeftUpLeg::Initialize()
+void CRightUpLeg::Initialize()
 {
-	m_fAngle = 0.5f;
+	m_fAngle = -0.5f;
 	// 자기 자신 vertex
 	if (m_pParentObject) {
 
 		m_tInfo.vPos = m_pParentObject->Get_Info().vPos;
 	}
-	m_vPoint[0] = { - 25.f, 0.f , 0.f };
-	m_vPoint[1] = { + 25.f, 0.f , 0.f };
-	m_vPoint[2] = { + 25.f, 0.f + 150.f, 0.f };
-	m_vPoint[3] = { - 25.f, 0.f + 150.f, 0.f };
-	m_vPoint[4] = { - 25.f, 0.f , 0.f };
+	m_vPoint[0] = { -25.f, 0.f , 0.f };
+	m_vPoint[1] = { +25.f, 0.f , 0.f };
+	m_vPoint[2] = { +25.f, 0.f + 150.f, 0.f };
+	m_vPoint[3] = { -25.f, 0.f + 150.f, 0.f };
+	m_vPoint[4] = { -25.f, 0.f , 0.f };
 
 	m_OriginVector = { m_tInfo.vPos.x,  m_tInfo.vPos.y , 0.f };
 	for (int i = 0; i < 5; ++i)
 		m_vOriginPoint[i] = m_vPoint[i];
-		
+
 }
 
-int CLeftUpLeg::Update()
-{
-	// 크 -> 자 -> 이 -> 공 -> 부
+int CRightUpLeg::Update()
+{	// 크 -> 자 -> 이 -> 공 -> 부
 	Key_Input();
 	D3DXMATRIX		matScale, matRotZ, matTrans, matParMat;
 
@@ -48,28 +47,28 @@ int CLeftUpLeg::Update()
 
 
 
-	m_tInfo.matWorld = matScale * matRotZ * matTrans *  matParMat;
+	m_tInfo.matWorld = matScale * matRotZ * matTrans * matParMat;
 
 	for (int i = 0; i < 5; ++i)
 	{
 		m_vPoint[i] = m_vOriginPoint[i];
 
 		D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
-	
+
 	}
 
 
 	return 0;
 }
 
-int CLeftUpLeg::Late_Update()
+int CRightUpLeg::Late_Update()
 {
 	return 0;
 }
 
-void CLeftUpLeg::Render(HDC hDC)
+void CRightUpLeg::Render(HDC hDC)
 {
-	MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y,nullptr);
+	MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
 	for (int i = 0; i < 5; ++i)
 	{
 		LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
@@ -77,14 +76,13 @@ void CLeftUpLeg::Render(HDC hDC)
 	}
 }
 
-void CLeftUpLeg::Release()
+void CRightUpLeg::Release()
 {
 }
 
-
-void CLeftUpLeg::Key_Input()
+void CRightUpLeg::Key_Input()
 {
-	if (CKeyMgr::Get_Instance()->Key_Pressing('Q')) {
+	if (CKeyMgr::Get_Instance()->Key_Pressing('O')) {
 		//cout << m_fAngle << endl;
 		m_fAngle -= D3DXToRadian(3.f);
 
@@ -93,7 +91,7 @@ void CLeftUpLeg::Key_Input()
 		}
 	}
 
-	if (CKeyMgr::Get_Instance()->Key_Pressing('W')) {
+	if (CKeyMgr::Get_Instance()->Key_Pressing('P')) {
 		//cout << m_fAngle << endl;
 		m_fAngle += D3DXToRadian(3.f);
 		if (m_fAngle > 1.2f) {
@@ -101,3 +99,4 @@ void CLeftUpLeg::Key_Input()
 		}
 	}
 }
+

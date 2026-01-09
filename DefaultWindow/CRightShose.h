@@ -1,10 +1,10 @@
 #pragma once
 #include "CKMSObj.h"
-class CRightLeg : public CKMSObj
+class CRightShose : public CKMSObj
 {
 public:
-	CRightLeg();
-	virtual ~CRightLeg();
+	CRightShose();
+	virtual ~CRightShose();
 
 public:
 	void Initialize() override;
@@ -12,5 +12,9 @@ public:
 	int Late_Update() override;
 	void Render(HDC hDC) override;
 	void Release() override;
+	void Key_Input() override;
+private:
+	D3DXVECTOR3		m_vPoint[5];
+	D3DXVECTOR3		m_vOriginPoint[5];
 };
 

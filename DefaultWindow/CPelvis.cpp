@@ -18,11 +18,11 @@ void CPelvis::Initialize()
 
 		m_tInfo.vPos = m_pParentObject->Get_Info().vPos;
 	}
-	m_vPoint[0] = { m_tInfo.vPos.x - 50.f, m_tInfo.vPos.y - 10.f, 0.f };
-	m_vPoint[1] = { m_tInfo.vPos.x + 50.f, m_tInfo.vPos.y - 10.f, 0.f };
-	m_vPoint[2] = { m_tInfo.vPos.x + 50.f, m_tInfo.vPos.y + 30.f, 0.f };
-	m_vPoint[3] = { m_tInfo.vPos.x - 50.f, m_tInfo.vPos.y + 30.f, 0.f };
-	m_vPoint[4] = { m_tInfo.vPos.x - 50.f, m_tInfo.vPos.y - 10.f, 0.f };
+	m_vPoint[0] = { - 25.f, - 10.f, 0.f };
+	m_vPoint[1] = { + 25.f, - 10.f, 0.f };
+	m_vPoint[2] = { + 25.f, + 30.f, 0.f };
+	m_vPoint[3] = { - 25.f, + 30.f, 0.f };
+	m_vPoint[4] = { - 25.f, - 10.f, 0.f };
 
 	for (int i = 0; i < 5; ++i)
 		m_vOriginPoint[i] = m_vPoint[i];
@@ -36,7 +36,7 @@ int CPelvis::Update()
 	D3DXVECTOR3		VecParPos;
 	float			ParAngle = 0;
 	if (m_pParentObject) {
-		m_tInfo.vPos = m_pParentObject->Get_Info().vPos;
+	
 		matParMat = m_pParentObject->Get_Info().matWorld;
 		m_fAngle = dynamic_cast<CKMSObj*>(m_pParentObject)->Get_Angle();
 		
@@ -75,6 +75,10 @@ void CPelvis::Render(HDC hDC)
 }
 
 void CPelvis::Release()
+{
+}
+
+void CPelvis::Key_Input()
 {
 }
 

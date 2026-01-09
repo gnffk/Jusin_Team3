@@ -106,10 +106,19 @@
     <Filter Include="KJJ\01. Obj\02. Hammer">
       <UniqueIdentifier>{c9d271c2-9839-4b97-8a74-455199a404d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="KMS\01. Obj\Player\Body\Bottom\LeftLeg">
+    <Filter Include="KMS\01. Obj\Player\Body\Constraint">
+      <UniqueIdentifier>{c78c0237-a564-45e8-a398-37769b6f5fa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body\Bottom\Left">
+      <UniqueIdentifier>{523d4451-4b78-407c-bf04-90af3e3aa35e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body\Bottom\Left\LeftLeg">
       <UniqueIdentifier>{cf6b3bd9-101b-4f9b-8cfb-4ca9bffe75e6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="KMS\01. Obj\Player\Body\Bottom\RightLeg">
+    <Filter Include="KMS\01. Obj\Player\Body\Bottom\RIght">
+      <UniqueIdentifier>{f59d8612-41c7-429e-b130-f6312d5f2871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body\Bottom\RIght\RightLeg">
       <UniqueIdentifier>{1cb12635-0556-4660-815b-b7f7b0be3c43}</UniqueIdentifier>
     </Filter>
     <Filter Include="KJJ\01. Obj\03. Tiles">
@@ -193,13 +202,13 @@
       <Filter>KMS\01. Obj\Player\Body\Bottom</Filter>
     </ClInclude>
     <ClInclude Include="CLeftUpLeg.h">
-      <Filter>KMS\01. Obj\Player\Body\Bottom\LeftLeg</Filter>
+      <Filter>KMS\01. Obj\Player\Body\Bottom\Left\LeftLeg</Filter>
     </ClInclude>
     <ClInclude Include="CLeftDownLeg.h">
-      <Filter>KMS\01. Obj\Player\Body\Bottom\LeftLeg</Filter>
+      <Filter>KMS\01. Obj\Player\Body\Bottom\Left\LeftLeg</Filter>
     </ClInclude>
-    <ClInclude Include="CRightLeg.h">
-      <Filter>KMS\01. Obj\Player\Body\Bottom\RightLeg</Filter>
+    <ClInclude Include="CRightUpLeg.h">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\RIght\RightLeg</Filter>
     </ClInclude>
     <ClInclude Include="CKJJObj.h">
       <Filter>KJJ\01. Obj\00. Obj</Filter>
@@ -221,6 +230,18 @@
     </ClInclude>
     <ClInclude Include="CKJJScene.h">
       <Filter>KJJ\00. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CConstraint.h">
+      <Filter>KMS\01. Obj\Player\Body\Constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="CLeftShose.h">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\Left</Filter>
+    </ClInclude>
+    <ClInclude Include="CRightDownLeg.h">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\RIght\RightLeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CRightShose.h">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\RIght</Filter>
     </ClInclude>
     <ClInclude Include="CBox.h">
       <Filter>KJJ\01. Obj\03. Tiles</Filter>
@@ -285,13 +306,13 @@
       <Filter>KMS\01. Obj\Player\Body\Bottom</Filter>
     </ClCompile>
     <ClCompile Include="CLeftDownLeg.cpp">
-      <Filter>KMS\01. Obj\Player\Body\Bottom\LeftLeg</Filter>
+      <Filter>KMS\01. Obj\Player\Body\Bottom\Left\LeftLeg</Filter>
     </ClCompile>
     <ClCompile Include="CLeftUpLeg.cpp">
-      <Filter>KMS\01. Obj\Player\Body\Bottom\LeftLeg</Filter>
+      <Filter>KMS\01. Obj\Player\Body\Bottom\Left\LeftLeg</Filter>
     </ClCompile>
-    <ClCompile Include="CRightLeg.cpp">
-      <Filter>KMS\01. Obj\Player\Body\Bottom\RightLeg</Filter>
+    <ClCompile Include="CRightUpLeg.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\RIght\RightLeg</Filter>
     </ClCompile>
     <ClCompile Include="DefaultWindow.cpp">
       <Filter>소스 파일</Filter>
@@ -319,6 +340,18 @@
     </ClCompile>
     <ClCompile Include="CKJJScene.cpp">
       <Filter>KJJ\00. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CConstraint.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Constraint</Filter>
+    </ClCompile>
+    <ClCompile Include="CLeftShose.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\Left</Filter>
+    </ClCompile>
+    <ClCompile Include="CRightDownLeg.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\RIght\RightLeg</Filter>
+    </ClCompile>
+    <ClCompile Include="CRightShose.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\RIght</Filter>
     </ClCompile>
     <ClCompile Include="CBox.cpp">
       <Filter>KJJ\01. Obj\03. Tiles</Filter>
