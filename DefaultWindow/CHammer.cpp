@@ -1,10 +1,19 @@
 #include "pch.h"
 #include "CHammer.h"
 
-CHammer::CHammer() : m_fAngle(-90.f)
+CHammer::CHammer() 
 {
+	m_fAngle =-90.f;
 	m_fHead_Distance = 100.f;
 	m_fHammer_Length = 100.f;
+
+	m_tInfo.vPos = { 0.f,0.f,0.f };
+
+	m_vSize = { 6.f, 10.f, 0.f };
+
+	m_vAxisX = { m_vSize.x / 2.f, 0.f,0.f };
+	m_vAxisY = { 0.f, -m_vSize.y / 2.f, 0.f };
+
 }
 
 CHammer::~CHammer()
@@ -13,16 +22,16 @@ CHammer::~CHammer()
 
 void CHammer::Initialize()
 {
-	m_vPoint[0] = { 0.f,0.f,0.f };
-	m_vPoint[1] = { -3.f, -5.f, 0.f };
-	m_vPoint[2] = { 3.f, -5.f, 0.f };
-	m_vPoint[3] = { 3.f, 5.f, 0.f };
-	m_vPoint[4] = { -3.f, 5.f, 0.f };
+	m_vPoint[0] = { -m_vSize.x / 2.f,-m_vSize.y / 2.f, 0.f };
+	m_vPoint[1] = { m_vSize.x / 2.f,-m_vSize.y / 2.f, 0.f };
+	m_vPoint[2] = { m_vSize.x / 2.f,m_vSize.y / 2.f, 0.f };
+	m_vPoint[3] = { -m_vSize.x / 2.f,m_vSize.y / 2.f, 0.f };
 
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 4; ++i)
 		m_vOriginPoint[i] = m_vPoint[i];
 
 	m_vCurrMouse = ::Get_Mouse();
+	m_vPrevMouse = m_vCurrMouse;
 }
 
 int CHammer::Update()
@@ -32,8 +41,8 @@ int CHammer::Update()
 
 	D3DXVECTOR3 vMouse_Movement = m_vCurrMouse - m_vPrevMouse;
 
-	m_fAngle			+= vMouse_Movement.x*9/20;
-	m_fHead_Distance	-= vMouse_Movement.y/4;
+	m_fAngle			+= vMouse_Movement.x/3;
+	m_fHead_Distance	-= vMouse_Movement.y/3;
 
 	if (m_fAngle > 180.f)
 	{
@@ -63,11 +72,14 @@ int CHammer::Update()
 
 	m_tInfo.matWorld = matScale * matTrans * matRotZ * matTrans2;
 
-	for (int i = 0; i < 5; ++i)
+	D3DXVec3TransformCoord(&m_tInfo.vPos, &m_tInfo.vPos, &m_tInfo.matWorld);
+
+	for (int i = 0; i < 4; ++i)
 	{
 		m_vPoint[i] = m_vOriginPoint[i];
 
 		D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
+
 	}
 	return 0;
 }
@@ -100,4 +112,9 @@ void CHammer::Render(HDC hDC)
 
 void CHammer::Release()
 {
+}
+
+void CHammer::Collision(CKJJObj* pObj)
+{
+
 }

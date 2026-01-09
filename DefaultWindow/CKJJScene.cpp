@@ -3,11 +3,15 @@
 #include "CAbstractFactory.h"
 #include "CObjMgr.h"
 #include "CKJJ_Player.h"
+#include "CBox.h"
 
 void CKJJScene::Initialize()
 {
-	CObj* pPlayer = CAbstractFactory<CKJJ_Player>::Create();
+	CObj* pPlayer = new CKJJ_Player;
 	CObjMgr::Get_Instance()->AddObject(OBJ_PLAYER, pPlayer);
+
+	CObj* pBox = new CBox;
+
 }
 
 int CKJJScene::Update()

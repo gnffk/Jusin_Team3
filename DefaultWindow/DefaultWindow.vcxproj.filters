@@ -112,6 +112,12 @@
     <Filter Include="KMS\01. Obj\Player\Body\Bottom\RightLeg">
       <UniqueIdentifier>{1cb12635-0556-4660-815b-b7f7b0be3c43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="KJJ\01. Obj\03. Tiles">
+      <UniqueIdentifier>{1d7ae214-9f13-4485-863f-1c8a0a405f0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\02. Design">
+      <UniqueIdentifier>{af22b141-e150-485f-b0dd-ae08a748c86c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -216,6 +222,12 @@
     <ClInclude Include="CKJJScene.h">
       <Filter>KJJ\00. Scene</Filter>
     </ClInclude>
+    <ClInclude Include="CBox.h">
+      <Filter>KJJ\01. Obj\03. Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="KJJ_CollisionMgr.h">
+      <Filter>KJJ\02. Design</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -307,6 +319,12 @@
     </ClCompile>
     <ClCompile Include="CKJJScene.cpp">
       <Filter>KJJ\00. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CBox.cpp">
+      <Filter>KJJ\01. Obj\03. Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="KJJ_CollisionMgr.cpp">
+      <Filter>KJJ\02. Design</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

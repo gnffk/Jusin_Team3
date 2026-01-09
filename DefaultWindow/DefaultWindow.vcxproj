@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="CAbstractFactory.h" />
     <ClInclude Include="CBmpMgr.h" />
+    <ClInclude Include="CBox.h" />
     <ClInclude Include="CCollisionMgr.h" />
     <ClInclude Include="CHammer.h" />
     <ClInclude Include="CKeyMgr.h" />
@@ -170,12 +171,14 @@
     <ClInclude Include="DefaultWindow.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="KJJ_CollisionMgr.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBmpMgr.cpp" />
+    <ClCompile Include="CBox.cpp" />
     <ClCompile Include="CCollisionMgr.cpp" />
     <ClCompile Include="CHammer.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
@@ -203,6 +206,7 @@
     <ClCompile Include="CScrollMgr.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
     <ClCompile Include="DefaultWindow.cpp" />
+    <ClCompile Include="KJJ_CollisionMgr.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

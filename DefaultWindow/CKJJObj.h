@@ -5,7 +5,7 @@ class CKJJObj :
 {
     // CObj을(를) 통해 상속됨
 public:
-	CKJJObj() { ZeroMemory(&m_tRect, sizeof(RECT)); }
+	CKJJObj();
 	virtual~CKJJObj() {}
 public:
 	virtual void	Initialize()	PURE;
@@ -14,7 +14,37 @@ public:
 	virtual void	Render(HDC hDC)	PURE;
 	virtual void	Release()		PURE;
 
-protected:
+	virtual void	Collision(CKJJObj* pObj) PURE;
 
-	RECT			m_tRect;
+	void Set_Size(float x, float y, float z)
+	{
+		m_vSize.x = x;
+		m_vSize.y = y;
+		m_vSize.z = z;
+	}
+	void Set_Size(D3DXVECTOR3 Size) { m_vSize = Size; }	
+	D3DXVECTOR3 Get_Size() { return m_vSize; }
+
+	void Set_Scale(float x, float y, float z)
+	{
+		m_vScale.x = x;
+		m_vScale.y = y;
+		m_vScale.z = z;
+	}
+	void Set_Scale(D3DXVECTOR3 Scale) { m_vScale = Scale; }
+	D3DXVECTOR3 Get_Scale() { return m_vScale; }
+
+	D3DXVECTOR3 Get_Point(int Num) { return m_vPoint[Num]; }
+	D3DXVECTOR3 Get_AxisX() { return m_vAxisX; }
+	D3DXVECTOR3 Get_AxisY() { return m_vAxisY; }
+
+	void Set_Angle(float Angle) { m_fAngle = Angle; }
+	float Get_Angle() { return m_fAngle; }
+
+protected:
+	float m_fAngle;
+	D3DXVECTOR3 m_vSize;
+	D3DXVECTOR3 m_vAxisX, m_vAxisY;
+	D3DXVECTOR3 m_vScale;
+	D3DXVECTOR3 m_vPoint[4], m_vOriginPoint[4];
 };

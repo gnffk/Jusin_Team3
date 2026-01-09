@@ -1,13 +1,11 @@
 #pragma once
-
 #include "CKJJObj.h"
-
-class CKJJ_Player :
+class CBox :
     public CKJJObj
 {
 public:
-    CKJJ_Player();
-    virtual~CKJJ_Player();
+    CBox() : m_fAngle(0.f) {}
+    virtual~CBox() {}
     // CKJJObj을(를) 통해 상속됨
     void Initialize() override;
     int Update() override;
@@ -15,13 +13,13 @@ public:
     void Render(HDC hDC) override;
     void Release() override;
 
-    void Collision(CKJJObj* pObj) override;
+
+    void Set_Angle(float Angle) { m_fAngle = Angle; }
 
 private:
-    CObj* m_pHammer;
+    float m_fAngle;
 
-    D3DXVECTOR3 m_vPoint[4], m_vOriginPoint[4];
-    D3DXVECTOR3 m_vHandPoint, m_vOriginHandPoint;
-
+    // CKJJObj을(를) 통해 상속됨
+    void Collision(CKJJObj* pObj) override;
 };
 
