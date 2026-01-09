@@ -52,7 +52,6 @@ int CLeftUpLeg::Update()
 	{
 		m_vPoint[i] = m_vOriginPoint[i];
 
-		
 		D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
 	
 	}

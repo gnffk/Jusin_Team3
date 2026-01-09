@@ -34,7 +34,7 @@ int CLeftDownLeg::Update()
 	D3DXVECTOR3		VecParPos;
 	float			ParAngle = 0;                                                                                                                              
 	if (m_pParentObject) {
-		m_tInfo.vPos = m_pParentObject->Get_Info().vPos;
+		//m_tInfo.vPos = m_pParentObject->Get_Info().vPos; // 현재 받아오는 시작점
 		matParMat = m_pParentObject->Get_Info().matWorld;
 		
 	}

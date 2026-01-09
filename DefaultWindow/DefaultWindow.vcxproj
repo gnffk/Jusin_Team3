@@ -142,6 +142,7 @@
     <ClInclude Include="CAbstractFactory.h" />
     <ClInclude Include="CBmpMgr.h" />
     <ClInclude Include="CCollisionMgr.h" />
+    <ClInclude Include="CConstraint.h" />
     <ClInclude Include="CHammer.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CKJJObj.h" />
@@ -177,6 +178,7 @@
   <ItemGroup>
     <ClCompile Include="CBmpMgr.cpp" />
     <ClCompile Include="CCollisionMgr.cpp" />
+    <ClCompile Include="CConstraint.cpp" />
     <ClCompile Include="CHammer.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CKJJObj.cpp" />
