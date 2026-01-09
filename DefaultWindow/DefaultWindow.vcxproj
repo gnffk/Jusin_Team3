@@ -147,6 +147,9 @@
     <ClInclude Include="CKMSObj.h" />
     <ClInclude Include="CKMSPlayer.h" />
     <ClInclude Include="CKMSScene.h" />
+    <ClInclude Include="CLSYObjKnifeMark.h" />
+    <ClInclude Include="CLSYObjMouse.h" />
+    <ClInclude Include="LSYDefine.h" />
     <ClInclude Include="CLSYObj.h" />
     <ClInclude Include="CLSyObjFruit.h" />
     <ClInclude Include="CDeltaMgr.h" />
@@ -179,6 +182,8 @@
     <ClCompile Include="CLSYObj.cpp" />
     <ClCompile Include="CLSYObjFruit.cpp" />
     <ClCompile Include="CDeltaMgr.cpp" />
+    <ClCompile Include="CLSYObjKnifeMark.cpp" />
+    <ClCompile Include="CLSYObjMouse.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMenu.cpp" />
     <ClCompile Include="CMyBitmap.cpp" />

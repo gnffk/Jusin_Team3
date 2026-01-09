@@ -3,7 +3,7 @@
 #include "CObjMgr.h"
 #include "CLSYObjFruit.h"
 #include "CAbstractFactory.h"
-#include "CDeltaMgr.h"
+#include "CLSYObjMouse.h"
 
 CSceneLSYTest::~CSceneLSYTest()
 {
@@ -12,10 +12,16 @@ CSceneLSYTest::~CSceneLSYTest()
 
 void CSceneLSYTest::Initialize()
 {
+	CLSYObjMouse* pMouse = dynamic_cast<CLSYObjMouse*>(CAbstractFactory<CLSYObjMouse>::Create());
+	CObjMgr::Get_Instance()->AddObject(OBJ_LSY_MOUSE, pMouse);
+
+
 	CLSYObjFruit* pFruit = dynamic_cast<CLSYObjFruit*>(CAbstractFactory<CLSYObjFruit>::Create());
 	pFruit->Set_Option(CLSYObjFruit::FROPT_TEST);
 	pFruit->GenerateVertexList();
-	CObjMgr::Get_Instance()->AddObject(OBJ_FRUIT, pFruit);
+	CObjMgr::Get_Instance()->AddObject(OBJ_LSY_FRUIT, pFruit);
+
+	pMouse->Set_TmpFruit(pFruit);
 }
 
 int CSceneLSYTest::Update()

@@ -1,5 +1,6 @@
 #pragma once
 #include "CObj.h"
+#include "LSYDefine.h"
 class CLSYObj :public CObj
 {
 public:
@@ -18,6 +19,7 @@ public:
 	float Get_Angle() const { return m_fAngle; }
 
 	list<list<D3DXVECTOR3>>& Get_VertexList() { return m_vertexList; }
+	void Set_VertexList(list<list<D3DXVECTOR3>> list) { m_vertexList = list; }
 	list<list<POINT>>& Get_PointList() { return m_pointList; }
 	
 	void Set_Pos(D3DXVECTOR3& pos) { m_tInfo.vPos = pos; }
