@@ -9,6 +9,7 @@ CKJJ_Player::CKJJ_Player() :m_pHammer(nullptr)
 	m_vAxisX = { m_vSize.x / 2.f, 0.f,0.f };
 	m_vAxisY = { 0.f, -m_vSize.y / 2.f, 0.f };
 	m_tInfo.vPos = { 400.f, 300.f, 0.f };
+	m_vScale = { 1.f,1.f,1.f };
 }
 
 CKJJ_Player::~CKJJ_Player()
@@ -30,14 +31,20 @@ void CKJJ_Player::Initialize()
 	if (m_pHammer == nullptr)
 	{
 		m_pHammer = new CHammer;
+		static_cast<CHammer*>(m_pHammer)->Set_Player(this);
 		m_pHammer->Initialize();
-
 		CObjMgr::Get_Instance()->AddObject(OBJ_HAMMER, m_pHammer);
 	}
 }	
 
 int CKJJ_Player::Update()
 {
+	D3DXVECTOR3		vGravity = { 0.f,0.01f,0.f };
+	D3DXVECTOR3		vMovement = m_tInfo.vDir * m_fSpeed + vGravity;
+	m_fSpeed = D3DXVec3Length(&vMovement);
+	D3DXVec3Normalize(&m_tInfo.vDir, &vMovement);
+	m_tInfo.vPos += vMovement;
+
 	D3DXMATRIX		matScale, matRotZ, matTrans;
 
 	D3DXMatrixScaling(&matScale,
@@ -86,4 +93,5 @@ void CKJJ_Player::Release()
 
 void CKJJ_Player::Collision(CKJJObj* pObj)
 {
+	m_fSpeed = 0;
 }

@@ -20,8 +20,6 @@ public:
 private:
     CObj* m_pHammer;
 
-    D3DXVECTOR3 m_vPoint[4], m_vOriginPoint[4];
-    D3DXVECTOR3 m_vHandPoint, m_vOriginHandPoint;
 
 };
 
