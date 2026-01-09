@@ -141,15 +141,25 @@
   <ItemGroup>
     <ClInclude Include="CAbstractFactory.h" />
     <ClInclude Include="CBmpMgr.h" />
+    <ClInclude Include="CBox.h" />
     <ClInclude Include="CCollisionMgr.h" />
+    <ClInclude Include="CConstraint.h" />
+    <ClInclude Include="CHammer.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CKJJObj.h" />
+    <ClInclude Include="CKJJScene.h" />
+    <ClInclude Include="CKJJ_Player.h" />
+    <ClInclude Include="CKMSCollisionMgr.h" />
+    <ClInclude Include="CKMSLine.h" />
     <ClInclude Include="CKMSObj.h" />
     <ClInclude Include="CKMSPlayer.h" />
     <ClInclude Include="CKMSScene.h" />
     <ClInclude Include="CLSYObjKnifeMark.h" />
     <ClInclude Include="CLSYObjMouse.h" />
     <ClInclude Include="LSYDefine.h" />
+    <ClInclude Include="CLeftDownLeg.h" />
+    <ClInclude Include="CLeftShose.h" />
+    <ClInclude Include="CLeftUpLeg.h" />
     <ClInclude Include="CLSYObj.h" />
     <ClInclude Include="CLSyObjFruit.h" />
     <ClInclude Include="CDeltaMgr.h" />
@@ -159,6 +169,9 @@
     <ClInclude Include="CObj.h" />
     <ClInclude Include="CObjMgr.h" />
     <ClInclude Include="CPelvis.h" />
+    <ClInclude Include="CRightDownLeg.h" />
+    <ClInclude Include="CRightShose.h" />
+    <ClInclude Include="CRightUpLeg.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneLSYTest.h" />
     <ClInclude Include="CSceneMgr.h" />
@@ -167,18 +180,29 @@
     <ClInclude Include="DefaultWindow.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="KJJ_CollisionMgr.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBmpMgr.cpp" />
+    <ClCompile Include="CBox.cpp" />
     <ClCompile Include="CCollisionMgr.cpp" />
+    <ClCompile Include="CConstraint.cpp" />
+    <ClCompile Include="CHammer.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CKJJObj.cpp" />
+    <ClCompile Include="CKJJScene.cpp" />
+    <ClCompile Include="CKJJ_Player.cpp" />
+    <ClCompile Include="CKMSCollisionMgr.cpp" />
+    <ClCompile Include="CKMSLine.cpp" />
     <ClCompile Include="CKMSObj.cpp" />
     <ClCompile Include="CKMSPlayer.cpp" />
     <ClCompile Include="CKMSScene.cpp" />
+    <ClCompile Include="CLeftDownLeg.cpp" />
+    <ClCompile Include="CLeftShose.cpp" />
+    <ClCompile Include="CLeftUpLeg.cpp" />
     <ClCompile Include="CLSYObj.cpp" />
     <ClCompile Include="CLSYObjFruit.cpp" />
     <ClCompile Include="CDeltaMgr.cpp" />
@@ -190,12 +214,16 @@
     <ClCompile Include="CObj.cpp" />
     <ClCompile Include="CObjMgr.cpp" />
     <ClCompile Include="CPelvis.cpp" />
+    <ClCompile Include="CRightDownLeg.cpp" />
+    <ClCompile Include="CRightShose.cpp" />
+    <ClCompile Include="CRightUpLeg.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneLSYTest.cpp" />
     <ClCompile Include="CSceneMgr.cpp" />
     <ClCompile Include="CScrollMgr.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
     <ClCompile Include="DefaultWindow.cpp" />
+    <ClCompile Include="KJJ_CollisionMgr.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

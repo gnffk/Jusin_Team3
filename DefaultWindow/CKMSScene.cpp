@@ -5,6 +5,16 @@
 #include "CKMSPlayer.h"
 #include "CObjMgr.h"
 
+#include "CLeftUpLeg.h"
+#include "CLeftDownLeg.h"
+#include "CConstraint.h"
+#include "CLeftShose.h"
+#include "CRightUpLeg.h"
+#include "CRightDownLeg.h"
+#include "CRightShose.h"
+#include "CKMSLine.h"
+#include "CKMSCollisionMgr.h"
+
 CKMSScene::CKMSScene()
 {
 }
@@ -15,12 +25,93 @@ CKMSScene::~CKMSScene()
 
 void CKMSScene::Initialize()
 {
+    p_Line = CAbstractFactory<CKMSLine>::Create();
+	CObjMgr::Get_Instance()->AddObject(OBJ_RUNLINE, p_Line);
+
 	CObj* p_Player = CAbstractFactory<CKMSPlayer>::Create();
 	CObjMgr::Get_Instance()->AddObject(OBJ_PLAYER,p_Player);
 
 	CObj* p_Pelvis = CAbstractFactory<CPelvis>::Create();
 	dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_Pelvis);
 	dynamic_cast<CKMSObj*>(p_Pelvis)->Set_ParentObject(p_Player);
+	// Left Leg
+	{
+		// Left Up Leg
+		CObj* p_LeftUpLeg = CAbstractFactory<CLeftUpLeg>::Create();
+		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftUpLeg);
+		dynamic_cast<CKMSObj*>(p_LeftUpLeg)->Set_ParentObject(p_Pelvis);
+
+
+		// Left Down Leg
+		CObj* p_LeftDownLeg = CAbstractFactory<CLeftDownLeg>::Create();
+		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftDownLeg);
+		dynamic_cast<CKMSObj*>(p_LeftDownLeg)->Set_ParentObject(p_LeftUpLeg);
+
+		// Left Shose
+		p_LeftShose = CAbstractFactory<CLeftShose>::Create();
+		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftShose);
+		dynamic_cast<CKMSObj*>(p_LeftShose)->Set_ParentObject(p_LeftDownLeg);
+
+
+		// Constraint - Left Up  <-> Left Down
+		CObj* p_LeftUpDownConstraint = CAbstractFactory<CConstraint>::Create();
+		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftUpDownConstraint);
+		dynamic_cast<CKMSObj*>(p_LeftDownLeg)->Set_Constraint(p_LeftUpDownConstraint);
+		dynamic_cast<CKMSObj*>(p_LeftUpDownConstraint)->Set_ParentObject(p_Player);
+		dynamic_cast<CConstraint*>(p_LeftUpDownConstraint)->Set_Up(p_LeftUpLeg);
+		dynamic_cast<CConstraint*>(p_LeftUpDownConstraint)->Set_Down(p_LeftDownLeg);
+
+		// Constraint - Left Down  <-> Left Shose
+		CObj* p_LeftDownShoseConstraint = CAbstractFactory<CConstraint>::Create();
+		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftDownShoseConstraint);
+		dynamic_cast<CKMSObj*>(p_LeftShose)->Set_Constraint(p_LeftDownShoseConstraint);
+		dynamic_cast<CKMSObj*>(p_LeftDownShoseConstraint)->Set_ParentObject(p_Player);
+		dynamic_cast<CConstraint*>(p_LeftDownShoseConstraint)->Set_Up(p_LeftDownLeg);
+		dynamic_cast<CConstraint*>(p_LeftDownShoseConstraint)->Set_Down(p_LeftShose);
+		dynamic_cast<CConstraint*>(p_LeftDownShoseConstraint)->Set_Visible(false);
+		p_LeftUpLeg->Initialize();
+		p_LeftDownLeg->Initialize();
+
+	}
+	
+	// Right Leg
+	{
+		// Right Up Leg
+		CObj* p_RightUpLeg = CAbstractFactory<CRightUpLeg>::Create();
+		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_RightUpLeg);
+		dynamic_cast<CKMSObj*>(p_RightUpLeg)->Set_ParentObject(p_Pelvis);
+
+
+		// Right Down Leg
+		CObj* p_RightDownLeg = CAbstractFactory<CRightDownLeg>::Create();
+		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_RightDownLeg);
+		dynamic_cast<CKMSObj*>(p_RightDownLeg)->Set_ParentObject(p_RightUpLeg);
+
+		// Right Shose
+		CObj* p_RightShose = CAbstractFactory<CRightShose>::Create();
+		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_RightShose);
+		dynamic_cast<CKMSObj*>(p_RightShose)->Set_ParentObject(p_RightDownLeg);
+
+		// Constraint - Left Up  <-> Left Down
+		CObj* p_RightUpDownConstraint = CAbstractFactory<CConstraint>::Create();
+		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_RightUpDownConstraint);
+		dynamic_cast<CKMSObj*>(p_RightDownLeg)->Set_Constraint(p_RightUpDownConstraint);
+		dynamic_cast<CKMSObj*>(p_RightUpDownConstraint)->Set_ParentObject(p_Player);
+		dynamic_cast<CConstraint*>(p_RightUpDownConstraint)->Set_Up(p_RightUpLeg);
+		dynamic_cast<CConstraint*>(p_RightUpDownConstraint)->Set_Down(p_RightDownLeg);
+
+		// Constraint - Left Down  <-> Left Shose
+		CObj* p_RightDownShoseConstraint = CAbstractFactory<CConstraint>::Create();
+		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_RightDownShoseConstraint);
+		dynamic_cast<CKMSObj*>(p_RightShose)->Set_Constraint(p_RightDownShoseConstraint);
+		dynamic_cast<CKMSObj*>(p_RightDownShoseConstraint)->Set_ParentObject(p_Player);
+		dynamic_cast<CConstraint*>(p_RightDownShoseConstraint)->Set_Up(p_RightDownLeg);
+		dynamic_cast<CConstraint*>(p_RightDownShoseConstraint)->Set_Down(p_RightShose);
+		dynamic_cast<CConstraint*>(p_RightDownShoseConstraint)->Set_Visible(false);
+	}
+	
+
+
 
 
 }
@@ -29,6 +120,7 @@ int CKMSScene::Update()
 {
 	CObjMgr::Get_Instance()->Update();
 
+	CKMSCollisionMgr::CheckShoeseLine(p_LeftShose,p_Line);
 	return 0;
 }
 

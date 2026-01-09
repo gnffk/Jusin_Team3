@@ -1,24 +1,17 @@
 #pragma once
 #include "CKMSObj.h"
-
-class CKMSPlayer : public CKMSObj
+class CLeftShose : public CKMSObj
 {
 public:
-	CKMSPlayer();
-	virtual ~CKMSPlayer();
-
+	CLeftShose();
+	virtual ~CLeftShose();
 public:
 	void Initialize() override;
-
 	int Update() override;
-
 	int Late_Update() override;
-
 	void Render(HDC hDC) override;
-
 	void Release() override;
-
-public:
 	void Key_Input() override;
+
 };
 

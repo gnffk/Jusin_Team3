@@ -64,6 +64,15 @@
     <Filter Include="KMS\01. Obj">
       <UniqueIdentifier>{1239b3b3-cd3a-4b37-96a9-57c9e83a50ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="KJJ\01. Obj\00. Obj">
+      <UniqueIdentifier>{d0155403-4075-4295-b1bc-be07fd1a9652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\01. Obj\01. Player">
+      <UniqueIdentifier>{b6f9ac29-2824-4019-bb87-832dcbc8d52e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\01. Obj\02. Hammer">
+      <UniqueIdentifier>{5788555b-90b9-47fd-abcf-f7d3d91e758e}</UniqueIdentifier>
+    </Filter>
     <Filter Include="KMS\02. Scene">
       <UniqueIdentifier>{fe071216-1bc2-476e-a3db-66b1a6291d90}</UniqueIdentifier>
     </Filter>
@@ -73,8 +82,50 @@
     <Filter Include="KMS\01. Obj\Player\Body">
       <UniqueIdentifier>{004fa1ba-c19f-4891-958d-c87f142f35fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="KMS\01. Obj\Player\Root">
+    <Filter Include="KMS\01. Obj\Player\Body\Bottom">
+      <UniqueIdentifier>{b715ba06-2abf-4097-bfc2-88398ea2a9a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body\Root">
       <UniqueIdentifier>{e226096e-2b51-43a6-ba6f-7ca4fa347728}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ">
+      <UniqueIdentifier>{0952e29d-a0bf-4eb2-aaed-c0cacd327167}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\00. Scene">
+      <UniqueIdentifier>{82e033c7-05ae-47b9-8bc5-c8424b922933}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\01. Obj">
+      <UniqueIdentifier>{5fdbe64f-a70f-4c2f-b29d-f960dfb95fd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\01. Obj\00. Obj">
+      <UniqueIdentifier>{68723418-4c99-4f44-bb77-d399698a278f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\01. Obj\01. Player">
+      <UniqueIdentifier>{d78dcb6f-12a7-47e9-a622-361cb72a4c07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\01. Obj\02. Hammer">
+      <UniqueIdentifier>{c9d271c2-9839-4b97-8a74-455199a404d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body\Constraint">
+      <UniqueIdentifier>{c78c0237-a564-45e8-a398-37769b6f5fa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body\Bottom\Left">
+      <UniqueIdentifier>{523d4451-4b78-407c-bf04-90af3e3aa35e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body\Bottom\Left\LeftLeg">
+      <UniqueIdentifier>{cf6b3bd9-101b-4f9b-8cfb-4ca9bffe75e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body\Bottom\RIght">
+      <UniqueIdentifier>{f59d8612-41c7-429e-b130-f6312d5f2871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body\Bottom\RIght\RightLeg">
+      <UniqueIdentifier>{1cb12635-0556-4660-815b-b7f7b0be3c43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\01. Obj\03. Tiles">
+      <UniqueIdentifier>{1d7ae214-9f13-4485-863f-1c8a0a405f0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KJJ\02. Design">
+      <UniqueIdentifier>{af22b141-e150-485f-b0dd-ae08a748c86c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,26 +189,68 @@
     <ClInclude Include="CLSYObj.h">
       <Filter>LSY</Filter>
     </ClInclude>
-    <ClInclude Include="CKJJObj.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CKMSObj.h">
       <Filter>KMS\01. Obj</Filter>
     </ClInclude>
     <ClInclude Include="CKMSScene.h">
       <Filter>KMS\02. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="CPelvis.h">
-      <Filter>KMS\01. Obj\Player\Body</Filter>
-    </ClInclude>
     <ClInclude Include="CKMSPlayer.h">
-      <Filter>KMS\01. Obj\Player\Root</Filter>
+      <Filter>KMS\01. Obj\Player\Body\Root</Filter>
+    </ClInclude>
+    <ClInclude Include="CPelvis.h">
+      <Filter>KMS\01. Obj\Player\Body\Bottom</Filter>
+    </ClInclude>
+    <ClInclude Include="CLeftUpLeg.h">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\Left\LeftLeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CLeftDownLeg.h">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\Left\LeftLeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CRightUpLeg.h">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\RIght\RightLeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CKJJObj.h">
+      <Filter>KJJ\01. Obj\00. Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="CKJJ_Player.h">
+      <Filter>KJJ\01. Obj\01. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CHammer.h">
+      <Filter>KJJ\01. Obj\02. Hammer</Filter>
+    </ClInclude>
+    <ClInclude Include="CLSyObjFruit.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CDeltaMgr.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneLSYTest.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CKJJScene.h">
+      <Filter>KJJ\00. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CConstraint.h">
+      <Filter>KMS\01. Obj\Player\Body\Constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="CLeftShose.h">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\Left</Filter>
+    </ClInclude>
+    <ClInclude Include="CRightDownLeg.h">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\RIght\RightLeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CRightShose.h">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\RIght</Filter>
+    </ClInclude>
+    <ClInclude Include="CBox.h">
+      <Filter>KJJ\01. Obj\03. Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="KJJ_CollisionMgr.h">
+      <Filter>KJJ\02. Design</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DefaultWindow.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -200,20 +293,71 @@
     <ClCompile Include="CLSYObj.cpp">
       <Filter>LSY</Filter>
     </ClCompile>
-    <ClCompile Include="CKJJObj.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CKMSObj.cpp">
       <Filter>KMS\01. Obj</Filter>
     </ClCompile>
     <ClCompile Include="CKMSScene.cpp">
       <Filter>KMS\02. Scene</Filter>
     </ClCompile>
-    <ClCompile Include="CPelvis.cpp">
-      <Filter>KMS\01. Obj\Player\Body</Filter>
-    </ClCompile>
     <ClCompile Include="CKMSPlayer.cpp">
-      <Filter>KMS\01. Obj\Player\Root</Filter>
+      <Filter>KMS\01. Obj\Player\Body\Root</Filter>
+    </ClCompile>
+    <ClCompile Include="CPelvis.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Bottom</Filter>
+    </ClCompile>
+    <ClCompile Include="CLeftDownLeg.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\Left\LeftLeg</Filter>
+    </ClCompile>
+    <ClCompile Include="CLeftUpLeg.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\Left\LeftLeg</Filter>
+    </ClCompile>
+    <ClCompile Include="CRightUpLeg.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\RIght\RightLeg</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultWindow.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CKJJObj.cpp">
+      <Filter>KJJ\01. Obj\00. Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="CKJJ_Player.cpp">
+      <Filter>KJJ\01. Obj\01. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CHammer.cpp">
+      <Filter>KJJ\01. Obj\02. Hammer</Filter>
+    </ClCompile>
+    <ClCompile Include="CLSYObjFruit.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CDeltaMgr.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneLSYTest.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CKJJObj.cpp">
+      <Filter>KJJ\01. Obj\00. Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="CKJJScene.cpp">
+      <Filter>KJJ\00. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CConstraint.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Constraint</Filter>
+    </ClCompile>
+    <ClCompile Include="CLeftShose.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\Left</Filter>
+    </ClCompile>
+    <ClCompile Include="CRightDownLeg.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\RIght\RightLeg</Filter>
+    </ClCompile>
+    <ClCompile Include="CRightShose.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Bottom\RIght</Filter>
+    </ClCompile>
+    <ClCompile Include="CBox.cpp">
+      <Filter>KJJ\01. Obj\03. Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="KJJ_CollisionMgr.cpp">
+      <Filter>KJJ\02. Design</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
