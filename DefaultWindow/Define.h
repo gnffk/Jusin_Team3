@@ -18,6 +18,7 @@ enum OBJID
 {
 	OBJ_PLAYER,
 	OBJ_HAMMER,
+	OBJ_BOX,
 	OBJ_FRUIT,
 	OBJ_END
 };

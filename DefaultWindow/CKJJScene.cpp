@@ -8,10 +8,14 @@
 void CKJJScene::Initialize()
 {
 	CObj* pPlayer = new CKJJ_Player;
+	pPlayer->Initialize();
 	CObjMgr::Get_Instance()->AddObject(OBJ_PLAYER, pPlayer);
 
-	CObj* pBox = new CBox;
-
+	CBox* pBox = new CBox;
+	pBox->Set_Size(800, 100, 0);
+	pBox->Set_Pos(400, 700, 0);
+	pBox->Initialize();
+	CObjMgr::Get_Instance()->AddObject(OBJ_BOX, pBox);
 }
 
 int CKJJScene::Update()

@@ -16,6 +16,14 @@ public:
 
 	virtual void	Collision(CKJJObj* pObj) PURE;
 
+	void Set_Pos(float x, float y, float z)
+	{
+		m_tInfo.vPos.x = x;
+		m_tInfo.vPos.y = y;
+		m_tInfo.vPos.z = z;
+	}
+	void Set_Pos(D3DXVECTOR3 Pos) { m_tInfo.vPos = Pos; }
+
 	void Set_Size(float x, float y, float z)
 	{
 		m_vSize.x = x;

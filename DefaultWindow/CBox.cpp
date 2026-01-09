@@ -17,7 +17,10 @@ void CBox::Initialize()
 
     float fRadian = D3DXToRadian(m_fAngle);
 
-    D3DXMatrixScaling(&matScale, 2.f, 2.f, 2.f);
+    D3DXMatrixScaling(&matScale,
+        m_vScale.x,
+        m_vScale.y,
+        m_vScale.z);
     D3DXMatrixRotationZ(&matRotZ, fRadian);
     D3DXMatrixTranslation(&matTrans,
         m_tInfo.vPos.x,
@@ -44,6 +47,13 @@ int CBox::Late_Update()
 
 void CBox::Render(HDC hDC)
 {
+    MoveToEx(hDC, m_vPoint[3].x, m_vPoint[3].y, nullptr);
+
+    for (int i = 0; i < 4; ++i)
+    {
+        LineTo(hDC, m_vPoint[i].x, m_vPoint[i].y);
+    }
+
 }
 
 void CBox::Release()
