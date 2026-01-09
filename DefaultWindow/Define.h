@@ -13,7 +13,6 @@
 #define		VK_MAX		0xff
 
 
-// 2601081647 김종진 망치머리 추가
 enum OBJID
 {
 	OBJ_PLAYER,
@@ -23,8 +22,6 @@ enum OBJID
 	OBJ_END
 };
 
-// 2601081647 김종진 씬아이디 추가
-//enum SCENEID { SC_MENU,SC_STAGE,SC_KJJ, SC_END };
 enum SCENEID
 {
 	SC_MENU,

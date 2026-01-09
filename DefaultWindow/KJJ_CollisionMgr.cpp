@@ -1,6 +1,24 @@
 #include "pch.h"
 #include "KJJ_CollisionMgr.h"
 
+void KJJ_CollisionMgr::OBB_Collision(list<CObj*> _pDst, list<CObj*> _pSrc)
+{
+	for (auto& Dst : _pDst)
+	{
+		for (auto& Src : _pSrc)
+		{
+			CKJJObj* pDst = static_cast<CKJJObj*>(Dst);
+			CKJJObj* pSrc = static_cast<CKJJObj*>(Src);
+			D3DXVECTOR3 vResult = Collision_Box(pDst, pSrc);
+			if (D3DXVec3Length(&vResult) != 0)
+			{
+				pDst->Collision(pSrc);
+				pSrc->Collision(pDst);
+			}
+		}
+	}
+}
+
 D3DXVECTOR3 KJJ_CollisionMgr::Collision_Box(CKJJObj* pDst, CKJJObj* pSrc)
 {
 	/*

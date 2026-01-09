@@ -13,7 +13,7 @@ void CKJJScene::Initialize()
 
 	CBox* pBox = new CBox;
 	pBox->Set_Size(800, 100, 0);
-	pBox->Set_Pos(400, 700, 0);
+	pBox->Set_Pos(400, 500, 0);
 	pBox->Initialize();
 	CObjMgr::Get_Instance()->AddObject(OBJ_BOX, pBox);
 }

@@ -40,6 +40,8 @@ public:
 		}
 	}
 
+	list<CObj*>* Get_ObjList() { return m_ObjList; }
+	list<CObj*>* Get_ObjList(OBJID eID) { return &m_ObjList[eID]; }
 
 private:
 	list<CObj*>	m_ObjList[OBJ_END];
