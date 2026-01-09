@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CConstraint.h"
 
-CConstraint::CConstraint() : UpObject(nullptr), DownObject(nullptr)
+CConstraint::CConstraint() : m_pUpObject(nullptr), m_pDownObject(nullptr), m_bVisible(true)
 {
 }
 
@@ -41,7 +41,10 @@ int CConstraint::Late_Update()
 
 void CConstraint::Render(HDC hDC)
 {
-	Ellipse(hDC, m_tInfo.vPos.x-25, m_tInfo.vPos.y - 25, m_tInfo.vPos.x+25, m_tInfo.vPos.y+25);
+	if (m_bVisible) {
+
+		Ellipse(hDC, m_tInfo.vPos.x-25, m_tInfo.vPos.y - 25, m_tInfo.vPos.x+25, m_tInfo.vPos.y+25);
+	}
 }
 
 void CConstraint::Release()

@@ -15,10 +15,14 @@ public:
 	void Release() override;
 	void Key_Input() override;
 
-	void Set_Up(CObj* _up) { UpObject = _up; }
-	void Set_Down(CObj* _down) { DownObject = _down; }
+	void Set_Up(CObj* _up) { m_pUpObject = _up; }
+	void Set_Down(CObj* _down) { m_pDownObject = _down; }
+
+	void Set_Visible(bool _bVisilbe) { m_bVisible = _bVisilbe; }
 public:
-	CObj* UpObject;
-	CObj* DownObject;
+	CObj* m_pUpObject;
+	CObj* m_pDownObject;
+
+	bool  m_bVisible;
 };
 
