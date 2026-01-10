@@ -14,12 +14,9 @@ public:
     int Late_Update() override;
     void Render(HDC hDC) override;
     void Release() override;
-
     void Collision(CKJJObj* pObj) override;
 
 private:
     CObj* m_pHammer;
-
-
 };
 

@@ -9,8 +9,7 @@ void KJJ_CollisionMgr::OBB_Collision(list<CObj*> _pDst, list<CObj*> _pSrc)
 		{
 			CKJJObj* pDst = static_cast<CKJJObj*>(Dst);
 			CKJJObj* pSrc = static_cast<CKJJObj*>(Src);
-			D3DXVECTOR3 vResult = Collision_Box(pDst, pSrc);
-			if (D3DXVec3Length(&vResult) != 0)
+			if (Collision_Box(pDst, pSrc))
 			{
 				pDst->Collision(pSrc);
 				pSrc->Collision(pDst);
@@ -19,16 +18,19 @@ void KJJ_CollisionMgr::OBB_Collision(list<CObj*> _pDst, list<CObj*> _pSrc)
 	}
 }
 
-D3DXVECTOR3 KJJ_CollisionMgr::Collision_Box(CKJJObj* pDst, CKJJObj* pSrc)
+bool KJJ_CollisionMgr::Collision_Box(CKJJObj* pDst, CKJJObj* pSrc)
 {
 	/*
-	벡터방향 Src->Dst
+	Result : Src가 Dst를 밀어내는 벡터
 	시계방향
 	 0		1
 
 
 	 3		2
 	*/
+
+	bool bResult(false), bSrcAxisX(false), bSrcAxisY(false);
+
 	D3DXVECTOR3 vCenter = pDst->Get_Info().vPos - pSrc->Get_Info().vPos;
 
 	D3DXVECTOR3 vSrcAxisX = pSrc->Get_AxisX();
@@ -36,8 +38,14 @@ D3DXVECTOR3 KJJ_CollisionMgr::Collision_Box(CKJJObj* pDst, CKJJObj* pSrc)
 	D3DXVECTOR3 vDstAxisX = pDst->Get_AxisX();
 	D3DXVECTOR3 vDstAxisY = pDst->Get_AxisY();
 
-	float fCenter_SrcX = D3DXVec3Dot(&vCenter, &vSrcAxisX);
-	float fCenter_SrcY = D3DXVec3Dot(&vCenter, &vSrcAxisY);
+	D3DXVECTOR3 vSrcNormX, vSrcNormY, vDstNormX, vDstNormY;
+
+	D3DXVec3Normalize(&vSrcNormX, &vSrcAxisX);
+	D3DXVec3Normalize(&vSrcNormY, &vSrcAxisY);
+	D3DXVec3Normalize(&vDstNormX, &vDstAxisX);
+	D3DXVec3Normalize(&vDstNormY, &vDstAxisY);
+
+	float fCenter_SrcNX = fabsf(D3DXVec3Dot(&vCenter, &vSrcNormX));
 
 #pragma region int iSrcPointNum
 	int iSrcPointNum = 0;
@@ -66,29 +74,48 @@ D3DXVECTOR3 KJJ_CollisionMgr::Collision_Box(CKJJObj* pDst, CKJJObj* pSrc)
 
 #pragma endregion
 
-	D3DXVECTOR3 vSrcPt = pSrc->Get_Point(iSrcPointNum);
-	float fSrcX_SrcPt = D3DXVec3Dot(&vSrcAxisX, &vSrcPt);
-	float fSrcX_DstX = D3DXVec3Dot(&vSrcAxisX, &vDstAxisX);
-	float fSrcX_DstY = D3DXVec3Dot(&vSrcAxisX, &vDstAxisY);
+	D3DXVECTOR3 vSrcPt = pSrc->Get_Point(iSrcPointNum) - pSrc->Get_Info().vPos;
 
-	float fSrcY_SrcPt = D3DXVec3Dot(&vSrcAxisY, &vSrcPt);
-	float fSrcY_DstX = D3DXVec3Dot(&vSrcAxisY, &vDstAxisX);
-	float fSrcY_DstY = D3DXVec3Dot(&vSrcAxisY, &vDstAxisY);
+	float fSrcNX_SrcPt	=	D3DXVec3Dot(&vSrcNormX, &vSrcPt);
+	float fSrcNX_DstX	=	D3DXVec3Dot(&vSrcNormX, &vDstAxisX);
+	float fSrcNX_DstY	=	D3DXVec3Dot(&vSrcNormX, &vDstAxisY);
 
-	float fSrcX_Sum = fSrcX_SrcPt + fSrcX_DstX + fSrcX_DstY;
-	float fSrcY_Sum = fSrcY_SrcPt + fSrcY_DstX + fSrcY_DstY;
-
-	if (fSrcX_Sum > fCenter_SrcX && fSrcY_Sum > fCenter_SrcY)
+	float fSrcNX_Sum	=	fabsf(fSrcNX_SrcPt)
+							+ fabsf(fSrcNX_DstX)
+							+ fabsf(fSrcNX_DstX);
+	
+	if (fSrcNX_Sum > fabsf(fCenter_SrcNX) + 1.f)
 	{
-		D3DXVECTOR3 vSrcNormX, vSrcNormY;
-		D3DXVec3Normalize(&vSrcAxisX, &vSrcNormX);
-		D3DXVec3Normalize(&vSrcAxisY, &vSrcNormY);
-		
-		return (fSrcX_Sum - fCenter_SrcX) * vSrcNormX +
-			(fSrcY_Sum - fCenter_SrcY) * vSrcNormY;
+		bSrcAxisX = true;
 	}
 	else
 	{
-		return { 0,0,0 };
+		bSrcAxisX = false;
 	}
+
+	float fCenter_SrcNY =	D3DXVec3Dot(&vCenter, &vSrcNormY);
+	float fSrcNY_SrcPt	=	D3DXVec3Dot(&vSrcNormY, &vSrcPt);
+	float fSrcNY_DstX	=	D3DXVec3Dot(&vSrcNormY, &vDstAxisX);
+	float fSrcNY_DstY	=	D3DXVec3Dot(&vSrcNormY, &vDstAxisY);
+
+	float fSrcNY_Sum	=	fabsf(fSrcNY_SrcPt)
+							+ fabsf(fSrcNY_DstX)
+							+ fabsf(fSrcNY_DstY);
+
+	if (fSrcNY_Sum > fabsf(fCenter_SrcNY) + 1.f)
+	{
+		bSrcAxisY = true;
+	}
+	else
+	{
+		bSrcAxisY = false;
+	}
+
+	bResult = bSrcAxisX && bSrcAxisY;
+
+	if (bResult)
+	{
+		cout << "충돌" << endl;
+	}
+	return bResult;
 }

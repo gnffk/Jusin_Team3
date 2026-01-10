@@ -8,6 +8,9 @@ void CBox::Initialize()
     m_vPoint[2] = { m_vSize.x / 2.f, m_vSize.y / 2.f, 0.f };
     m_vPoint[3] = { -m_vSize.x / 2.f, m_vSize.y / 2.f, 0.f };
 
+    m_vAxisX = { m_vSize.x/2.f,0.f,0.f };
+    m_vAxisY = { 0.f,-m_vSize.y/2.f, 0.f };
+
     for (int i = 0; i < 4; ++i)
     {
         m_vOriginPoint[i] = m_vPoint[i];
@@ -63,3 +66,4 @@ void CBox::Release()
 void CBox::Collision(CKJJObj* pObj)
 {
 }
+

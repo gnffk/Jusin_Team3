@@ -6,8 +6,6 @@
 CKJJ_Player::CKJJ_Player() :m_pHammer(nullptr)
 {
 	m_vSize = { 100.f,100.f,0.f };
-	m_vAxisX = { m_vSize.x / 2.f, 0.f,0.f };
-	m_vAxisY = { 0.f, -m_vSize.y / 2.f, 0.f };
 	m_tInfo.vPos = { 400.f, 300.f, 0.f };
 	m_vScale = { 1.f,1.f,1.f };
 }
@@ -18,6 +16,9 @@ CKJJ_Player::~CKJJ_Player()
 
 void CKJJ_Player::Initialize()
 {
+	m_vAxisX = { m_vSize.x / 2.f, 0.f,0.f };
+	m_vAxisY = { 0.f, -m_vSize.y / 2.f, 0.f };
+
 	m_vPoint[0] = { -m_vSize.x / 2.f,-m_vSize.y / 2.f, 0.f };
 	m_vPoint[1] = { m_vSize.x / 2.f,-m_vSize.y / 2.f, 0.f };
 	m_vPoint[2] = { m_vSize.x / 2.f,m_vSize.y / 2.f, 0.f };
@@ -39,27 +40,7 @@ void CKJJ_Player::Initialize()
 
 int CKJJ_Player::Update()
 {
-	D3DXVECTOR3		vGravity = { 0.f,0.01f,0.f };
-	D3DXVECTOR3		vMovement = m_tInfo.vDir * m_fSpeed + vGravity;
-	m_fSpeed = D3DXVec3Length(&vMovement);
-	D3DXVec3Normalize(&m_tInfo.vDir, &vMovement);
-	m_tInfo.vPos += vMovement;
-
-	D3DXMATRIX		matScale, matRotZ, matTrans;
-
-	D3DXMatrixScaling(&matScale,
-		m_vScale.x,
-		m_vScale.y,
-		m_vScale.z);
-
-	D3DXMatrixRotationZ(&matRotZ, D3DXToRadian(m_fAngle));
-
-	D3DXMatrixTranslation(&matTrans, 
-		m_tInfo.vPos.x,
-		m_tInfo.vPos.y,
-		m_tInfo.vPos.z);
-
-	m_tInfo.matWorld = matScale * matRotZ * matTrans;
+	CKJJObj::Update_matWorld();
 
 	for (int i = 0; i < 4; ++i)
 	{
@@ -73,6 +54,23 @@ int CKJJ_Player::Update()
 
 int CKJJ_Player::Late_Update()
 {
+	D3DXVECTOR3	vMovement = m_fSpeed * m_tInfo.vDir;
+
+	m_vecMovement.push_back({ 0.f,1.f,0.f });		// ม฿ทย
+
+	for (vector<D3DXVECTOR3>::iterator iter = m_vecMovement.begin();
+		iter != m_vecMovement.end(); ++iter)
+	{
+		vMovement += (*iter);
+	}
+
+	m_tInfo.vPos += vMovement;
+
+	m_fSpeed = D3DXVec3Length(&vMovement);
+	D3DXVec3Normalize(&m_tInfo.vDir, &vMovement);
+
+	m_vecMovement.clear();
+
 	return 0;
 }
 
@@ -93,5 +91,6 @@ void CKJJ_Player::Release()
 
 void CKJJ_Player::Collision(CKJJObj* pObj)
 {
-	m_fSpeed = 0;
+	m_fSpeed = 0.f;
+	m_tInfo.vPos += {0.f, -10.f, 0.f };
 }

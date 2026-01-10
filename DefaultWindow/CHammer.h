@@ -1,8 +1,8 @@
 #pragma once
-#include "CKJJ_Player.h"
+#include "CKJJObj.h"
 
 class CHammer :
-    public CKJJ_Player
+    public CKJJObj
 {
 public:
     CHammer();
@@ -15,10 +15,9 @@ public:
     void Release() override;
 
     void Set_Player(CObj* pPlayer) { m_pPlayer = pPlayer; }
-
     void Collision(CKJJObj* pObj) override;
+
 private:
-    float m_fAngle;
     float m_fHead_Distance;
     float m_fHammer_Length;
 
