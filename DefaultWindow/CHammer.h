@@ -15,7 +15,7 @@ public:
     void Release() override;
 
     void Set_Player(CObj* pPlayer) { m_pPlayer = pPlayer; }
-    void Collision(CKJJObj* pObj) override;
+    void Collision(CKJJObj* pObj, D3DXVECTOR3 Vec) override;
 
 private:
     float m_fHead_Distance;

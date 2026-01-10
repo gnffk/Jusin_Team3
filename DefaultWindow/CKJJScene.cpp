@@ -30,6 +30,7 @@ void CKJJScene::Late_Update()
 	KJJ_CollisionMgr::OBB_Collision(
 		*CObjMgr::Get_Instance()->Get_ObjList(OBJ_PLAYER),
 		*CObjMgr::Get_Instance()->Get_ObjList(OBJ_BOX));
+
 	CObjMgr::Get_Instance()->Late_Update();
 }
 

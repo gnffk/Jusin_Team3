@@ -14,9 +14,10 @@ public:
     int Late_Update() override;
     void Render(HDC hDC) override;
     void Release() override;
-    void Collision(CKJJObj* pObj) override;
+    void Collision(CKJJObj* pObj, D3DXVECTOR3 Vec) override;
 
 private:
     CObj* m_pHammer;
+    bool bIs_falling;
 };
 

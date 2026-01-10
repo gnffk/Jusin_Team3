@@ -14,7 +14,7 @@ public:
 	virtual void	Render(HDC hDC)	PURE;
 	virtual void	Release()		PURE;
 
-	virtual void	Collision(CKJJObj* pObj) PURE;
+	virtual void	Collision(CKJJObj* pObj, D3DXVECTOR3 Vec) PURE;
 
 	void Set_Pos(float x, float y, float z)
 	{

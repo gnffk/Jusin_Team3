@@ -118,6 +118,6 @@ void CHammer::Release()
 {
 }
 
-void CHammer::Collision(CKJJObj* pObj)
+void CHammer::Collision(CKJJObj* pObj, D3DXVECTOR3 Vec)
 {
 }
