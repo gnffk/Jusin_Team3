@@ -17,31 +17,39 @@ void CKMSPlayer::Initialize()
 	// 크 -> 자 -> 이 -> 공 -> 부
 	// 월드 좌표계 차이
 	m_tInfo.vPos = { 400.f, 300.f, 0.f };
+	m_prePos = { 400.f, 300.f, 0.f };
 
 	m_tInfo.vLook = { 0.f, -1.f, 0.f };
 	m_fAngle = 0.f;
 	m_fSpeed = 2.f;
+	m_bGravity = true;
 
+	m_fAngle = 0.f;
 
 }
 
 int CKMSPlayer::Update()
 {
+	m_prePos = m_tInfo.vPos;
 	Key_Input();
 
 	// 크 -> 자 -> 이 -> 공 -> 부
 	D3DXMATRIX		matScale, matRotZ, matTrans, matParRotZ, matParMat;
 	D3DXVECTOR3		VecParPos;
 	float			ParAngle = 0;
-	/*m_tInfo.vDir.x = m_tInfo.vLook.x * cosf(m_fAngle) - m_tInfo.vLook.y * sinf(m_fAngle);
-	m_tInfo.vDir.y = m_tInfo.vLook.x * sinf(m_fAngle) + m_tInfo.vLook.y * cosf(m_fAngle);*/
 
-	//m_tInfo.vPos.x += m_fSpeed * m_tInfo.vDir.x * 5;
+	 
 
-	//m_tInfo.vPos.y -=  m_tInfo.vDir.y;
+
+	m_tInfo.vDir.x = m_tInfo.vLook.x * cosf(m_fAngle) - m_tInfo.vLook.y * sinf(m_fAngle);
+	//m_tInfo.vDir.y = m_tInfo.vLook.x * sinf(m_fAngle) + m_tInfo.vLook.y * cosf(m_fAngle);
+	D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
+
+	//m_tInfo.vPos.x += m_fSpeed * m_tInfo.vDir.x;
+	//m_tInfo.vPos.y -= m_tInfo.vDir.y * m_fGravity * 0.7f;
 
 	//cout << "Pos x : " << m_tInfo.vPos.x << " Pos y : " << m_tInfo.vPos.y << endl;
-	//cout << "Angle : " << ParAngle << endl;
+	cout << "Angle : " << m_fAngle << endl;
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
 	D3DXMatrixRotationZ(&matRotZ, m_fAngle);
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
@@ -51,11 +59,16 @@ int CKMSPlayer::Update()
 	m_tInfo.matWorld = matScale * matRotZ * matTrans;
 
 
-
 	for (auto iter : m_vecSubObject) {
+
 		iter->Update();
+
+
 		CKMSCollisionMgr::CheckLine(iter, m_pCollisionLine);
 	}
+
+	
+
 
 	return OBJ_NOEVENT;
 }
@@ -64,6 +77,7 @@ int CKMSPlayer::Late_Update()
 {
 	for (auto iter : m_vecSubObject) {
 		iter->Late_Update();
+		
 	}
 
 	return 0;
@@ -104,16 +118,6 @@ void CKMSPlayer::Key_Input()
 	}
 
 
-	if (GetAsyncKeyState(VK_UP))
-	{
-		m_tInfo.vDir.x = m_tInfo.vLook.x * cosf(m_fAngle) - m_tInfo.vLook.y * sinf(m_fAngle) * -1;
-		m_tInfo.vDir.y = m_tInfo.vLook.x * sinf(m_fAngle) + m_tInfo.vLook.y * cosf(m_fAngle);
-		//cout << "Dir x : " << m_tInfo.vDir.x << " Dir y : " << m_tInfo.vDir.y << endl;
-		D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
-
-		m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
-	}
-
 	if (GetAsyncKeyState(VK_DOWN))
 	{
 		m_tInfo.vDir.x = m_tInfo.vLook.x * cosf(m_fAngle) - m_tInfo.vLook.y * sinf(m_fAngle) * -1;
@@ -126,3 +130,11 @@ void CKMSPlayer::Key_Input()
 }
 
 
+void CKMSPlayer::Add_Point() {
+	m_tInfo.vDir.x = m_tInfo.vLook.x * cosf(m_fAngle) - m_tInfo.vLook.y * sinf(m_fAngle) * -1;
+	m_tInfo.vDir.y = m_tInfo.vLook.x * sinf(m_fAngle) + m_tInfo.vLook.y * cosf(m_fAngle);
+	//cout << "Dir x : " << m_tInfo.vDir.x << " Dir y : " << m_tInfo.vDir.y << endl;
+	D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
+
+	m_tInfo.vPos += m_tInfo.vDir * m_fSpeed * 1;
+}
