@@ -76,8 +76,12 @@ int CRightDownLeg::Update()
 
 		dynamic_cast<CKMSObj*>(m_pConstraint)->Set_Pos(Constraint_Pos);
 	}
-
-
+	if (m_fAngle > 1.2f) {
+		m_fAngle = 1.2f;
+	}
+	if (m_fAngle < 0.f) {
+		m_fAngle = 0.f;
+	}
 	return 0;
 }
 
@@ -105,16 +109,12 @@ void CRightDownLeg::Key_Input()
 	if (CKeyMgr::Get_Instance()->Key_Pressing('P')) {
 		//cout << m_fAngle << endl;
 		m_fAngle += D3DXToRadian(3.f);
-		if (m_fAngle > 1.2f) {
-			m_fAngle = 1.2f;
-		}
+	
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing('O')) {
 		//cout << m_fAngle << endl;
 		m_fAngle -= D3DXToRadian(3.f);
-		if (m_fAngle < 0.f) {
-			m_fAngle = 0.f;
-		}
+		
 	}
 }

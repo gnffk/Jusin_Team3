@@ -15,7 +15,10 @@
 CLSYObjFruit::CLSYObjFruit():
 	m_bCut(false),
 	m_fTimer(0.f),
-	m_bDead(false)
+	m_bDead(false),
+	m_bThrow(false),
+	m_fThrowAngle(60.f),
+	m_fThrowVelocityZero(10.f)
 {
 }
 
@@ -30,11 +33,31 @@ void CLSYObjFruit::GenerateVertexList()
 	{
 	case FROPT_TEST:
 	{
+		
 		{
-			list<D3DXVECTOR3> v = GetCircleVertex(50);
-			v.push_back(v.front());
+			list<pair<D3DXVECTOR3, D3DXVECTOR3>> v = GetCircleVertex(60, 20);
 			Get_VertexList().push_back(v);
 		}
+
+		{
+			list<pair<D3DXVECTOR3, D3DXVECTOR3>> v = GetCircleVertex(80, 30);
+			Get_VertexList().push_back(v);
+		}
+
+		{
+			list<pair<D3DXVECTOR3, D3DXVECTOR3>> v = GetCircleVertex(30, 10);
+			Get_VertexList().push_back(v);
+		}
+
+		//{
+		//	Get_VertexList().push_back({
+		//		{ {-50.f, -50.f, 0.f}, {50.f, -50.f, 0.f} },
+		//		{ {50.f, -50.f, 0.f}, {50.f, 50.f, 0.f} },
+		//		{ {50.f, 50.f, 0.f}, {-50.f, 50.f, 0.f} },
+		//		{ {-50.f, 50.f, 0.f}, {-50.f, -50.f, 0.f} },
+		//	});
+		//}
+		
 		
 		//{
 		//	list<D3DXVECTOR3> v = GetCircleVertex(100, 30);
@@ -54,228 +77,267 @@ void CLSYObjFruit::GenerateVertexList()
 	}
 }
 
-bool CLSYObjFruit::CalcKnifeMark(POINT& pt1, POINT& pt2)
+
+bool CLSYObjFruit::Slice(POINT& pt1, POINT& pt2)
 {
-	list< D3DXVECTOR3> crossPointList;
-	for (list<D3DXVECTOR3>& vertexList : Get_VertexList())
+	//float EPSILON = 1.414f;
+	float EPSILON = 0.5f;
+	LONG err = ((LONG)pt1.x - (LONG)pt2.x);
+	if (err == 0)
 	{
-		bool bFirstSet = false;
-		D3DXVECTOR3 posTmp;
-		for (D3DXVECTOR3& vertex: vertexList)
+		return false;
+	}
+
+	list< D3DXVECTOR3> crossPointList;
+
+	float veryLeft = WINCX;
+	float veryRight = 0;
+	float veryBottom = 0;
+	float veryTop = WINCY;
+
+	for (list<pair<D3DXVECTOR3, D3DXVECTOR3>>& vertexList : Get_VertexList())
+	{
+		for (auto iter = vertexList.begin(); iter != vertexList.end();)
 		{
-			if (bFirstSet)
+			pair<D3DXVECTOR3, D3DXVECTOR3> vectorPair = *iter;
+
+			D3DXVECTOR3 pt3;
+			D3DXVECTOR3 pt4;
+
+			D3DXVec3TransformCoord(&pt3, &vectorPair.first, &m_tInfo.matWorld);
+			D3DXVec3TransformCoord(&pt4, &vectorPair.second, &m_tInfo.matWorld);
+
+			;
+			veryLeft = min(veryLeft, pt3.x);
+			veryRight = max(veryRight, pt3.x);
+			veryBottom = max(veryBottom, pt3.y);
+			veryTop = min(veryTop, pt3.y);
+
+			//pt3 += m_tInfo.vPos;
+			//pt4 += m_tInfo.vPos;
+
+			LONG err = ((pt1.x - pt2.x) * (pt3.y - pt4.y) - (pt1.y - pt2.y) * (pt3.x - pt4.x));
+			if (err == 0)
 			{
-				D3DXVECTOR3 tmp = vertex + m_tInfo.vPos;
+				return false;
+				//continue;
+			}
 
-				POINT pt3 = { tmp.x, tmp.y};
-				POINT pt4 = { posTmp.x, posTmp.y };
+			D3DXVECTOR3 ptCross = CrossPointBy2LinePoint(pt1, pt2, pt3, pt4);
 
-				LONG err = ((pt1.x - pt2.x) * (pt3.y - pt4.y) - (pt1.y - pt2.y) * (pt3.x - pt4.x));
-				if (err == 0)
-				{
-					continue;
-				}
+			float minx = min(pt3.x, pt4.x);
+			float maxx = max(pt3.x, pt4.x);
+			float miny = min(pt3.y, pt4.y);
+			float maxy = max(pt3.y, pt4.y);
 
-				POINT ptCross = CrossPointBy2LinePoint(pt1, pt2, pt3, pt4);
-
-				LONG minx = min(pt3.x, pt4.x);
-				LONG maxx = max(pt3.x, pt4.x);
-				LONG miny = min(pt3.y, pt4.y);
-				LONG maxy = max(pt3.y, pt4.y);
-
-				if (ptCross.x >= minx && ptCross.x <= maxx
-					&& ptCross.y >= miny && ptCross.y <= maxy)
-				{
-					D3DXVECTOR3 a = { (float)ptCross.x, (float)ptCross.y, 0.f };
-
-					//a -= m_tInfo.vPos;
-					a.x -= m_tInfo.vPos.x;
-					a.y -= m_tInfo.vPos.y;
-					crossPointList.push_back(a);
-				}
-
-				posTmp = vertex + m_tInfo.vPos;
-				if (crossPointList.size() >= 2)
-				{
-					break;
-				}
+			if (ptCross.x >= (minx - EPSILON) && ptCross.x <= (maxx + EPSILON)
+				&& ptCross.y >= (miny - EPSILON) && ptCross.y <= (maxy + EPSILON))
+			{
+				D3DXVECTOR3 a = { (float)ptCross.x, (float)ptCross.y, 0.f };
+				crossPointList.push_back(a);
+				++iter;
 			}
 			else
 			{
-				posTmp = vertex + m_tInfo.vPos;
-				bFirstSet = true;
+				++iter;
 			}
 		}
 	}
-	if (crossPointList.size() == 2)
+
+	RECT thisRect = { veryLeft, veryTop, veryRight, veryBottom };
+	int width = fabsf(pt2.x - pt1.x);
+	int height = fabsf(pt2.y - pt1.y);
+	int left = min(pt1.x, pt2.x);
+	int top = min(pt1.y, pt2.y);
+	RECT mouseRect = { left, top, left + width, top + height };
+	RECT rc;
+	if(!IntersectRect(&rc, &thisRect, &mouseRect))
 	{
-		D3DXVECTOR3 crossPos1 = crossPointList.front();
-		crossPointList.pop_front();
-		D3DXVECTOR3 crossPos2 = crossPointList.front();
-		crossPointList.pop_front();
-		LONG err = ((LONG)crossPos2.x - (LONG)crossPos1.x);
-		if (err == 0)
+		return false;
+	}
+	//RECT mouseRect = {}
+
+	if (false)
+	{
+		bool bFirstSet = false;
+		D3DXVECTOR3 posBefore;
+		for (D3DXVECTOR3 crossPoint : crossPointList)
 		{
-			return false;
-		}
 
-		float gi = (crossPos2.y - crossPos1.y) / (crossPos2.x - crossPos1.x);
-
-		list<list<D3DXVECTOR3>> part1VertexList;
-		list<list<D3DXVECTOR3>> part2VertexList;
-
-		for (list<D3DXVECTOR3> vertexList : Get_VertexList())
-		{
-			//vertexList.push_front(crossPos1);
-			//vertexList.push_back(crossPos2);
-
-			//vertexList.sort();
-
-			list<D3DXVECTOR3> part1;
-			list<D3DXVECTOR3> part2;
-
-			/*part1.push_back(crossPos1);
-			part1.push_back(crossPos2);*/
-			for (D3DXVECTOR3& vertex : vertexList)
+			if (bFirstSet)
 			{
-				LONG y = LineEquation({ (LONG)crossPos1.x, (LONG)crossPos1.y }, { (LONG)crossPos2.x, (LONG)crossPos2.y }, (LONG)vertex.x);
+				Get_VertexList().push_back({
+					{ posBefore - m_tInfo.vPos, crossPoint - m_tInfo.vPos},
+					});
+			}
+			else
+			{
+				bFirstSet = true;
+				posBefore = crossPoint;
+			}
+		}
+	}
 
-				if ((LONG)vertex.y >= y)
+	cout << "crossPointList: " << crossPointList.size() << endl;
+	
+
+	if (true)
+	{
+		for (list<pair<D3DXVECTOR3, D3DXVECTOR3>>& vertexList : Get_VertexList())
+		{
+
+			for (D3DXVECTOR3 crossPoint : crossPointList)
+			{
+				for (auto iter = vertexList.begin(); iter != vertexList.end();)
 				{
-					part1.push_back(vertex);
-				}
-				else
-				{
-					part2.push_back(vertex);
+					pair<D3DXVECTOR3, D3DXVECTOR3> vectorPair = *iter;
+
+					//D3DXVECTOR3 pt3 = vectorPair.first;
+					//D3DXVECTOR3 pt4 = vectorPair.second;
+					//pt3 += m_tInfo.vPos;
+					//pt4 += m_tInfo.vPos;
+
+					D3DXVECTOR3 pt3;
+					D3DXVECTOR3 pt4;
+
+					D3DXVec3TransformCoord(&pt3, &vectorPair.first, &m_tInfo.matWorld);
+					D3DXVec3TransformCoord(&pt4, &vectorPair.second, &m_tInfo.matWorld);
+
+
+					float minx = min(pt3.x, pt4.x);
+					float maxx = max(pt3.x, pt4.x);
+					float miny = min(pt3.y, pt4.y);
+					float maxy = max(pt3.y, pt4.y);
+
+					if (crossPoint.x >= (minx - EPSILON) && crossPoint.x <= (maxx + EPSILON)
+						&& crossPoint.y >= (miny - EPSILON) && crossPoint.y <= (maxy + EPSILON))
+					{
+						iter = vertexList.erase(iter);
+					}
+					else
+					{
+						++iter;
+					}
+
 				}
 			}
+		}
+	}
+
+
+
+
+	list<list<pair<D3DXVECTOR3, D3DXVECTOR3>>> part1VertexList;
+	list<list<pair<D3DXVECTOR3, D3DXVECTOR3>>> part2VertexList;
+	{
+		for (list<pair<D3DXVECTOR3, D3DXVECTOR3>> vertexList : Get_VertexList())
+		{
+			list<pair<D3DXVECTOR3, D3DXVECTOR3>> part1;
+			for (pair<D3DXVECTOR3, D3DXVECTOR3> vertexPair : vertexList)
+			{
+				D3DXVECTOR3 pt3;
+				D3DXVECTOR3 pt4;
+
+				D3DXVec3TransformCoord(&pt3, &vertexPair.first, &m_tInfo.matWorld);
+				D3DXVec3TransformCoord(&pt4, &vertexPair.second, &m_tInfo.matWorld);
+
+				float judgePt3Y = LineEquation(pt1, pt2, pt3.x);
+				float judgePt4Y = LineEquation(pt1, pt2, pt4.x);
+
+				if (pt3.y > judgePt3Y && pt3.y > judgePt3Y)
+				{
+					part1.push_back(vertexPair);
+				}
+			}
+
+			if (!part1.empty())
+			{
+				part1VertexList.push_back(part1);
+			}
+		}
+
+	}
 
 	
 
-
-			if (part1.front() != part1.back())
-			{
-				int x = 0;
-				//part2.push_back(part1.front());
-				//part1.push_back(part1.front());
-			}
-			if (part2.front() != part2.back())
-			{
-				//part2.push_back(part2.front());
-			}
-
-			if (gi < 0)
-			{
-				// 양의방향
-
-				//part2.push_front(part1.back());
-				//part2.push_back(part1.front());
-			}
-
-			part1VertexList.push_back(part1);
-			part2VertexList.push_back(part2);
-		}
-
-		m_bDead = true;
-		{
-			CLSYObjFruit* pFruit = dynamic_cast<CLSYObjFruit*>(CAbstractFactory<CLSYObjFruit>::Create());
-			pFruit->Set_Option(CLSYObjFruit::FROPT_PART);
-			pFruit->Set_VertexList(part1VertexList);
-			CObjMgr::Get_Instance()->AddObject(OBJ_LSY_FRUIT, pFruit);
-		}
-
-		{
-			CLSYObjFruit* pFruit = dynamic_cast<CLSYObjFruit*>(CAbstractFactory<CLSYObjFruit>::Create());
-			pFruit->Set_Option(CLSYObjFruit::FROPT_PART);
-			D3DXVECTOR3 tmp = { 300.f, 300.f, 0 };
-			pFruit->Set_Pos(tmp);
-			pFruit->Set_VertexList(part2VertexList);
-			CObjMgr::Get_Instance()->AddObject(OBJ_LSY_FRUIT, pFruit);
-		}
-	}
-	if (false && crossPointList.size() == 2)
 	{
-		D3DXVECTOR3 crossPos1 = crossPointList.front();
-		crossPointList.pop_front();
-		D3DXVECTOR3 crossPos2 = crossPointList.front();
-		crossPointList.pop_front();
-		LONG err = ((LONG)crossPos2.x - (LONG)crossPos1.x);
-		if (err == 0)
+		for (list<pair<D3DXVECTOR3, D3DXVECTOR3>> vertexList : Get_VertexList())
 		{
-			return false;
-		}
-
-		float gi = (crossPos2.y - crossPos1.y) / (crossPos2.x - crossPos1.x);
-
-		list<list<D3DXVECTOR3>> part1VertexList;
-		list<list<D3DXVECTOR3>> part2VertexList;
-
-		for (list<D3DXVECTOR3>& vertexList : Get_VertexList())
-		{
-			list<D3DXVECTOR3> part1;
-			list<D3DXVECTOR3> part2;
-
-			
-			for (D3DXVECTOR3& vertex : vertexList)
+			list<pair<D3DXVECTOR3, D3DXVECTOR3>> part2;
+			for (pair<D3DXVECTOR3, D3DXVECTOR3> vertexPair : vertexList)
 			{
-				LONG y = LineEquation({ (LONG)crossPos1.x, (LONG)crossPos1.y }, { (LONG)crossPos2.x, (LONG)crossPos2.y }, (LONG)vertex.x);
+				D3DXVECTOR3 pt3;
+				D3DXVECTOR3 pt4;
 
-				if ((LONG)vertex.y > y)
+				D3DXVec3TransformCoord(&pt3, &vertexPair.first, &m_tInfo.matWorld);
+				D3DXVec3TransformCoord(&pt4, &vertexPair.second, &m_tInfo.matWorld);
+
+				float judgePt3Y = LineEquation(pt1, pt2, pt3.x);
+				float judgePt4Y = LineEquation(pt1, pt2, pt4.x);
+
+				if (pt3.y < judgePt3Y && pt3.y < judgePt3Y)
 				{
-					part1.push_back(vertex);
-				}
-				else
-				{
-					part2.push_back(vertex);
+					part2.push_back(vertexPair);
 				}
 			}
-			
 
-			if (part1.front() != part1.back())
+			if (!part2.empty())
 			{
-				int x = 0;
-				//part2.push_back(part1.front());
-				part1.push_back(part1.front());
+				part2VertexList.push_back(part2);
 			}
-			if (part2.front() != part2.back())
-			{
-				part2.push_back(part2.front());
-			}
-
-			if (gi < 0)
-			{
-				// 양의방향
-
-				//part2.push_front(part1.back());
-				//part2.push_back(part1.front());
-			}
-
-			part1VertexList.push_back(part1);
-			part2VertexList.push_back(part2);
 		}
-
-		m_bDead = true;
-		{
-			CLSYObjFruit* pFruit = dynamic_cast<CLSYObjFruit*>(CAbstractFactory<CLSYObjFruit>::Create());
-			pFruit->Set_Option(CLSYObjFruit::FROPT_PART);
-			pFruit->Set_VertexList(part1VertexList);
-			CObjMgr::Get_Instance()->AddObject(OBJ_LSY_FRUIT, pFruit);
-		}
-
-		{
-			CLSYObjFruit* pFruit = dynamic_cast<CLSYObjFruit*>(CAbstractFactory<CLSYObjFruit>::Create());
-			pFruit->Set_Option(CLSYObjFruit::FROPT_PART);
-			D3DXVECTOR3 tmp = { 300.f, 300.f, 0 };
-			pFruit->Set_Pos(tmp);
-			pFruit->Set_VertexList(part2VertexList);
-			CObjMgr::Get_Instance()->AddObject(OBJ_LSY_FRUIT, pFruit);
-		}
+		
 	}
 
-	//Get_VertexList().push_back(crossPointList);
+	
 
-	m_bCut = true;
-	return false;
+		if (!part1VertexList.empty() && !part2VertexList.empty())
+		{
+			{
+				if (!part1VertexList.empty())
+				{
+					//part1
+					CLSYObjFruit* pFruit = dynamic_cast<CLSYObjFruit*>(CAbstractFactory<CLSYObjFruit>::Create());
+					pFruit->Set_Option(CLSYObjFruit::FROPT_PART);
+					pFruit->Set_VertexList(part1VertexList);
+					pFruit->Set_Angle(m_fAngle);
+					pFruit->Set_Pos(m_tInfo.vPos);
+					int randSpeed = rand() % 5;
+					pFruit->Set_Speed(randSpeed + 1);
+					pFruit->Set_Throw(m_bThrow);
+					pFruit->Set_ThrowAngle(m_fAngle - 90);
+					CObjMgr::Get_Instance()->AddObject(OBJ_LSY_FRUIT, pFruit);
+
+					m_bDead = true;
+				}
+			}
+			{
+				if (!part2VertexList.empty())
+				{
+					//part2
+					CLSYObjFruit* pFruit = dynamic_cast<CLSYObjFruit*>(CAbstractFactory<CLSYObjFruit>::Create());
+					pFruit->Set_Option(CLSYObjFruit::FROPT_PART);
+					pFruit->Set_VertexList(part2VertexList);
+					D3DXVECTOR3 tmpPos = { 100.f, 300.f, 0.f };
+					pFruit->Set_Angle(m_fAngle);
+					pFruit->Set_Pos(m_tInfo.vPos);
+					int randSpeed = rand() % 5;
+					pFruit->Set_Speed(randSpeed + 1);
+					pFruit->Set_Throw(m_bThrow);
+					pFruit->Set_ThrowAngle(m_fAngle + 90);
+					CObjMgr::Get_Instance()->AddObject(OBJ_LSY_FRUIT, pFruit);
+
+					m_bDead = true;
+				}
+			}
+		}
+
+	
+
+	
+	
+
+	return true;
 }
 
 void CLSYObjFruit::Initialize()
@@ -287,7 +349,7 @@ void CLSYObjFruit::Initialize()
 	m_tInfo.vLook = { 0.f, -1.f, 0.f };
 	m_fSpeed = 3.f;
 
-	m_tRectSides = { 100, 100 };
+	//m_tRectSides = { 200, 200 };
 }
 
 int CLSYObjFruit::Update()
@@ -299,16 +361,17 @@ int CLSYObjFruit::Update()
 
 	float delta = CDeltaMgr::Get_Instance()->Get_Delta();
 	m_fTimer += delta;
-	if (false)
+	if (m_bThrow)
 	{
-		float vzero = 7.f;
-		float cosx = vzero * cosf(D3DXToRadian(70.f)) * m_fTimer;
-		float siny = vzero * sinf(D3DXToRadian(70.f)) * m_fTimer;
+		float cosx = m_fThrowVelocityZero * cosf(D3DXToRadian(m_fThrowAngle)) * m_fTimer;
+		float siny = m_fThrowVelocityZero * sinf(D3DXToRadian(m_fThrowAngle)) * m_fTimer;
 
 		D3DXVECTOR3 dirGravity = { 0.f, 9.81f, 0.f };
 		m_tInfo.vPos += 1.f * dirGravity * 0.5 * m_fTimer * m_fTimer;
 		m_tInfo.vPos.x += cosx;
 		m_tInfo.vPos.y -= siny;
+
+		m_fAngle += m_fSpeed;
 	}
 
 
@@ -341,7 +404,13 @@ int CLSYObjFruit::Update()
 
 int CLSYObjFruit::Late_Update()
 {
-	
+	// culling
+	//m_tInfo.vPos
+	int margin = 100;
+	if (m_tInfo.vPos.x > WINCX + margin || m_tInfo.vPos.x < 0 - margin || m_tInfo.vPos.y > WINCY + margin || m_tInfo.vPos.y < 0 - margin)
+	{
+		m_bDead = true;
+	}
 	return OBJ_NOEVENT;
 }
 

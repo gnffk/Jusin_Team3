@@ -52,7 +52,7 @@ void CKMSScene::Initialize()
 		p_LeftShose = CAbstractFactory<CLeftShose>::Create();
 		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftShose);
 		dynamic_cast<CKMSObj*>(p_LeftShose)->Set_ParentObject(p_LeftDownLeg);
-
+		dynamic_cast<CKMSObj*>(p_LeftShose)->Set_RootObject(p_Player);
 
 		// Constraint - Left Up  <-> Left Down
 		CObj* p_LeftUpDownConstraint = CAbstractFactory<CConstraint>::Create();
@@ -95,6 +95,7 @@ void CKMSScene::Initialize()
 		CObj* p_RightShose = CAbstractFactory<CRightShose>::Create();
 		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_RightShose);
 		dynamic_cast<CKMSObj*>(p_RightShose)->Set_ParentObject(p_RightDownLeg);
+		dynamic_cast<CKMSObj*>(p_RightShose)->Set_RootObject(p_Player);
 
 		// Constraint - Right Up  <-> Right Down
 		CObj* p_RightUpDownConstraint = CAbstractFactory<CConstraint>::Create();
@@ -118,7 +119,7 @@ void CKMSScene::Initialize()
 		dynamic_cast<CConstraint*>(p_RightDownShoseConstraint)->Set_MinAngle(0.f);
 	}
 	
-
+	p_Player->Initialize();
 
 
 

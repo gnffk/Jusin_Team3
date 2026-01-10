@@ -8,6 +8,8 @@ public:
 	virtual ~CKMSObj();
 	
 public:
+	void Set_RootObject(CObj* _pRoot) { RootObj = _pRoot; }
+	CObj* Get_RootObject() {return RootObj; }
 
 	void Set_ParentObject(CObj* m_fParentObject) {m_pParentObject = m_fParentObject;}
 	CObj* Get_ParentObject() { return m_pParentObject; }
@@ -20,6 +22,7 @@ public:
 	void Set_StartPos(D3DXVECTOR3 _StartVector) { m_StartVector = _StartVector; }
 
 	void Set_Pos(D3DXVECTOR3 _Vector) { m_tInfo.vPos = _Vector; }
+	void Set_PlusPos(D3DXVECTOR3 _Vector) { m_tInfo.vPos += _Vector; }
 
 	vector<D3DXVECTOR3> Get_Point() { return m_vPoint; }
 
@@ -44,5 +47,7 @@ protected:
 	D3DXVECTOR3	m_OriginVector;
 
 	KMSOBJTYPE m_eKMSObjType;
+
+	CObj* RootObj;
 };
 
