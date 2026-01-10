@@ -97,7 +97,7 @@ void CMenu::Late_Update()
 	}
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LBUTTON) && IntersectRect(&rc, &m_mouseRect, &m_syRect))
 	{
-		CSceneMgr::Get_Instance()->Scene_Change(SC_LSY_TEST);
+		CSceneMgr::Get_Instance()->Scene_Change(SC_LSY_FRUIT_NINJA);
 	}
 }
 

@@ -15,7 +15,7 @@ public:
 
     void Set_Angle(float Angle) { m_fAngle = Angle; }
 
-    void Collision(CKJJObj* pObj) override;
+    void Collision(CKJJObj* pObj, D3DXVECTOR3 Vec) override;
 private:
 
 

@@ -14,7 +14,7 @@ public:
 	virtual void	Render(HDC hDC)	PURE;
 	virtual void	Release()		PURE;
 
-	virtual void	Collision(CKJJObj* pObj) PURE;
+	virtual void	Collision(CKJJObj* pObj, D3DXVECTOR3 Vec) PURE;
 
 	void Set_Pos(float x, float y, float z)
 	{
@@ -50,6 +50,8 @@ public:
 	float Get_Angle() { return m_fAngle; }
 	void Set_Weight(float Weight) { m_fWeight = Weight; }
 	float Get_Weight() { return m_fWeight; }
+
+	void Move_Pos(D3DXVECTOR3 Vec) { m_tInfo.vPos += Vec; }
 
 	void Update_matWorld();
 

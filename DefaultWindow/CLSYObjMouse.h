@@ -1,17 +1,12 @@
 #pragma once
 #include "CLSYObj.h"
 #include "CLSYObjFruit.h"
+#include "CLSYObjKnifeMark.h"
 class CLSYObjMouse final : public CLSYObj
 {
 public:
 	CLSYObjMouse();
 	~CLSYObjMouse() override;
-
-public:
-	void Set_TmpFruit(CLSYObjFruit* TmpFruit)
-	{
-		m_pTmpFruit = TmpFruit;
-	}
 
 public:
 	void	Initialize()	override;
@@ -28,7 +23,8 @@ private:
 	bool m_bMarking;
 
 
-	CLSYObjFruit* m_pTmpFruit;
+	//CLSYObjFruit* m_pTmpFruit;
+	CLSYObjKnifeMark* m_pKnifeMark;
 	
 };
 
