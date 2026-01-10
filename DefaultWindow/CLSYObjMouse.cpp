@@ -7,7 +7,8 @@
 
 CLSYObjMouse::CLSYObjMouse():
 	m_iCnt(0),
-	m_bMarking(false)
+	m_bMarking(false),
+	m_pKnifeMark(nullptr)
 {
 	ZeroMemory(&m_ptBefore, sizeof(m_ptBefore));
 	ZeroMemory(&m_ptCurr, sizeof(m_ptCurr));
@@ -21,6 +22,10 @@ void CLSYObjMouse::Initialize()
 {
 	m_tRectSides = { 10, 10 };
 	m_tInfo.vLook = { 0.f, -1.f, 0.f };
+
+	CLSYObjKnifeMark* pKnifeMark = dynamic_cast<CLSYObjKnifeMark*>(CAbstractFactory<CLSYObjKnifeMark>::Create());
+	CObjMgr::Get_Instance()->AddObject(OBJ_LSY_MOUSE, pKnifeMark);
+	m_pKnifeMark = pKnifeMark;
 }
 
 int CLSYObjMouse::Update()
@@ -87,6 +92,8 @@ int CLSYObjMouse::Update()
 			m_bMarking = true;
 
 			{
+				m_pKnifeMark->Set_Pos(m_tInfo.vPos);
+
 				m_ptBefore = m_ptCurr;
 				m_ptCurr = ptMouse;
 			}
@@ -100,6 +107,31 @@ int CLSYObjMouse::Update()
 			m_bMarking = false;
 
 			{
+				//if (true || PtInRect(&m_pTmpFruit->Get_Rect(), ptMouse))
+				//{
+				//	if (!m_pTmpFruit->Get_Cut())
+				//	{
+				//		D3DXVECTOR3 posMark = m_pKnifeMark->Get_Info().vPos;
+				//		POINT ptMark{ (LONG) posMark.x, (LONG) posMark.y};
+				//		m_pTmpFruit->Slice(ptMark, ptMouse);
+				//	}
+				//}
+
+
+
+				list<CObj*> fruits = *CObjMgr::Get_Instance()->Get_ObjList(OBJ_LSY_FRUIT);
+				for (auto iter = fruits.begin(); iter != fruits.end(); ++iter)
+				{
+					CLSYObjFruit* pFruits = dynamic_cast<CLSYObjFruit*>(*iter);
+					D3DXVECTOR3 posMark = m_pKnifeMark->Get_Info().vPos;
+					POINT ptMark{ (LONG)posMark.x, (LONG)posMark.y };
+					pFruits->Slice(ptMark, ptMouse);
+				}
+
+
+				cout << "sadf " << endl;
+
+
 
 			}
 		}
@@ -109,11 +141,22 @@ int CLSYObjMouse::Update()
 	{
 		if (!(m_ptCurr.x == ptMouse.x && m_ptCurr.y == ptMouse.y))
 		{
+			m_pKnifeMark->Set_EndPt(ptMouse);
+
+
+
+
+
+
 			LONG width = ptMouse.x - m_ptCurr.x;
 			LONG height = ptMouse.y - m_ptCurr.y;
 			float distance = sqrtf(width * width + height * height);
 
-			if (distance > 5)
+			
+			
+			
+
+			if (false && distance > 5)
 			{
 				cout << "mark!" << endl;
 				m_ptBefore = m_ptCurr;
@@ -127,23 +170,23 @@ int CLSYObjMouse::Update()
 					CLSYObjKnifeMark* pKnifeMark = dynamic_cast<CLSYObjKnifeMark*>(CAbstractFactory<CLSYObjKnifeMark>::Create());
 					pKnifeMark->Set_Pos(m_tInfo.vPos);
 					pKnifeMark->Set_Angle(m_fAngle);
-					pKnifeMark->Get_VertexList().push_back({
-						{-5.f, -distance, 0.f},
-						{5.f, -distance, 0.f},
-						{5.f, distance, 0.f},
-						{-5.f, distance, 0.f},
-						{-5.f, -distance, 0.f}
-						});
+					//pKnifeMark->Get_VertexList().push_back({
+					//	{-5.f, -distance, 0.f},
+					//	{5.f, -distance, 0.f},
+					//	{5.f, distance, 0.f},
+					//	{-5.f, distance, 0.f},
+					//	{-5.f, -distance, 0.f}
+					//	});
 					CObjMgr::Get_Instance()->AddObject(OBJ_LSY_MOUSE, pKnifeMark);
 
 
-					if (PtInRect(&m_pTmpFruit->Get_Rect(), ptMouse))
-					{
-						if (!m_pTmpFruit->Get_Cut())
-						{
-							m_pTmpFruit->CalcKnifeMark(m_ptCurr, m_ptBefore);
-						}
-					}
+					//if (PtInRect(&m_pTmpFruit->Get_Rect(), ptMouse))
+					//{
+					//	if (!m_pTmpFruit->Get_Cut())
+					//	{
+					//		m_pTmpFruit->CalcKnifeMark(m_ptCurr, m_ptBefore);
+					//	}
+					//}
 				}
 			}
 		}

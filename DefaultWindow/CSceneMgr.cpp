@@ -4,7 +4,7 @@
 #include "CKJJScene.h"
 #include "CKMSScene.h"
 #include "CSceneLSYTest.h"
-
+#include "CSceneLSYFruitNinja.h"
 CSceneMgr* CSceneMgr::m_pInstance = nullptr;
 
 CSceneMgr::CSceneMgr() : m_pScene(nullptr), m_ePreScene(SC_END), m_eCurScene(SC_MINSU)
@@ -37,6 +37,10 @@ void CSceneMgr::Scene_Change(SCENEID eID)
 
 		case SC_LSY_TEST:
 			m_pScene = new CSceneLSYTest;
+			break;
+
+		case SC_LSY_FRUIT_NINJA:
+			m_pScene = new CSceneLSYFruitNinja;
 			break;
 
 		case SC_KJJ:
