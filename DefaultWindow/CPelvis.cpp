@@ -48,7 +48,7 @@ int CPelvis::Update()
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x,m_tInfo.vPos.y,m_tInfo.vPos.z);
 	
 	//cout << "RightAngle :" << m_fRightAngle << " LeftAngle :" << m_fLeftAngle << endl;
-	cout << "Angle : " << m_fAngle << endl;
+	//cout << "Angle : " << m_fAngle << endl;
 	
 	m_tInfo.matWorld = matScale * matRotZ * matTrans  * matParMat;
 

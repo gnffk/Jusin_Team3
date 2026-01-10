@@ -11,10 +11,15 @@ void CKMSCollisionMgr::CheckLine(CObj* _Body, CObj* _Line)
 		
 		if (dynamic_cast<CKMSObj*>(_Body)->GetKMSObjType() == KMSOBJ_RIGHTSHOES) {
 			if (i.y >= static_cast<CKMSObj*>(_Line)->Get_Point().front().y) {
-
+	
 				//cout << Count << "번 점 충돌 <오른쪽>" << endl;
 				if (dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject())) {
-					dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject())->Plus_Angle(0.01f);
+					if (dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject())->Get_Angle() <= 0.5f) {
+						dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject())->Plus_Angle(0.01f);
+					}
+					if (dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject())->Get_Angle() > 0.3f) {
+						dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject())->Plus_Angle(-0.01f);
+					}
 					if (dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject()))) {
 						dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject())->Get_ParentObject())->Plus_Angle(-0.01f);
 

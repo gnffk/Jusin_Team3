@@ -49,15 +49,15 @@ int CRightUpLeg::Update()
 	
 	if (m_fAngle <= -1.2f) {
 		m_fAngle = -1.2f;
-		dynamic_cast<CPelvis*>(m_pParentObject)->Set_SubAngle(0.01f);
+		//dynamic_cast<CPelvis*>(m_pParentObject)->Set_SubAngle(0.01f);
 	}
 	if (m_fAngle >= 1.2f) {
 		m_fAngle = 1.2f;
-		dynamic_cast<CPelvis*>(m_pParentObject)->Set_SubAngle(0.01f);
+		//dynamic_cast<CPelvis*>(m_pParentObject)->Set_SubAngle(0.01f);
 	}
 	m_tInfo.matWorld = matScale * matRotZ * matTrans * matParMat;
-
-	cout << m_fAngle << endl;
+	
+	/*cout << m_fAngle << endl;*/
 	for (int i = 0; i < 5; ++i)
 	{
 		m_vPoint[i] = m_vOriginPoint[i];

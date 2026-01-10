@@ -49,11 +49,11 @@ int CLeftUpLeg::Update()
 
 	if (m_fAngle <= -1.2f) {
 		m_fAngle = -1.2f;
-		dynamic_cast<CPelvis*>(m_pParentObject)->Set_SubAngle(0.01f);
+		//dynamic_cast<CPelvis*>(m_pParentObject)->Set_SubAngle(0.01f);
 	}
 	else if (m_fAngle >= 1.2f) {
 		m_fAngle = 1.2f;
-		dynamic_cast<CPelvis*>(m_pParentObject)->Set_SubAngle(0.01f);
+		//dynamic_cast<CPelvis*>(m_pParentObject)->Set_SubAngle(0.01f);
 	}
 
 	

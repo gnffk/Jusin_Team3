@@ -68,7 +68,7 @@ int CRightDownLeg::Update()
 
 
 	}
-
+	cout << m_fAngle << endl;
 	if (m_pConstraint) {
 		D3DXVECTOR3 Constraint_Pos = { 0.f,0.f,0.f };
 
