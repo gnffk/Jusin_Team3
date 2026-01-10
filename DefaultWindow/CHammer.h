@@ -1,5 +1,6 @@
 #pragma once
 #include "CKJJObj.h"
+#include "CKJJ_Player.h"
 
 class CHammer :
     public CKJJObj
@@ -14,14 +15,19 @@ public:
     void Render(HDC hDC) override;
     void Release() override;
 
-    void Set_Player(CObj* pPlayer) { m_pPlayer = pPlayer; }
+    void Set_Player(CKJJ_Player* pPlayer) { m_pPlayer = pPlayer; }
     void Collision(CKJJObj* pObj, D3DXVECTOR3 Vec) override;
 
 private:
     float m_fHead_Distance;
     float m_fHammer_Length;
+    float m_fPlayerAngle;
 
-    CObj* m_pPlayer;
+    bool m_bIs_Col;
+    bool m_bClockWise;
+    bool m_bColDir;
+
+    CKJJ_Player* m_pPlayer;
 
     D3DXVECTOR3 m_vPrevMouse, m_vCurrMouse;
 };

@@ -13,7 +13,7 @@ void CKJJScene::Initialize()
 	CObjMgr::Get_Instance()->AddObject(OBJ_PLAYER, pPlayer);
 
 	CBox* pBox = new CBox;
-	pBox->Set_Size(800, 10, 0);
+	pBox->Set_Size(800, 100, 0);
 	pBox->Set_Pos(400, 400, 0);
 	pBox->Initialize();
 	CObjMgr::Get_Instance()->AddObject(OBJ_BOX, pBox);
@@ -29,6 +29,10 @@ void CKJJScene::Late_Update()
 {
 	KJJ_CollisionMgr::OBB_Collision(
 		*CObjMgr::Get_Instance()->Get_ObjList(OBJ_PLAYER),
+		*CObjMgr::Get_Instance()->Get_ObjList(OBJ_BOX));
+
+	KJJ_CollisionMgr::OBB_Collision(
+		*CObjMgr::Get_Instance()->Get_ObjList(OBJ_HAMMER),
 		*CObjMgr::Get_Instance()->Get_ObjList(OBJ_BOX));
 
 	CObjMgr::Get_Instance()->Late_Update();
