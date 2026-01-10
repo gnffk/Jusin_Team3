@@ -12,11 +12,27 @@ void CKJJScene::Initialize()
 	pPlayer->Initialize();
 	CObjMgr::Get_Instance()->AddObject(OBJ_PLAYER, pPlayer);
 
-	CBox* pBox = new CBox;
-	pBox->Set_Size(800, 100, 0);
-	pBox->Set_Pos(400, 400, 0);
-	pBox->Initialize();
-	CObjMgr::Get_Instance()->AddObject(OBJ_BOX, pBox);
+	CBox* pFloor = new CBox;
+	pFloor->Set_Size(600, 100, 0);
+	pFloor->Set_Pos(300, 550, 0);
+	pFloor->Initialize();
+	CObjMgr::Get_Instance()->AddObject(OBJ_BOX, static_cast<CObj*>(pFloor));
+
+	CBox* pWall = new CBox;
+	pWall->Set_Size(100, 1200, 0);
+	pWall->Set_Pos(0, 300, 0);
+	pWall->Initialize();
+	CObjMgr::Get_Instance()->AddObject(OBJ_BOX, static_cast<CObj*>(pWall));
+	
+	CBox* pBox[8];
+	for (int i = 0; i < 8; ++i)
+	{
+		pBox[i] = new CBox;
+		pBox[i]->Set_Size((8 - i) * 50, 50, 0);
+		pBox[i]->Set_Pos(600 - (8 - i) * 25, 475 - 50 * i, 0);
+		pBox[i]->Initialize();
+		CObjMgr::Get_Instance()->AddObject(OBJ_BOX, static_cast<CObj*>(pBox[i]));
+	}
 }
 
 int CKJJScene::Update()

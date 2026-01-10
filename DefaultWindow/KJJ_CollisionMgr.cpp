@@ -49,33 +49,36 @@ bool KJJ_CollisionMgr::Collision_Box(D3DXVECTOR3* pResult, CKJJObj* pDst, CKJJOb
 	float fCenter_SrcNX = fabsf(D3DXVec3Dot(&vCenter, &vSrcNormX));
 
 #pragma region int iSrcPointNum
-	int iSrcPointNum = 0;
-	if (vCenter.y < 0)
-	{
-		if (vCenter.x < 0)
-		{
-			iSrcPointNum = 0;
-		}
-		else
-		{
-			iSrcPointNum = 1;
-		}
-	}
-	else
-	{
-		if (vCenter.x > 0)
-		{
-			iSrcPointNum = 3;
-		}
-		else
-		{
-			iSrcPointNum = 4;
-		}
-	}
-
+	//int iSrcPointNum = 0;
+	//if (vCenter.y < 0)
+	//{
+	//	if (vCenter.x < 0)
+	//	{
+	//		iSrcPointNum = 0;
+	//		vSrcNormX = -vSrcNormX;
+	//		vSrcNormY = -vSrcNormY;
+	//	}
+	//	else
+	//	{
+	//		iSrcPointNum = 1;
+	//		vSrcNormY = -vSrcNormY;
+	//	}
+	//}
+	//else
+	//{
+	//	if (vCenter.x > 0)
+	//	{
+	//		iSrcPointNum = 3;
+	//	}
+	//	else
+	//	{
+	//		iSrcPointNum = 4;
+	//		vSrcNormX = -vSrcNormX;
+	//	}
+	//}
 #pragma endregion
 
-	D3DXVECTOR3 vSrcPt = pSrc->Get_Point(iSrcPointNum) - pSrc->Get_Info().vPos;
+	D3DXVECTOR3 vSrcPt = pSrc->Get_Point(0) - pSrc->Get_Info().vPos;
 
 	float fSrcNX_SrcPt	=	D3DXVec3Dot(&vSrcNormX, &vSrcPt);
 	float fSrcNX_DstX	=	D3DXVec3Dot(&vSrcNormX, &vDstAxisX);
@@ -85,7 +88,7 @@ bool KJJ_CollisionMgr::Collision_Box(D3DXVECTOR3* pResult, CKJJObj* pDst, CKJJOb
 							+ fabsf(fSrcNX_DstX)
 							+ fabsf(fSrcNX_DstX);
 	
-	if (fSrcNX_Sum > fabsf(fCenter_SrcNX) + 1.f)
+	if (fSrcNX_Sum > fabsf(fCenter_SrcNX))
 	{
 		bSrcAxisX = true;
 	}
@@ -103,7 +106,7 @@ bool KJJ_CollisionMgr::Collision_Box(D3DXVECTOR3* pResult, CKJJObj* pDst, CKJJOb
 							+ fabsf(fSrcNY_DstX)
 							+ fabsf(fSrcNY_DstY);
 
-	if (fSrcNY_Sum > fabsf(fCenter_SrcNY) + 1.f)
+	if (fSrcNY_Sum > fabsf(fCenter_SrcNY))
 	{
 		bSrcAxisY = true;
 	}
@@ -115,19 +118,16 @@ bool KJJ_CollisionMgr::Collision_Box(D3DXVECTOR3* pResult, CKJJObj* pDst, CKJJOb
 	bResult = bSrcAxisX && bSrcAxisY;
 
 	if (bResult)
-	{
-		cout << "Ãæµ¹" << endl;	
-		
+	{		
 		if (fSrcNX_Sum - fabsf(fCenter_SrcNX) < fSrcNY_Sum - fabsf(fCenter_SrcNY))
 		{
-			*pResult = vSrcNormX * (fSrcNX_Sum - fabsf(fCenter_SrcNX));
+			*pResult = -vSrcNormX * (fSrcNX_Sum - fabsf(fCenter_SrcNX));
 		}
 		else
 		{
-			*pResult = vSrcNormY * (fSrcNY_Sum - fabsf(fCenter_SrcNY));
+			*pResult = -vSrcNormY * (fSrcNY_Sum - fabsf(fCenter_SrcNY));
 		}
 	}
-
 
 	return bResult;
 }

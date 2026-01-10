@@ -26,6 +26,8 @@ private:
     bool m_bIs_Col;
     bool m_bClockWise;
     bool m_bColDir;
+    
+    bool m_Super_Wennie_Hut;
 
     CKJJ_Player* m_pPlayer;
 

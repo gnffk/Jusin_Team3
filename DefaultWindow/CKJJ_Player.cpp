@@ -7,7 +7,7 @@ CKJJ_Player::CKJJ_Player() :
 	m_pHammer(nullptr),
 	bIs_falling(true)
 {
-	m_vSize = { 100.f,100.f,0.f };
+	m_vSize = { 50.f,100.f,0.f };
 	m_tInfo.vPos = { 400.f, 300.f, 0.f };
 	m_vScale = { 1.f,1.f,1.f };
 }
@@ -18,13 +18,13 @@ CKJJ_Player::~CKJJ_Player()
 
 void CKJJ_Player::Initialize()
 {
-	m_vAxisX = { m_vSize.x / 2.f, 0.f,0.f };
-	m_vAxisY = { 0.f, -m_vSize.y / 2.f, 0.f };
+	m_vAxisX = { m_vSize.x, 0.f,0.f };
+	m_vAxisY = { 0.f, -m_vSize.y, 0.f };
 
-	m_vPoint[0] = { -m_vSize.x / 2.f,-m_vSize.y / 2.f, 0.f };
-	m_vPoint[1] = { m_vSize.x / 2.f,-m_vSize.y / 2.f, 0.f };
-	m_vPoint[2] = { m_vSize.x / 2.f,m_vSize.y / 2.f, 0.f };
-	m_vPoint[3] = { -m_vSize.x / 2.f,m_vSize.y / 2.f, 0.f };
+	m_vPoint[0] = { -m_vSize.x,-m_vSize.y/2.f, 0.f };
+	m_vPoint[1] = { m_vSize.x ,-m_vSize.y/2.f, 0.f };
+	m_vPoint[2] = { m_vSize.x ,m_vSize.y/2.f, 0.f };
+	m_vPoint[3] = { -m_vSize.x ,m_vSize.y/2.f, 0.f };
 
 	for (int i = 0; i < 4; ++i)
 	{
@@ -99,7 +99,29 @@ void CKJJ_Player::Collision(CKJJObj* pObj, D3DXVECTOR3 Vec)
 {
 	m_fSpeed = 0.f;
 	m_tInfo.vDir = { 0.f,0.f,0.f };
-	m_tInfo.vPos += Vec;
+	if (Vec.x != 0.f)
+	{
+		if (m_tInfo.vPos.x < pObj->Get_Info().vPos.x)
+		{
+			m_tInfo.vPos += Vec;
+		}
+		else
+		{
+			m_tInfo.vPos -= Vec;
+		}
+	}
+	if (Vec.y != 0.f)
+	{
+		if (m_tInfo.vPos.y < pObj->Get_Info().vPos.y)
+		{
+			m_tInfo.vPos += Vec;
+		}
+		else
+		{
+			m_tInfo.vPos -= Vec;
+		}
+	}
+
 	if (Vec.y < 0)
 	{
 		bIs_falling = false;
