@@ -12,6 +12,8 @@ public:
 public:
 	INFO			Get_Info() { return m_tInfo; }
 
+	float	Get_Speed() { return m_fSpeed; }
+
 public:
 	virtual void	Initialize()	PURE;
 	virtual int		Update()		PURE;
