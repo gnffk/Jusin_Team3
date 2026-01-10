@@ -9,7 +9,8 @@ void KJJ_CollisionMgr::OBB_Collision(list<CObj*> _pDst, list<CObj*> _pSrc)
 		{
 			CKJJObj* pDst = static_cast<CKJJObj*>(Dst);
 			CKJJObj* pSrc = static_cast<CKJJObj*>(Src);
-			if (Collision_Box(pDst, pSrc))
+			D3DXVECTOR3 vResult;
+			if (Collision_Box(vResult, pDst, pSrc))
 			{
 				pDst->Collision(pSrc);
 				pSrc->Collision(pDst);
@@ -18,7 +19,7 @@ void KJJ_CollisionMgr::OBB_Collision(list<CObj*> _pDst, list<CObj*> _pSrc)
 	}
 }
 
-bool KJJ_CollisionMgr::Collision_Box(CKJJObj* pDst, CKJJObj* pSrc)
+bool KJJ_CollisionMgr::Collision_Box(D3DXVECTOR3 vResult, CKJJObj* pDst, CKJJObj* pSrc)
 {
 	/*
 	Result : Src가 Dst를 밀어내는 벡터
@@ -116,6 +117,15 @@ bool KJJ_CollisionMgr::Collision_Box(CKJJObj* pDst, CKJJObj* pSrc)
 	if (bResult)
 	{
 		cout << "충돌" << endl;
+	}
+
+	if (fSrcNX_Sum - fabsf(fCenter_SrcNX) < fSrcNY_Sum - fabsf(fCenter_SrcNY))
+	{
+		vResult = vSrcNormX * (fSrcNX_Sum - fabsf(fCenter_SrcNX));
+	}
+	else
+	{
+		vResult = vSrcNormY * (fSrcNY_Sum - fabsf(fCenter_SrcNY));
 	}
 	return bResult;
 }
