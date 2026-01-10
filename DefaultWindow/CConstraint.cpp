@@ -12,13 +12,19 @@ CConstraint::~CConstraint()
 void CConstraint::Initialize()
 {
 	m_StartVector = { 0.f,0.f,0.f };
-
+	m_fMax_Angle = 0.f;
+	m_fMin_Angle = 0.f;
 }
 
 int CConstraint::Update()
 {
 	D3DXMATRIX		matScale, matRotZ, matTrans, matParMat;
 
+	if (m_pUpObject) {
+		if (m_fMax_Angle < dynamic_cast<CKMSObj*>(m_pUpObject)->Get_Angle()) {
+			dynamic_cast<CKMSObj*>(m_pUpObject)->Set_Angle(m_fMax_Angle);
+		}
+	}
 
 	//if (m_pParentObject) {
 	//	m_tInfo.vPos = m_pParentObject->Get_Info().vPos + m_StartVector;

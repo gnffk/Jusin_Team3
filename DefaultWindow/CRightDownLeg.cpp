@@ -49,7 +49,7 @@ int CRightDownLeg::Update()
 		m_OriginVector.y - m_tInfo.vPos.y, m_OriginVector.z - m_tInfo.vPos.z);
 
 
-
+	//cout << m_fAngle << endl;
 
 
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);

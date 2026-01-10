@@ -13,7 +13,7 @@ void CLeftShose::Initialize()
 {
 	m_fAngle = 0.f;
 	// 자기 자신 vertex
-
+	m_eKMSObjType = KMSOBJ_LEFTSHOES;
 	m_vPoint[0] = { -25.f, +0.f, 0.f };
 	m_vPoint[1] = { 50.f, +0.f, 0.f };
 	m_vPoint[2] = { 50.f, +20.f, 0.f };

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CHammer.h"
 
-CHammer::CHammer() 
+CHammer::CHammer() :m_pPlayer(nullptr)
 {
 	m_fAngle =-90.f;
 	m_fHead_Distance = 100.f;
@@ -11,10 +11,6 @@ CHammer::CHammer()
 
 	m_vSize = { 6.f, 10.f, 0.f };
 	m_vScale = { 2.f,2.f,2.f };
-
-	m_vAxisX = { m_vSize.x / 2.f, 0.f,0.f };
-	m_vAxisY = { 0.f, -m_vSize.y / 2.f, 0.f };
-
 }
 
 CHammer::~CHammer()
@@ -23,6 +19,9 @@ CHammer::~CHammer()
 
 void CHammer::Initialize()
 {
+	m_vAxisX = { m_vSize.x / 2.f, 0.f,0.f };
+	m_vAxisY = { 0.f, -m_vSize.y / 2.f, 0.f };
+
 	m_vPoint[0] = { -m_vSize.x / 2.f,-m_vSize.y / 2.f, 0.f };
 	m_vPoint[1] = { m_vSize.x / 2.f,-m_vSize.y / 2.f, 0.f };
 	m_vPoint[2] = { m_vSize.x / 2.f,m_vSize.y / 2.f, 0.f };
@@ -119,7 +118,6 @@ void CHammer::Release()
 {
 }
 
-void CHammer::Collision(CKJJObj* pObj)
+void CHammer::Collision(CKJJObj* pObj, D3DXVECTOR3 Vec)
 {
-
 }

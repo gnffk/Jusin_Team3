@@ -30,6 +30,7 @@ void CKMSScene::Initialize()
 
 	CObj* p_Player = CAbstractFactory<CKMSPlayer>::Create();
 	CObjMgr::Get_Instance()->AddObject(OBJ_PLAYER,p_Player);
+	dynamic_cast<CKMSPlayer*>(p_Player)->Set_CollisionLine(p_Line);
 
 	CObj* p_Pelvis = CAbstractFactory<CPelvis>::Create();
 	dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_Pelvis);
@@ -61,6 +62,9 @@ void CKMSScene::Initialize()
 		dynamic_cast<CConstraint*>(p_LeftUpDownConstraint)->Set_Up(p_LeftUpLeg);
 		dynamic_cast<CConstraint*>(p_LeftUpDownConstraint)->Set_Down(p_LeftDownLeg);
 
+		dynamic_cast<CConstraint*>(p_LeftUpDownConstraint)->Set_MaxAngle(1.2f);
+		dynamic_cast<CConstraint*>(p_LeftUpDownConstraint)->Set_MinAngle(0.f);
+
 		// Constraint - Left Down  <-> Left Shose
 		CObj* p_LeftDownShoseConstraint = CAbstractFactory<CConstraint>::Create();
 		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftDownShoseConstraint);
@@ -69,8 +73,8 @@ void CKMSScene::Initialize()
 		dynamic_cast<CConstraint*>(p_LeftDownShoseConstraint)->Set_Up(p_LeftDownLeg);
 		dynamic_cast<CConstraint*>(p_LeftDownShoseConstraint)->Set_Down(p_LeftShose);
 		dynamic_cast<CConstraint*>(p_LeftDownShoseConstraint)->Set_Visible(false);
-		p_LeftUpLeg->Initialize();
-		p_LeftDownLeg->Initialize();
+		dynamic_cast<CConstraint*>(p_LeftDownShoseConstraint)->Set_MaxAngle(1.2f);
+		dynamic_cast<CConstraint*>(p_LeftDownShoseConstraint)->Set_MinAngle(0.f);
 
 	}
 	
@@ -92,15 +96,17 @@ void CKMSScene::Initialize()
 		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_RightShose);
 		dynamic_cast<CKMSObj*>(p_RightShose)->Set_ParentObject(p_RightDownLeg);
 
-		// Constraint - Left Up  <-> Left Down
+		// Constraint - Right Up  <-> Right Down
 		CObj* p_RightUpDownConstraint = CAbstractFactory<CConstraint>::Create();
 		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_RightUpDownConstraint);
 		dynamic_cast<CKMSObj*>(p_RightDownLeg)->Set_Constraint(p_RightUpDownConstraint);
 		dynamic_cast<CKMSObj*>(p_RightUpDownConstraint)->Set_ParentObject(p_Player);
 		dynamic_cast<CConstraint*>(p_RightUpDownConstraint)->Set_Up(p_RightUpLeg);
 		dynamic_cast<CConstraint*>(p_RightUpDownConstraint)->Set_Down(p_RightDownLeg);
+		dynamic_cast<CConstraint*>(p_RightUpDownConstraint)->Set_MaxAngle(1.2f);
+		dynamic_cast<CConstraint*>(p_RightUpDownConstraint)->Set_MinAngle(0.f);
 
-		// Constraint - Left Down  <-> Left Shose
+		// Constraint - Right Down  <-> Right Shose
 		CObj* p_RightDownShoseConstraint = CAbstractFactory<CConstraint>::Create();
 		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_RightDownShoseConstraint);
 		dynamic_cast<CKMSObj*>(p_RightShose)->Set_Constraint(p_RightDownShoseConstraint);
@@ -108,6 +114,8 @@ void CKMSScene::Initialize()
 		dynamic_cast<CConstraint*>(p_RightDownShoseConstraint)->Set_Up(p_RightDownLeg);
 		dynamic_cast<CConstraint*>(p_RightDownShoseConstraint)->Set_Down(p_RightShose);
 		dynamic_cast<CConstraint*>(p_RightDownShoseConstraint)->Set_Visible(false);
+		dynamic_cast<CConstraint*>(p_RightDownShoseConstraint)->Set_MaxAngle(1.2f);
+		dynamic_cast<CConstraint*>(p_RightDownShoseConstraint)->Set_MinAngle(0.f);
 	}
 	
 
@@ -120,7 +128,7 @@ int CKMSScene::Update()
 {
 	CObjMgr::Get_Instance()->Update();
 
-	CKMSCollisionMgr::CheckShoeseLine(p_LeftShose,p_Line);
+	
 	return 0;
 }
 
