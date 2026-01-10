@@ -21,14 +21,19 @@ public:
 
 	void Set_Pos(D3DXVECTOR3 _Vector) { m_tInfo.vPos = _Vector; }
 
+	vector<D3DXVECTOR3> Get_Point() { return m_vPoint; }
 public:
 	virtual void Key_Input() PURE;
 protected:
 	CObj* m_pParentObject;
 	CObj* m_pConstraint;
 	vector<CObj*>m_vecSubObject;
+	vector<D3DXVECTOR3>m_vPoint;
+	vector<D3DXVECTOR3>m_vOriginPoint;
+
 
 	float m_fAngle;
+	float m_fGravity;
 	D3DXVECTOR3	m_StartVector;
 	D3DXVECTOR3	m_OriginVector;
 };

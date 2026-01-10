@@ -12,6 +12,8 @@
 #include "CRightUpLeg.h"
 #include "CRightDownLeg.h"
 #include "CRightShose.h"
+#include "CKMSLine.h"
+#include "CKMSCollisionMgr.h"
 
 CKMSScene::CKMSScene()
 {
@@ -23,6 +25,9 @@ CKMSScene::~CKMSScene()
 
 void CKMSScene::Initialize()
 {
+    p_Line = CAbstractFactory<CKMSLine>::Create();
+	CObjMgr::Get_Instance()->AddObject(OBJ_RUNLINE, p_Line);
+
 	CObj* p_Player = CAbstractFactory<CKMSPlayer>::Create();
 	CObjMgr::Get_Instance()->AddObject(OBJ_PLAYER,p_Player);
 
@@ -43,7 +48,7 @@ void CKMSScene::Initialize()
 		dynamic_cast<CKMSObj*>(p_LeftDownLeg)->Set_ParentObject(p_LeftUpLeg);
 
 		// Left Shose
-		CObj* p_LeftShose = CAbstractFactory<CLeftShose>::Create();
+		p_LeftShose = CAbstractFactory<CLeftShose>::Create();
 		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftShose);
 		dynamic_cast<CKMSObj*>(p_LeftShose)->Set_ParentObject(p_LeftDownLeg);
 
@@ -115,6 +120,7 @@ int CKMSScene::Update()
 {
 	CObjMgr::Get_Instance()->Update();
 
+	CKMSCollisionMgr::CheckShoeseLine(p_LeftShose,p_Line);
 	return 0;
 }
 

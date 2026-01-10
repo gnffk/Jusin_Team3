@@ -112,7 +112,7 @@ void CLeftDownLeg::Key_Input()
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing('Q')) {
-		cout << m_fAngle << endl;
+		//cout << m_fAngle << endl;
 		m_fAngle -= D3DXToRadian(3.f);
 		if (m_fAngle < 0.f) {
 			m_fAngle = 0.f;
