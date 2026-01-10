@@ -2,12 +2,12 @@
 #include "CObj.h"
 class CKMSObj : public CObj
 {
+
 public:
 	CKMSObj();
 	virtual ~CKMSObj();
-
+	
 public:
-	float Get_Angle() { return m_fAngle; }
 
 	void Set_ParentObject(CObj* m_fParentObject) {m_pParentObject = m_fParentObject;}
 	CObj* Get_ParentObject() { return m_pParentObject; }
@@ -22,6 +22,12 @@ public:
 	void Set_Pos(D3DXVECTOR3 _Vector) { m_tInfo.vPos = _Vector; }
 
 	vector<D3DXVECTOR3> Get_Point() { return m_vPoint; }
+
+	float Get_Angle() { return m_fAngle; }
+	void Plus_Angle(float _Angle) { m_fAngle += _Angle; }
+	void Set_Angle(float _Angle) { m_fAngle = _Angle; }
+
+	KMSOBJTYPE GetKMSObjType() { return m_eKMSObjType; }
 public:
 	virtual void Key_Input() PURE;
 protected:
@@ -36,5 +42,7 @@ protected:
 	float m_fGravity;
 	D3DXVECTOR3	m_StartVector;
 	D3DXVECTOR3	m_OriginVector;
+
+	KMSOBJTYPE m_eKMSObjType;
 };
 

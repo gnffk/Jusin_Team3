@@ -127,6 +127,9 @@
     <Filter Include="KJJ\02. Design">
       <UniqueIdentifier>{af22b141-e150-485f-b0dd-ae08a748c86c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="KMS\01. Obj\Line">
+      <UniqueIdentifier>{c0dc53ca-4987-4197-8572-ae52eac3e4c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -249,6 +252,12 @@
     <ClInclude Include="KJJ_CollisionMgr.h">
       <Filter>KJJ\02. Design</Filter>
     </ClInclude>
+    <ClInclude Include="CKMSCollisionMgr.h">
+      <Filter>KMS\01. Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="CKMSLine.h">
+      <Filter>KMS\01. Obj\Line</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -358,6 +367,12 @@
     </ClCompile>
     <ClCompile Include="KJJ_CollisionMgr.cpp">
       <Filter>KJJ\02. Design</Filter>
+    </ClCompile>
+    <ClCompile Include="CKMSCollisionMgr.cpp">
+      <Filter>KMS\01. Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="CKMSLine.cpp">
+      <Filter>KMS\01. Obj\Line</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

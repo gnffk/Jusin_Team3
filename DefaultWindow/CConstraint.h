@@ -19,10 +19,15 @@ public:
 	void Set_Down(CObj* _down) { m_pDownObject = _down; }
 
 	void Set_Visible(bool _bVisilbe) { m_bVisible = _bVisilbe; }
+
+	void Set_MaxAngle(float _MaxAngle) { m_fMax_Angle = _MaxAngle; }
+	void Set_MinAngle(float _MinAngle) { m_fMin_Angle = _MinAngle; }
 public:
 	CObj* m_pUpObject;
 	CObj* m_pDownObject;
 
+	float m_fMax_Angle;
+	float m_fMin_Angle;
 	bool  m_bVisible;
 };
 

@@ -13,11 +13,12 @@ void CKMSLine::Initialize()
 {
 	m_fAngle = 0.5f;
 	// 자기 자신 vertex
+	m_eKMSObjType = KMSOBJ_LINE;
+	m_vPoint[0] = { -200.f, 560.f, 0.f };
+	m_vPoint[1] = { 4000.f, 560.f, 0.f };
 
-	m_vPoint[0] = { -200.f, 580.f, 0.f };
-	m_vPoint[1] = { 4000.f, 500.f, 0.f };
-
-
+	m_UpVector = { 0.f, -1.f, 0.f };
+	m_RightVector = m_vPoint[1] - m_vPoint[0];
 
 
 	for (int i = 0; i < 5; ++i)

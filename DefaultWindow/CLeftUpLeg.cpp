@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CLeftUpLeg.h"
 #include "CKeyMgr.h"
+#include "CPelvis.h"
 
 CLeftUpLeg::CLeftUpLeg()
 {
@@ -46,7 +47,16 @@ int CLeftUpLeg::Update()
 	D3DXMatrixRotationZ(&matRotZ, m_fAngle);
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
 
+	if (m_fAngle <= -1.2f) {
+		m_fAngle = -1.2f;
+		dynamic_cast<CPelvis*>(m_pParentObject)->Set_SubAngle(0.01f);
+	}
+	else if (m_fAngle >= 1.2f) {
+		m_fAngle = 1.2f;
+		dynamic_cast<CPelvis*>(m_pParentObject)->Set_SubAngle(0.01f);
+	}
 
+	
 
 	m_tInfo.matWorld = matScale * matRotZ * matTrans *  matParMat;
 
@@ -56,6 +66,10 @@ int CLeftUpLeg::Update()
 
 		D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
 	
+	}
+
+	if (m_pParentObject) {
+		dynamic_cast<CPelvis*>(m_pParentObject)->Set_LeftAngle(m_fAngle);
 	}
 
 

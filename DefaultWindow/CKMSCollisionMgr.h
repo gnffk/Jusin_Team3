@@ -5,6 +5,7 @@
 class CKMSCollisionMgr
 {
 public:
-	static void CheckShoeseLine(CObj* _Shose, CObj* _Line);
+	static void CheckLine(CObj* _Body, CObj* _Line);
+	
 };
 

@@ -15,10 +15,15 @@ public:
 	int Late_Update() override;
 
 	void Render(HDC hDC) override;
-
+	
 	void Release() override;
 
 public:
 	void Key_Input() override;
+
+	void Set_CollisionLine(CObj* _pCollisionLine) { m_pCollisionLine = _pCollisionLine; };
+
+public:
+	CObj* m_pCollisionLine;
 };
 

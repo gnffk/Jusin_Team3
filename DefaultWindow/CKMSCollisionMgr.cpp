@@ -1,18 +1,47 @@
 #include "pch.h"
 #include "CKMSCollisionMgr.h"
 #include "CKMSObj.h"
+#include "CKMSLine.h"
 
-void CKMSCollisionMgr::CheckShoeseLine(CObj* _Shose, CObj* _Line)
+void CKMSCollisionMgr::CheckLine(CObj* _Body, CObj* _Line)
 {
-	D3DXVECTOR3 _ShoesVec;
-	auto max = max_element(dynamic_cast<CKMSObj*>(_Shose)->Get_Point().begin(),
-		dynamic_cast<CKMSObj*>(_Shose)->Get_Point().end(), [&](const D3DXVECTOR3& a, const D3DXVECTOR3& b) {
-			return a.y > b.y;
-		});
+
+	int Count = 0;
+	for (auto i : dynamic_cast<CKMSObj*>(_Body)->Get_Point()) {
+		
+		if (dynamic_cast<CKMSObj*>(_Body)->GetKMSObjType() == KMSOBJ_RIGHTSHOES) {
+			if (i.y >= static_cast<CKMSObj*>(_Line)->Get_Point().front().y) {
+
+				//cout << Count << "번 점 충돌 <오른쪽>" << endl;
+				if (dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject())) {
+					dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject())->Plus_Angle(0.01f);
+					if (dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject()))) {
+						dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject())->Get_ParentObject())->Plus_Angle(-0.01f);
+
+					}
+
+				}
+			}
+		}
 	
 
+		if (dynamic_cast<CKMSObj*>(_Body)->GetKMSObjType() == KMSOBJ_LEFTSHOES) {
+			if (i.y >= static_cast<CKMSObj*>(_Line)->Get_Point().front().y) {
+
+				//cout << Count << "번 점 충돌 <왼쪽>" << endl;
+				if (dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject())) {
+					dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject())->Plus_Angle(0.01f);
+					if (dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject()))) {
+						dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(dynamic_cast<CKMSObj*>(_Body)->Get_ParentObject())->Get_ParentObject())->Plus_Angle(0.01f);
+
+					}
+
+				}
+			}
+		}
+
+		Count++;
+	}
 	
-
-
 
 }

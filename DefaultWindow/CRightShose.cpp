@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "CRightShose.h"
+#include "CKMSCollisionMgr.h"
+#include "CAbstractFactory.h"
+#include "CKMSLine.h"
 
 CRightShose::CRightShose()
 {
@@ -13,7 +16,7 @@ void CRightShose::Initialize()
 {
 	m_fAngle = 0.f;
 	// 자기 자신 vertex
-
+	m_eKMSObjType = KMSOBJ_RIGHTSHOES;
 	m_vPoint[0] = { -25.f, +0.f, 0.f };
 	m_vPoint[1] = { 50.f, +0.f, 0.f };
 	m_vPoint[2] = { 50.f, +20.f, 0.f };
@@ -65,7 +68,9 @@ int CRightShose::Update()
 
 		D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
 
-
+	/*	if (i == 2) {
+			cout << "Dir x : " << m_vPoint[i].x << " Dir y : " << m_vPoint[i].y << endl;
+		}*/
 	}
 
 	if (m_pConstraint) {
@@ -76,6 +81,8 @@ int CRightShose::Update()
 		dynamic_cast<CKMSObj*>(m_pConstraint)->Set_Pos(Constraint_Pos);
 	}
 
+	//CObj* m_pCollisionLine = CAbstractFactory<CKMSLine>::Create();
+	//CKMSCollisionMgr::CheckLine(this, m_pCollisionLine);
 
 	return 0;
 }
