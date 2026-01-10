@@ -10,12 +10,19 @@ int CLSYObj::Update()
 
 	for (auto& vertexList : Get_VertexList())
 	{
-		list<POINT> ptList;
-		for (D3DXVECTOR3& vertex : vertexList)
+		list<pair<POINT, POINT>> ptList;
+		for (pair<D3DXVECTOR3, D3DXVECTOR3>& vertexPair : vertexList)
 		{
-			D3DXVECTOR3 posWorldVertex;
-			D3DXVec3TransformCoord(&posWorldVertex, &vertex, &m_tInfo.matWorld);
-			ptList.push_back({ (LONG)posWorldVertex.x, (LONG)posWorldVertex.y });
+			
+			D3DXVECTOR3 posWorldVertexFirst;
+			D3DXVec3TransformCoord(&posWorldVertexFirst, &vertexPair.first, &m_tInfo.matWorld);
+
+			D3DXVECTOR3 posWorldVertexSecond;
+			D3DXVec3TransformCoord(&posWorldVertexSecond, &vertexPair.second, &m_tInfo.matWorld);
+
+			POINT pt1{(LONG)posWorldVertexFirst.x, (LONG)posWorldVertexFirst .y};
+			POINT pt2{ (LONG)posWorldVertexSecond.x, (LONG)posWorldVertexSecond.y };
+			ptList.push_back({ pt1, pt2 });
 		}
 		Get_PointList().push_back(ptList);
 	}
@@ -35,21 +42,23 @@ void CLSYObj::Render(HDC hDC)
 
 	if (!Get_PointList().empty())
 	{
-		for (auto& ptList : Get_PointList())
+		for (list<pair<POINT, POINT>>& ptList : Get_PointList())
 		{
 			if (!ptList.empty())
 			{
-				POINT frontPt = ptList.front();
-				ptList.pop_front();
-				MoveToEx(hDC, frontPt.x, frontPt.y, nullptr);
+				//POINT frontPt = ptList.front();
+				//ptList.pop_front();
+				//MoveToEx(hDC, frontPt.x, frontPt.y, nullptr);
 #ifdef _DEBUG
-				DrawEllipseByPoint(hDC, move(frontPt), DBG_ELLIPSE_R);
+				//DrawEllipseByPoint(hDC, move(frontPt), DBG_ELLIPSE_R);
 #endif // DEBUG
-				for (POINT& pt : ptList)
+				for (pair<POINT, POINT>& ptPair : ptList)
 				{
-					LineTo(hDC, pt.x, pt.y);
+					MoveToEx(hDC, ptPair.first.x, ptPair.first.y, nullptr);
+					LineTo(hDC, ptPair.second.x, ptPair.second.y);
 #ifdef _DEBUG
-					DrawEllipseByPoint(hDC, move(pt), DBG_ELLIPSE_R);
+					DrawEllipseByPoint(hDC, ptPair.first, DBG_ELLIPSE_R);
+					DrawEllipseByPoint(hDC, ptPair.second, DBG_ELLIPSE_R);
 #endif // DEBUG
 				}
 			}
@@ -66,7 +75,8 @@ void CLSYObj::Render(HDC hDC)
 	dirTmp *= 20;
 	dirTmp += m_tInfo.vPos;
 	LineTo(hDC, dirTmp.x, dirTmp.y);
-	DrawEllipseByPoint(hDC, { (LONG)dirTmp .x, (LONG)dirTmp .y}, DBG_ELLIPSE_R);
+	POINT ptHead{ (LONG)dirTmp.x, (LONG)dirTmp.y };
+	DrawEllipseByPoint(hDC, ptHead, DBG_ELLIPSE_R);
 #endif // DEBUG
 
 	Get_PointList().clear();

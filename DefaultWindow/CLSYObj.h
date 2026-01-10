@@ -18,9 +18,10 @@ public:
 	void Set_Angle(float fAngle) { m_fAngle = fAngle; }
 	float Get_Angle() const { return m_fAngle; }
 
-	list<list<D3DXVECTOR3>>& Get_VertexList() { return m_vertexList; }
-	void Set_VertexList(list<list<D3DXVECTOR3>> list) { m_vertexList = list; }
-	list<list<POINT>>& Get_PointList() { return m_pointList; }
+	list<list<pair<D3DXVECTOR3, D3DXVECTOR3>>>& Get_VertexList() { return m_vertexList; }
+	void Set_VertexList(list<list<pair<D3DXVECTOR3, D3DXVECTOR3>>> list) { m_vertexList = list; }
+
+	list<list<pair<POINT, POINT>>>& Get_PointList() { return m_pointList; }
 	
 	void Set_Pos(D3DXVECTOR3& pos) { m_tInfo.vPos = pos; }
 	void Set_Dir(D3DXVECTOR3& dir) { m_tInfo.vDir = dir; }
@@ -42,8 +43,8 @@ protected:
 	void Update_Rect();
 
 protected:
-	list<list<D3DXVECTOR3>> m_vertexList;
-	list<list<POINT>> m_pointList;
+	list<list<pair<D3DXVECTOR3, D3DXVECTOR3>>> m_vertexList;
+	list<list<pair<POINT, POINT>>> m_pointList;
 	int m_iOption;
 	float m_fAngle;
 

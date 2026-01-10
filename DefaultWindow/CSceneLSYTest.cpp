@@ -21,7 +21,6 @@ void CSceneLSYTest::Initialize()
 	pFruit->GenerateVertexList();
 	CObjMgr::Get_Instance()->AddObject(OBJ_LSY_FRUIT, pFruit);
 
-	pMouse->Set_TmpFruit(pFruit);
 }
 
 int CSceneLSYTest::Update()

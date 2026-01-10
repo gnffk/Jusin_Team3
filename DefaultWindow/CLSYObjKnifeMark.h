@@ -7,6 +7,12 @@ public:
 	~CLSYObjKnifeMark() override;
 
 public:
+	void Set_EndPt(POINT ptEnd)
+	{
+		m_ptEnd = ptEnd;
+	}
+
+public:
 	void	Initialize()	override;
 	int		Update()		override;
 	int		Late_Update()	override;
@@ -15,5 +21,7 @@ public:
 
 private:
 	float m_fDeathTimer;
+
+	POINT m_ptEnd;
 };
 

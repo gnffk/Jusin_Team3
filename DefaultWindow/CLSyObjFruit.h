@@ -17,11 +17,30 @@ public:
 	{
 		return m_bCut;
 	}
+	void Set_Throw(bool bThrow)
+	{
+		m_bThrow = bThrow;
+	}
+	bool Get_Throw()
+	{
+		return m_bThrow;
+	}
+
+	void Set_ThrowAngle(float fTrhowAngle)
+	{
+		m_fThrowAngle = fTrhowAngle;
+	}
+
+	void Set_ThrowVelocityZero(float fVelocity)
+	{
+		m_fThrowVelocityZero = fVelocity;
+	}
 
 public:
 	void GenerateVertexList();
 
-	bool CalcKnifeMark(POINT& pt1, POINT& pt2);
+
+	bool Slice(POINT& pt1, POINT& pt2);
 
 public:
 	void	Initialize()	override;
@@ -33,8 +52,15 @@ public:
 private:
 	float m_fTimer;
 
+	float m_fThrowAngle;
+
+	float m_fThrowVelocityZero;
+
 	bool m_bCut;
 
 	bool m_bDead;
+
+	bool m_bThrow;
+
 };
 
