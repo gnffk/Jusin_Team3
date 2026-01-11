@@ -77,20 +77,35 @@ int CHammer::Late_Update()
 {
 	D3DXVECTOR3 vMouse_Movement = { 0,0,0 };
 
+	if (GetAsyncKeyState(VK_RBUTTON))
+	{
+		if (m_Super_Wennie_Hut)
+			m_Super_Wennie_Hut = false;
+		else
+			m_Super_Wennie_Hut = true;
+	}
+
+	if (m_Super_Wennie_Hut)
+	{
 #pragma region 자동해머
-	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LBUTTON))
+		if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LBUTTON))
+		{
+			m_vPrevMouse = m_vCurrMouse;
+			m_vCurrMouse = ::Get_Mouse();
+		}
+		vMouse_Movement = m_vCurrMouse - m_vPrevMouse;
+#pragma endregion
+	}
+	else
 	{
 		m_vPrevMouse = m_vCurrMouse;
 		m_vCurrMouse = ::Get_Mouse();
-	}
-	vMouse_Movement = m_vCurrMouse - m_vPrevMouse;
-#pragma endregion
-
 #pragma region 수동해머
-	//if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LBUTTON))
-	//{
-	//	vMouse_Movement = m_vCurrMouse - m_vPrevMouse;
-	//}
+		if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LBUTTON))
+		{
+			vMouse_Movement = m_vCurrMouse - m_vPrevMouse;
+		}
+	}
 #pragma endregion
 
 	if (vMouse_Movement.x > 0)
