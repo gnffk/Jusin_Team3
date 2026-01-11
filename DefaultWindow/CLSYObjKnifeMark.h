@@ -20,7 +20,7 @@ public:
 	void	Release()		override;
 
 public:
-	void Slicing(POINT& ptMouse);
+	void Slicing(POINT& ptMouse, int* plusCnt, int* minusCnt);
 	void Reset();
 
 private:

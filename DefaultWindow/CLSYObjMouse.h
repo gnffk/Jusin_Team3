@@ -9,6 +9,12 @@ public:
 	~CLSYObjMouse() override;
 
 public:
+	int Get_Count()
+	{
+		return m_iCnt;
+	}
+
+public:
 	void	Initialize()	override;
 	int		Update()		override;
 	int		Late_Update()	override;
@@ -36,5 +42,8 @@ private:
 	bool m_bSkill;
 	float m_fSkillTimer;
 	float m_fSkillIntervalTimer;
+
+	TCHAR m_szCnt[32];
+	int m_iSliceCnt;
 };
 

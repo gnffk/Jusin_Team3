@@ -95,11 +95,13 @@ void CLSYObjKnifeMark::Release()
 {
 }
 
-void CLSYObjKnifeMark::Slicing(POINT& ptMouse)
+void CLSYObjKnifeMark::Slicing(POINT& ptMouse, int* plusCnt, int* minusCnt)
 {
 	{
 		list<CObj*> fruits = *CObjMgr::Get_Instance()->Get_ObjList(OBJ_LSY_FRUIT);
 		//cout << "fruits1"<<fruits.size() << endl;
+		int plus = 0;
+		int minus = 0;
 		for (auto iter = fruits.begin(); iter != fruits.end(); ++iter)
 		{
 			CLSYObjFruit* pFruits = dynamic_cast<CLSYObjFruit*>(*iter);
@@ -108,8 +110,24 @@ void CLSYObjKnifeMark::Slicing(POINT& ptMouse)
 			//cout << "//" << endl;
 			//cout << "x" << ptMark.x << "y" << ptMark.y << endl;
 			//cout << "x" << ptMouse.x << "y" << ptMouse.y << endl;
-			pFruits->Slice(ptMark, ptMouse);
+			bool bSliced = pFruits->Slice(ptMark, ptMouse);
+			;
+			if (pFruits->Get_Option() != CLSYObjFruit::FROPT_PART && bSliced)
+			{
+				if (pFruits->Get_Option() == CLSYObjFruit::FROPT_SCROLL_CLOUD
+					|| pFruits->Get_Option() == CLSYObjFruit::FROPT_SCROLL_STAR)
+				{
+					++minus;
+				}
+				else
+				{
+					++plus;
+				}
+			}
 		}
+
+		*plusCnt = plus;
+		*minusCnt = minus;
 
 		m_bThick = true;
 	}
