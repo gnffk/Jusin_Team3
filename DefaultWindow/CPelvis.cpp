@@ -24,7 +24,7 @@ void CPelvis::Initialize()
 	m_vPoint[2] = { + 25.f, + 30.f, 0.f };
 	m_vPoint[3] = { - 25.f, + 30.f, 0.f };
 	m_vPoint[4] = { - 25.f, - 10.f, 0.f };
-
+	m_fAngle = 0.f;
 	for (int i = 0; i < 5; ++i)
 		m_vOriginPoint[i] = m_vPoint[i];
 
@@ -39,15 +39,15 @@ int CPelvis::Update()
 	if (m_pParentObject) {
 	
 		matParMat = m_pParentObject->Get_Info().matWorld;
-		m_fAngle = dynamic_cast<CKMSObj*>(m_pParentObject)->Get_Angle();
-		m_fAngle += m_fLeftAngle + m_fRightAngle + m_fdisAngle;
+		//m_fAngle = dynamic_cast<CKMSObj*>(m_pParentObject)->Get_Angle();
+		m_fAngle = m_fLeftAngle + m_fRightAngle;
 	}
 
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
 	D3DXMatrixRotationZ(&matRotZ, m_fAngle);
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x,m_tInfo.vPos.y,m_tInfo.vPos.z);
 	
-	//cout << "RightAngle :" << m_fRightAngle << " LeftAngle :" << m_fLeftAngle << endl;
+	cout << "RightAngle :" << m_fRightAngle << " LeftAngle :" << m_fLeftAngle << endl;
 	cout << "Angle : " << m_fAngle << endl;
 	
 	m_tInfo.matWorld = matScale * matRotZ * matTrans  * matParMat;
@@ -60,9 +60,9 @@ int CPelvis::Update()
 	}
 
 
-	/*if (m_pParentObject) {
+	if (m_pParentObject) {
 		dynamic_cast<CKMSObj*>(m_pParentObject)->Set_Angle(m_fAngle);
-	}*/
+	}
 
 	return 0;
 }

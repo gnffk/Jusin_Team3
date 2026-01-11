@@ -1,13 +1,22 @@
 #include "pch.h"
 #include "CHammer.h"
+#include "CKJJ_Player.h"
+#include "CKeyMgr.h"
 
-CHammer::CHammer() :m_pPlayer(nullptr)
+
+CHammer::CHammer() :
+	m_pPlayer(nullptr),
+	m_fPlayerAngle(0.f),
+	m_bIs_Col(false),
+	m_bClockWise(false),
+	m_bColDir(false),
+	m_Super_Wennie_Hut(false)
 {
 	m_fAngle =-90.f;
 	m_fHead_Distance = 100.f;
 	m_fHammer_Length = 100.f;
 
-	m_tInfo.vPos = { 0.f,0.f,0.f };
+	m_tInfo.vPos = { m_fHead_Distance,0.f,0.f };
 
 	m_vSize = { 6.f, 10.f, 0.f };
 	m_vScale = { 2.f,2.f,2.f };
@@ -36,37 +45,13 @@ void CHammer::Initialize()
 
 int CHammer::Update()
 {
-	m_vPrevMouse = m_vCurrMouse;
-	m_vCurrMouse = ::Get_Mouse();
-
-	D3DXVECTOR3 vMouse_Movement = m_vCurrMouse - m_vPrevMouse;
-
-	m_fAngle			+= vMouse_Movement.x/3;
-	m_fHead_Distance	-= vMouse_Movement.y/3;
-
-	if (m_fAngle > 180.f)
-	{
-		m_fAngle -= 360.f;
-	}
-	else if (m_fAngle < -180.f)
-	{
-		m_fAngle += 360.f;
-	}
-
-	if (m_fHead_Distance < 50.f)
-		m_fHead_Distance = 50.f;
-	else if (m_fHead_Distance > 150.f)
-		m_fHead_Distance = 150.f;
-
 	D3DXMATRIX		matScale, matRotZ, matTrans, matTrans2;
-
-	float fRadian = D3DXToRadian(m_fAngle);
 
 	D3DXMatrixScaling(&matScale,
 		m_vScale.x,
 		m_vScale.y,
 		m_vScale.z);
-	D3DXMatrixRotationZ(&matRotZ, fRadian);
+	D3DXMatrixRotationZ(&matRotZ, D3DXToRadian(m_fAngle));
 	D3DXMatrixTranslation(&matTrans, m_fHead_Distance, 0.f, 0.f);
 	D3DXMatrixTranslation(&matTrans2,
 		m_pPlayer->Get_Info().vPos.x,
@@ -90,6 +75,92 @@ int CHammer::Update()
 
 int CHammer::Late_Update()
 {
+	D3DXVECTOR3 vMouse_Movement = { 0,0,0 };
+
+	if (GetAsyncKeyState(VK_RBUTTON))
+	{
+		if (m_Super_Wennie_Hut)
+			m_Super_Wennie_Hut = false;
+		else
+			m_Super_Wennie_Hut = true;
+	}
+
+	if (m_Super_Wennie_Hut)
+	{
+#pragma region 자동해머
+		if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LBUTTON))
+		{
+			m_vPrevMouse = m_vCurrMouse;
+			m_vCurrMouse = ::Get_Mouse();
+		}
+		vMouse_Movement = m_vCurrMouse - m_vPrevMouse;
+#pragma endregion
+	}
+	else
+	{
+		m_vPrevMouse = m_vCurrMouse;
+		m_vCurrMouse = ::Get_Mouse();
+#pragma region 수동해머
+		if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LBUTTON))
+		{
+			vMouse_Movement = m_vCurrMouse - m_vPrevMouse;
+		}
+	}
+#pragma endregion
+
+	if (vMouse_Movement.x > 0)
+	{
+		m_bClockWise = true;
+	}
+	else
+	{
+		m_bClockWise = false;
+	}
+
+	if (m_bIs_Col)
+	{
+		if (m_bColDir == m_bClockWise)
+		{
+			m_fPlayerAngle = vMouse_Movement.x / 3;
+
+			if (m_fPlayerAngle > 180.f)
+			{
+				m_fPlayerAngle -= 360.f;
+			}
+			else if (m_fPlayerAngle < -180.f)
+			{
+				m_fPlayerAngle += 360.f;
+			}
+
+			D3DXVECTOR3 vPlayerMove = m_pPlayer->Get_Info().vPos - m_tInfo.vPos;
+			D3DXMATRIX	matRotZ;
+			D3DXMatrixRotationZ(&matRotZ, D3DXToRadian(m_fPlayerAngle));
+			D3DXVec3TransformCoord(&vPlayerMove, &vPlayerMove, &matRotZ);
+			D3DXVECTOR3 vNewPlayerPos = m_tInfo.vPos + vPlayerMove;
+			m_pPlayer->Set_Pos(vNewPlayerPos);
+		}
+	}
+	
+	m_fAngle += vMouse_Movement.x / 3;
+
+	if (m_fAngle > 180.f)
+	{
+		m_fAngle -= 360.f;
+	}
+	else if (m_fAngle < -180.f)
+	{
+		m_fAngle += 360.f;
+	}
+
+
+	m_fHead_Distance -= vMouse_Movement.y / 3;
+
+	if (m_fHead_Distance < 40.f)
+		m_fHead_Distance = 40.f;
+	else if (m_fHead_Distance > 150.f)
+		m_fHead_Distance = 150.f;
+
+	m_bIs_Col = false;
 	return 0;
 }
 
@@ -120,4 +191,34 @@ void CHammer::Release()
 
 void CHammer::Collision(CKJJObj* pObj, D3DXVECTOR3 Vec)
 {
+	m_bIs_Col = true;
+	m_bColDir = m_bClockWise;
+	m_pPlayer->Set_Falling(false);
+	if (Vec.x != 0.f)
+	{
+		if (m_tInfo.vPos.x < pObj->Get_Info().vPos.x)
+		{
+			m_tInfo.vPos += 1.1f * Vec;
+			m_pPlayer->Move_Pos(1.1f * Vec);
+		}
+		else
+		{
+			m_tInfo.vPos -= 1.1f * Vec;
+			m_pPlayer->Move_Pos(-1.1f * Vec);
+		}
+	}
+	if (Vec.y != 0.f)
+	{
+		if (m_tInfo.vPos.y < pObj->Get_Info().vPos.y)
+		{
+			m_tInfo.vPos += Vec;
+			m_pPlayer->Move_Pos(Vec);
+		}
+		else
+		{
+			m_tInfo.vPos -= Vec;
+			m_pPlayer->Move_Pos(-Vec);
+		}
+	}
+	m_pPlayer->Move_Pos(Vec);
 }

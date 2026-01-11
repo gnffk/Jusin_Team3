@@ -16,21 +16,24 @@ void CBox::Initialize()
         m_vOriginPoint[i] = m_vPoint[i];
     }
 
-    D3DXMATRIX		matScale, matRotZ, matTrans;
+    CKJJObj::Update_matWorld();
 
-    float fRadian = D3DXToRadian(m_fAngle);
+    //D3DXMATRIX		matScale, matRotZ, matTrans;
 
-    D3DXMatrixScaling(&matScale,
-        m_vScale.x,
-        m_vScale.y,
-        m_vScale.z);
-    D3DXMatrixRotationZ(&matRotZ, fRadian);
-    D3DXMatrixTranslation(&matTrans,
-        m_tInfo.vPos.x,
-        m_tInfo.vPos.y,
-        m_tInfo.vPos.z);
-    
-    m_tInfo.matWorld = matScale * matRotZ * matTrans;
+    //float fRadian = D3DXToRadian(m_fAngle);
+
+    //D3DXMatrixScaling(&matScale,
+    //    m_vScale.x,
+    //    m_vScale.y,
+    //    m_vScale.z);
+    //D3DXMatrixRotationZ(&matRotZ, fRadian);
+    //D3DXMatrixTranslation(&matTrans,
+    //    m_tInfo.vPos.x,
+    //    m_tInfo.vPos.y,
+    //    m_tInfo.vPos.z);
+    //
+    //m_tInfo.matWorld = matScale * matRotZ * matTrans;
+
 
     for (int i = 0; i < 4; ++i)
     {
@@ -65,5 +68,6 @@ void CBox::Release()
 
 void CBox::Collision(CKJJObj* pObj, D3DXVECTOR3 Vec)
 {
+    cout << "Ãæ?" << endl;
 }
 

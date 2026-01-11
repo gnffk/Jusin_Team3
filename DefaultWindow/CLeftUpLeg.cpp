@@ -47,14 +47,7 @@ int CLeftUpLeg::Update()
 	D3DXMatrixRotationZ(&matRotZ, m_fAngle);
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
 
-	if (m_fAngle <= -1.2f) {
-		m_fAngle = -1.2f;
-		dynamic_cast<CPelvis*>(m_pParentObject)->Set_SubAngle(0.01f);
-	}
-	else if (m_fAngle >= 1.2f) {
-		m_fAngle = 1.2f;
-		dynamic_cast<CPelvis*>(m_pParentObject)->Set_SubAngle(0.01f);
-	}
+
 
 	
 
@@ -71,7 +64,14 @@ int CLeftUpLeg::Update()
 	if (m_pParentObject) {
 		dynamic_cast<CPelvis*>(m_pParentObject)->Set_LeftAngle(m_fAngle);
 	}
-
+	if (m_fAngle <= -1.2f) {
+		m_fAngle = -1.2f;
+		//dynamic_cast<CPelvis*>(m_pParentObject)->Set_SubAngle(0.01f);
+	}
+	else if (m_fAngle >= 1.2f) {
+		m_fAngle = 1.2f;
+		//dynamic_cast<CPelvis*>(m_pParentObject)->Set_SubAngle(0.01f);
+	}
 
 	return 0;
 }

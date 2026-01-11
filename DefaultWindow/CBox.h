@@ -17,7 +17,5 @@ public:
 
     void Collision(CKJJObj* pObj, D3DXVECTOR3 Vec) override;
 private:
-
-
 };
 

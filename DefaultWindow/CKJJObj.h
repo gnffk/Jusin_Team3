@@ -51,6 +51,8 @@ public:
 	void Set_Weight(float Weight) { m_fWeight = Weight; }
 	float Get_Weight() { return m_fWeight; }
 
+	void Move_Pos(D3DXVECTOR3 Vec) { m_tInfo.vPos += Vec; }
+
 	void Update_matWorld();
 
 protected:
