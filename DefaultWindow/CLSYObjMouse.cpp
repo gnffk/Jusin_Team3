@@ -13,7 +13,8 @@ CLSYObjMouse::CLSYObjMouse():
 	m_pKnifeMark(nullptr),
 	m_bSkill(false),
 	m_fSkillIntervalTimer(0.f),
-	m_fSkillTimer(0.f)
+	m_fSkillTimer(0.f),
+	m_bSceneEnd(false)
 {
 	ZeroMemory(&m_ptBefore, sizeof(m_ptBefore));
 	ZeroMemory(&m_ptCurr, sizeof(m_ptCurr));
@@ -213,8 +214,12 @@ void CLSYObjMouse::Render(HDC hDC)
 		FillRect(hDC, &m_tCoolTimeFillRect, brush);
 		DeleteObject(brush);
 	}
-	swprintf_s(m_szCnt, L"%i", m_iCnt);
-	TextOut(hDC, m_tInfo.vPos.x-30, m_tInfo.vPos.y + 30, m_szCnt, lstrlen(m_szCnt));
+
+	if (!m_bSceneEnd)
+	{
+		swprintf_s(m_szCnt, L"%i/20", m_iCnt);
+		TextOut(hDC, m_tInfo.vPos.x - 30, m_tInfo.vPos.y + 30, m_szCnt, lstrlen(m_szCnt));
+	}
 	
 	CLSYObj::Render(hDC);
 }

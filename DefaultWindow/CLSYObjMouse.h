@@ -13,6 +13,10 @@ public:
 	{
 		return m_iCnt;
 	}
+	void Scene_End()
+	{
+		m_bSceneEnd = true;
+	}
 
 public:
 	void	Initialize()	override;
@@ -45,5 +49,7 @@ private:
 
 	TCHAR m_szCnt[32];
 	int m_iSliceCnt;
+
+	bool m_bSceneEnd;
 };
 
