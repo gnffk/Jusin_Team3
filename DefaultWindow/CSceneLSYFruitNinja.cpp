@@ -21,9 +21,6 @@ void CSceneLSYFruitNinja::Initialize()
 {
 	CLSYObjMouse* pMouse = dynamic_cast<CLSYObjMouse*>(CAbstractFactory<CLSYObjMouse>::Create());
 	CObjMgr::Get_Instance()->AddObject(OBJ_LSY_MOUSE, pMouse);
-
-
-
 }
 
 int CSceneLSYFruitNinja::Update()
@@ -31,7 +28,7 @@ int CSceneLSYFruitNinja::Update()
 	m_fSpawnTimer += CDeltaMgr::Get_Instance()->Get_Delta();
 	CObjMgr::Get_Instance()->Update();
 
-	if (m_fSpawnTimer > 0.5f)
+	if (m_fSpawnTimer > 0.4f)
 	{
 		m_fSpawnTimer = 0.f;
 
@@ -62,7 +59,12 @@ void CSceneLSYFruitNinja::Release()
 void CSceneLSYFruitNinja::Spawn()
 {
 	CLSYObjFruit* pFruit = dynamic_cast<CLSYObjFruit*>(CAbstractFactory<CLSYObjFruit>::Create());
-	pFruit->Set_Option(CLSYObjFruit::FROPT_TEST);
+
+	int r = rand();
+	int opt = r % (CLSYObjFruit::FROPT_TEST + 1);
+	pFruit->Set_Option(opt);
+
+
 	pFruit->GenerateVertexList();
 	pFruit->Set_Throw(true);
 

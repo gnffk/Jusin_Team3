@@ -98,6 +98,11 @@ void CMenu::Late_Update()
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LBUTTON) && IntersectRect(&rc, &m_mouseRect, &m_syRect))
 	{
 		CSceneMgr::Get_Instance()->Scene_Change(SC_LSY_FRUIT_NINJA);
+		//CSceneMgr::Get_Instance()->Scene_Change(SC_LSY_TEST);
+	}
+	if (CKeyMgr::Get_Instance()->Key_Pressing('E'))
+	{
+		CSceneMgr::Get_Instance()->Scene_Change(SC_LSY_LINE_EDIT);
 	}
 }
 
@@ -112,9 +117,11 @@ void CMenu::Render(HDC hDC)
 	TCHAR szMs[10] = _T("¹Î¼ö");
 	TCHAR szJj[10] = _T("Á¾Áø");
 	TCHAR szSy[10] = _T("¼ºÀ±");
+	TCHAR szSyEdit[10] = _T("¼ºÀ±¿¡µ÷'E'");
 	TextOut(hDC, g_ptMs.x, g_ptMs.y, szMs, lstrlen(szMs));
 	TextOut(hDC, g_ptJj.x, g_ptJj.y, szJj, lstrlen(szJj));
 	TextOut(hDC, g_ptSy.x, g_ptSy.y, szSy, lstrlen(szSy));
+	TextOut(hDC, g_ptSy.x + 200, g_ptSy.y, szSyEdit, lstrlen(szSyEdit));
 
 	m_mouseRect = g_mouseRect;
 	m_msRect = g_msRect;
