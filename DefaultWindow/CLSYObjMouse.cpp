@@ -44,7 +44,7 @@ int CLSYObjMouse::Update()
 
 	if (m_fCoolTime <= 1.f)
 	{
-		m_fCoolTime += 0.002f;
+		m_fCoolTime += 0.005f;
 	}
 
 	int coolTimeHalfWidth = 5;
