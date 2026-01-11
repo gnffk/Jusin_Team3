@@ -17,6 +17,7 @@ CLSYObjMouse::CLSYObjMouse():
 {
 	ZeroMemory(&m_ptBefore, sizeof(m_ptBefore));
 	ZeroMemory(&m_ptCurr, sizeof(m_ptCurr));
+	ZeroMemory(&m_szCnt, sizeof(m_szCnt));
 }
 
 CLSYObjMouse::~CLSYObjMouse()
@@ -117,7 +118,10 @@ int CLSYObjMouse::Update()
 			}
 			pKnifeMark->Set_Pos(posMark);
 			pKnifeMark->Set_EndPt(ptMarkEnd);
-			pKnifeMark->Slicing(ptMarkEnd);
+			int plus = 0;
+			int minus = 0;
+			pKnifeMark->Slicing(ptMarkEnd, &plus, &minus);
+			m_iCnt += (plus - minus);
 			CObjMgr::Get_Instance()->AddObject(OBJ_LSY_MOUSE, pKnifeMark);
 		}
 	}
@@ -172,7 +176,10 @@ int CLSYObjMouse::Update()
 				cout << "UP" << endl;
 				if (m_pKnifeMark)
 				{
-					m_pKnifeMark->Slicing(ptMouse);
+					int plus = 0;
+					int minus = 0;
+					m_pKnifeMark->Slicing(ptMouse, &plus, &minus);
+					m_iCnt += (plus - minus);
 				}
 				
 				m_pKnifeMark = nullptr;
@@ -206,6 +213,8 @@ void CLSYObjMouse::Render(HDC hDC)
 		FillRect(hDC, &m_tCoolTimeFillRect, brush);
 		DeleteObject(brush);
 	}
+	swprintf_s(m_szCnt, L"%i", m_iCnt);
+	TextOut(hDC, m_tInfo.vPos.x-30, m_tInfo.vPos.y + 30, m_szCnt, lstrlen(m_szCnt));
 	
 	CLSYObj::Render(hDC);
 }
