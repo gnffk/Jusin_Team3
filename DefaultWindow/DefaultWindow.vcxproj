@@ -158,6 +158,7 @@
     <ClInclude Include="CKMSObj.h" />
     <ClInclude Include="CKMSPlayer.h" />
     <ClInclude Include="CKMSScene.h" />
+    <ClInclude Include="CLogo.h" />
     <ClInclude Include="CLSYObjKnifeMark.h" />
     <ClInclude Include="CLSYObjMouse.h" />
     <ClInclude Include="CSceneLSYFruitNinja.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="CLeftDownLeg.cpp" />
     <ClCompile Include="CLeftShose.cpp" />
     <ClCompile Include="CLeftUpLeg.cpp" />
+    <ClCompile Include="CLogo.cpp" />
     <ClCompile Include="CLSYObj.cpp" />
     <ClCompile Include="CLSYObjFruit.cpp" />
     <ClCompile Include="CDeltaMgr.cpp" />

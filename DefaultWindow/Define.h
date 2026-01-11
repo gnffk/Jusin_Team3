@@ -33,6 +33,7 @@ enum OBJID
 
 enum SCENEID
 {
+	SC_LOGO,
 	SC_MENU,
 	SC_STAGE,
 	SC_MINSU,

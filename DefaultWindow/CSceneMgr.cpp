@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CSceneMgr.h"
 #include "CMenu.h"
+#include "CLogo.h"
 #include "CKJJScene.h"
 #include "CKMSScene.h"
 #include "CSceneLSYTest.h"
@@ -27,6 +28,10 @@ void CSceneMgr::Scene_Change(SCENEID eID)
 
 		switch (m_eCurScene)
 		{
+		case SC_LOGO:
+			m_pScene = new CLogo;
+			break;
+
 		case SC_MENU:
 			m_pScene = new CMenu;
 
