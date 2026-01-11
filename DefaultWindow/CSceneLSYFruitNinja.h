@@ -23,5 +23,8 @@ private:
 	float m_fScrollSpawnTimer;
 
 	CLSYObjMouse* m_pMouse;
+
+	float m_fEndSceneTimer;
+	bool m_bEnd;
 };
 

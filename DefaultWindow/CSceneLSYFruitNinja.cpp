@@ -11,7 +11,9 @@
 CSceneLSYFruitNinja::CSceneLSYFruitNinja():
 	m_fThrowSpawnTimer(0.f),
 	m_fScrollSpawnTimer(0.f),
-	m_pMouse(nullptr)
+	m_fEndSceneTimer(0.f),
+	m_pMouse(nullptr),
+	m_bEnd(false)
 {
 }
 
@@ -29,34 +31,57 @@ void CSceneLSYFruitNinja::Initialize()
 
 int CSceneLSYFruitNinja::Update()
 {
-	m_fThrowSpawnTimer += CDeltaMgr::Get_Instance()->Get_Delta();
-	m_fScrollSpawnTimer += CDeltaMgr::Get_Instance()->Get_Delta();
-
-	CObjMgr::Get_Instance()->Update();
-
-	if (m_fThrowSpawnTimer > 0.6f)
+	if (!m_bEnd)
 	{
-		m_fThrowSpawnTimer = 0.f;
+		m_fThrowSpawnTimer += CDeltaMgr::Get_Instance()->Get_Delta();
+		m_fScrollSpawnTimer += CDeltaMgr::Get_Instance()->Get_Delta();
 
-		SpawnThrow();
+		CObjMgr::Get_Instance()->Update();
+
+		if (m_fThrowSpawnTimer > 0.4f)
+		{
+			m_fThrowSpawnTimer = 0.f;
+
+			SpawnThrow();
+		}
+
+		if (m_fScrollSpawnTimer > 0.7f)
+		{
+			m_fScrollSpawnTimer = 0.f;
+
+			SpawnScroll();
+		}
+
+		if (CKeyMgr::Get_Instance()->Key_Down('T'))
+		{
+			SpawnThrow();
+		}
+
+		if (m_pMouse->Get_Count() >= 20)
+		{
+			m_pMouse->Scene_End();
+			m_bEnd = true;
+		}
 	}
-
-	if (m_fScrollSpawnTimer > 1.f)
+	else
 	{
-		m_fScrollSpawnTimer = 0.f;
+		m_fScrollSpawnTimer += CDeltaMgr::Get_Instance()->Get_Delta();
+		m_fEndSceneTimer += CDeltaMgr::Get_Instance()->Get_Delta();
+		CObjMgr::Get_Instance()->Update();
 
-		SpawnScroll();
-	}
+		if (m_fScrollSpawnTimer > 0.7f)
+		{
+			m_fScrollSpawnTimer = 0.f;
 
-	if (CKeyMgr::Get_Instance()->Key_Down('T'))
-	{
-		SpawnThrow();
-	}
+			//SpawnScroll();
+		}
 
-	if (m_pMouse->Get_Count() >= 10)
-	{
-		CSceneMgr::Get_Instance()->Scene_Change(SC_MINSU);
+		if (m_fEndSceneTimer > 3.f)
+		{
+			CSceneMgr::Get_Instance()->Scene_Change(SC_MINSU);
+		}
 	}
+	
 	return 0;
 }
 
