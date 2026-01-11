@@ -10,10 +10,8 @@ CKJJ_Player::CKJJ_Player() :
 	m_bStart(false),m_bEnd(false)
 {
 	m_vSize = { 21.f,56.f,0.f };
-	m_tInfo.vPos = { 150.f, 300.f, 0.f };
+	m_tInfo.vPos = { 150.f, 100.f, 0.f };
 	m_vScale = { 1.f,1.f,1.f };
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Mario.bmp", L"Mario");
-	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Jar.bmp", L"Jar");
 
 }
 
@@ -47,7 +45,12 @@ int CKJJ_Player::Update()
 		CObjMgr::Get_Instance()->Delete_ID(OBJ_HAMMER);
 		return OBJ_DEAD;
 	}
+	for (int i = 0; i < 4; ++i)
+	{
+		m_vPoint[i] = m_vOriginPoint[i];
 
+		D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
+	}
 	CKJJObj::Update_matWorld();
 	return 0;
 }
@@ -103,19 +106,18 @@ void CKJJ_Player::Render(HDC hDC)
 			RGB(89, 186, 255));
 	}
 
-	for (int i = 0; i < 4; ++i)
+	if (DEBUG)
 	{
-		m_vPoint[i] = m_vOriginPoint[i];
 
-		D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
+
+		MoveToEx(hDC, m_vPoint[3].x, m_vPoint[3].y, nullptr);
+
+		for (int i = 0; i < 4; ++i)
+		{
+			LineTo(hDC, m_vPoint[i].x, m_vPoint[i].y);
+		}
 	}
 
-	MoveToEx(hDC, m_vPoint[3].x, m_vPoint[3].y, nullptr);
-
-	for (int i = 0; i < 4; ++i)
-	{
-		LineTo(hDC, m_vPoint[i].x, m_vPoint[i].y);
-	}
 }
 
 void CKJJ_Player::Release()

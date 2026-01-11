@@ -7,9 +7,14 @@
 #include "KJJ_CollisionMgr.h"
 #include "CSceneMgr.h"
 #include "KJJ_CheckPoint.h"	
+#include "CBmpMgr.h"
 
 void CKJJScene::Initialize()
 {
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Mario.bmp", L"Mario");
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Jar.bmp", L"Jar");
+	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/KJJBack.bmp", L"KJJBack");
+
 	CObj* pPlayer = new CKJJ_Player;
 	pPlayer->Initialize();
 	CObjMgr::Get_Instance()->AddObject(OBJ_PLAYER, pPlayer);
@@ -67,6 +72,12 @@ void CKJJScene::Late_Update()
 
 void CKJJScene::Render(HDC hDC)
 {
+	BitBlt(hDC,
+		0, 0,
+		800, 600,
+		CBmpMgr::Get_Instance()->Find_Image(L"KJJBack"),
+		0, 0,
+		SRCCOPY);
 	CObjMgr::Get_Instance()->Render(hDC);
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CKJJObj.h"
+#define DEBUG false
 
 class CKJJ_Player :
     public CKJJObj
