@@ -74,6 +74,10 @@
     <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(DXSDK_DIR)lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -150,6 +154,7 @@
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CKJJObj.h" />
     <ClInclude Include="CKJJScene.h" />
+    <ClInclude Include="CKJJScene2.h" />
     <ClInclude Include="CKJJ_Player.h" />
     <ClInclude Include="CKMSBox.h" />
     <ClInclude Include="CKMSCollisionMgr.h" />
@@ -158,12 +163,15 @@
     <ClInclude Include="CKMSPlayer.h" />
     <ClInclude Include="CKMSScene.h" />
     <ClInclude Include="CLeftUpArm.h" />
+    <ClInclude Include="CLogo.h" />
     <ClInclude Include="CLSYObjKnifeMark.h" />
     <ClInclude Include="CLSYObjMouse.h" />
     <ClInclude Include="CRightDownArm.h" />
     <ClInclude Include="CRightUpArm.h" />
     <ClInclude Include="CSceneLSYFruitNinja.h" />
     <ClInclude Include="LeftDownArm.h" />
+    <ClInclude Include="KJJ_CheckPoint.h" />
+    <ClInclude Include="CSceneLSYLineEidt.h" />
     <ClInclude Include="LSYDefine.h" />
     <ClInclude Include="CLeftDownLeg.h" />
     <ClInclude Include="CLeftShose.h" />
@@ -204,6 +212,7 @@
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CKJJObj.cpp" />
     <ClCompile Include="CKJJScene.cpp" />
+    <ClCompile Include="CKJJScene2.cpp" />
     <ClCompile Include="CKJJ_Player.cpp" />
     <ClCompile Include="CKMSBox.cpp" />
     <ClCompile Include="CKMSCollisionMgr.cpp" />
@@ -215,6 +224,7 @@
     <ClCompile Include="CLeftDownLeg.cpp" />
     <ClCompile Include="CLeftShose.cpp" />
     <ClCompile Include="CLeftUpLeg.cpp" />
+    <ClCompile Include="CLogo.cpp" />
     <ClCompile Include="CLSYObj.cpp" />
     <ClCompile Include="CLSYObjFruit.cpp" />
     <ClCompile Include="CDeltaMgr.cpp" />
@@ -233,11 +243,13 @@
     <ClCompile Include="CRightShose.cpp" />
     <ClCompile Include="CRightUpLeg.cpp" />
     <ClCompile Include="CScene.cpp" />
+    <ClCompile Include="CSceneLSYLineEidt.cpp" />
     <ClCompile Include="CSceneLSYTest.cpp" />
     <ClCompile Include="CSceneMgr.cpp" />
     <ClCompile Include="CScrollMgr.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
     <ClCompile Include="DefaultWindow.cpp" />
+    <ClCompile Include="KJJ_CheckPoint.cpp" />
     <ClCompile Include="KJJ_CollisionMgr.cpp" />
     <ClCompile Include="LeftDownArm.cpp" />
     <ClCompile Include="pch.cpp">

@@ -145,6 +145,9 @@
     <Filter Include="KMS\01. Obj\Box">
       <UniqueIdentifier>{42dcbeb4-03ba-47c1-b79a-ccf07fdbf4c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="KJJ\01. Obj\04. CheckPoint">
+      <UniqueIdentifier>{50f023cc-6c3f-4b4a-a7cf-5cb2daab4c9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -306,6 +309,12 @@
     <ClInclude Include="CKMSBox.h">
       <Filter>KMS\01. Obj\Box</Filter>
     </ClInclude>
+    <ClInclude Include="CSceneLSYFruitNinja.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="KJJ_CheckPoint.h">
+      <Filter>KJJ\01. Obj\04. CheckPoint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -431,6 +440,9 @@
     <ClCompile Include="CSceneLSYFruitNinja.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="CSceneLSYFruitNinja.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="CBody.cpp">
       <Filter>KMS\01. Obj\Player\Body\Body</Filter>
     </ClCompile>
@@ -451,6 +463,9 @@
     </ClCompile>
     <ClCompile Include="CKMSBox.cpp">
       <Filter>KMS\01. Obj\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="KJJ_CheckPoint.cpp">
+      <Filter>KJJ\01. Obj\04. CheckPoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

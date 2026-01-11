@@ -1,10 +1,13 @@
 #include "pch.h"
 #include "CSceneMgr.h"
 #include "CMenu.h"
+#include "CLogo.h"
 #include "CKJJScene.h"
+#include "CKJJScene2.h"
 #include "CKMSScene.h"
 #include "CSceneLSYTest.h"
 #include "CSceneLSYFruitNinja.h"
+#include "CSceneLSYLineEidt.h"
 CSceneMgr* CSceneMgr::m_pInstance = nullptr;
 
 CSceneMgr::CSceneMgr() : m_pScene(nullptr), m_ePreScene(SC_END), m_eCurScene(SC_MINSU)
@@ -26,6 +29,10 @@ void CSceneMgr::Scene_Change(SCENEID eID)
 
 		switch (m_eCurScene)
 		{
+		case SC_LOGO:
+			m_pScene = new CLogo;
+			break;
+
 		case SC_MENU:
 			m_pScene = new CMenu;
 
@@ -43,10 +50,18 @@ void CSceneMgr::Scene_Change(SCENEID eID)
 			m_pScene = new CSceneLSYFruitNinja;
 			break;
 
-		case SC_KJJ:
+		case SC_LSY_LINE_EDIT:
+			m_pScene = new CSceneLSYLineEidt;
+			break;
 
+		case SC_KJJ:
 			m_pScene = new CKJJScene;
 			break;
+			
+		case SC_KJJ2:
+			m_pScene = new CKJJScene2;
+			break;
+
 		case SC_MINSU:
 			m_pScene = new CKMSScene;
 			break;

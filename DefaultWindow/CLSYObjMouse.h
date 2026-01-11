@@ -9,6 +9,16 @@ public:
 	~CLSYObjMouse() override;
 
 public:
+	int Get_Count()
+	{
+		return m_iCnt;
+	}
+	void Scene_End()
+	{
+		m_bSceneEnd = true;
+	}
+
+public:
 	void	Initialize()	override;
 	int		Update()		override;
 	int		Late_Update()	override;
@@ -20,11 +30,26 @@ private:
 	POINT m_ptCurr;
 	int m_iCnt;
 
+	bool m_bPressed;
+
 	bool m_bMarking;
 
 
 	//CLSYObjFruit* m_pTmpFruit;
 	CLSYObjKnifeMark* m_pKnifeMark;
+
+	float m_fCoolTime;
 	
+	RECT m_tCoolTimeEdgeRect;
+	RECT m_tCoolTimeFillRect;
+
+	bool m_bSkill;
+	float m_fSkillTimer;
+	float m_fSkillIntervalTimer;
+
+	TCHAR m_szCnt[32];
+	int m_iSliceCnt;
+
+	bool m_bSceneEnd;
 };
 

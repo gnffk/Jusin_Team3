@@ -5,8 +5,19 @@ class CLSYObjFruit final: public CLSYObj
 public:
 	enum FRUIT_OPT
 	{
+		FROPT_ARROW,
+		//FROPT_JUSIN,
+		FROPT_MS,
+		FROPT_JJ,
+		FROPT_SY,
+
 		FROPT_TEST,
+
+		FROPT_SCROLL_STAR,
+		FROPT_SCROLL_CLOUD,
+
 		FROPT_PART,
+		FROPT_DRAW,
 		FRUIT_OPT_END
 	};
 public:
@@ -36,6 +47,11 @@ public:
 		m_fThrowVelocityZero = fVelocity;
 	}
 
+	void Set_Scroll(bool bScroll)
+	{
+		m_bScroll = bScroll;
+	}
+
 public:
 	void GenerateVertexList();
 
@@ -58,9 +74,10 @@ private:
 
 	bool m_bCut;
 
-	bool m_bDead;
 
 	bool m_bThrow;
+
+	bool m_bScroll;
 
 };
 

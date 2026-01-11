@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CKJJObj.h"
+#define DEBUG false
 
 class CKJJ_Player :
     public CKJJObj
@@ -21,4 +22,6 @@ public:
 private:
     CObj* m_pHammer;
     bool bIs_falling;
+    bool m_bStart;
+    bool m_bEnd;
 };

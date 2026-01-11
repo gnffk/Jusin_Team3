@@ -1,22 +1,25 @@
 #include "pch.h"
 #include "CHammer.h"
 #include "CKJJ_Player.h"
+#include "CKeyMgr.h"
+
 
 CHammer::CHammer() :
 	m_pPlayer(nullptr),
 	m_fPlayerAngle(0.f),
 	m_bIs_Col(false),
 	m_bClockWise(false),
-	m_bColDir(false)
+	m_bColDir(false),
+	m_Super_Wennie_Hut(false)
 {
 	m_fAngle =-90.f;
 	m_fHead_Distance = 100.f;
-	m_fHammer_Length = 100.f;
+	m_fHammer_Length = 60.f;
 
 	m_tInfo.vPos = { m_fHead_Distance,0.f,0.f };
 
 	m_vSize = { 6.f, 10.f, 0.f };
-	m_vScale = { 2.f,2.f,2.f };
+	m_vScale = { 1.5f,1.5f,1.5f };
 }
 
 CHammer::~CHammer()
@@ -72,10 +75,38 @@ int CHammer::Update()
 
 int CHammer::Late_Update()
 {
-	m_vPrevMouse = m_vCurrMouse;
-	m_vCurrMouse = ::Get_Mouse();
+	D3DXVECTOR3 vMouse_Movement = { 0,0,0 };
 
-	D3DXVECTOR3 vMouse_Movement = m_vCurrMouse - m_vPrevMouse;
+	if (GetAsyncKeyState(VK_RBUTTON))
+	{
+		if (m_Super_Wennie_Hut)
+			m_Super_Wennie_Hut = false;
+		else
+			m_Super_Wennie_Hut = true;
+	}
+
+	if (m_Super_Wennie_Hut)
+	{
+#pragma region 자동해머
+		if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LBUTTON))
+		{
+			m_vPrevMouse = m_vCurrMouse;
+			m_vCurrMouse = ::Get_Mouse();
+		}
+		vMouse_Movement = m_vCurrMouse - m_vPrevMouse;
+#pragma endregion
+	}
+	else
+	{
+		m_vPrevMouse = m_vCurrMouse;
+		m_vCurrMouse = ::Get_Mouse();
+#pragma region 수동해머
+		if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LBUTTON))
+		{
+			vMouse_Movement = m_vCurrMouse - m_vPrevMouse;
+		}
+	}
+#pragma endregion
 
 	if (vMouse_Movement.x > 0)
 	{
@@ -124,10 +155,10 @@ int CHammer::Late_Update()
 
 	m_fHead_Distance -= vMouse_Movement.y / 3;
 
-	if (m_fHead_Distance < 50.f)
-		m_fHead_Distance = 50.f;
-	else if (m_fHead_Distance > 150.f)
-		m_fHead_Distance = 150.f;
+	if (m_fHead_Distance < 20.f)
+		m_fHead_Distance = 20.f;
+	else if (m_fHead_Distance > 80.f)
+		m_fHead_Distance = 80.f;
 
 	m_bIs_Col = false;
 	return 0;
@@ -163,4 +194,31 @@ void CHammer::Collision(CKJJObj* pObj, D3DXVECTOR3 Vec)
 	m_bIs_Col = true;
 	m_bColDir = m_bClockWise;
 	m_pPlayer->Set_Falling(false);
+	if (Vec.x != 0.f)
+	{
+		if (m_tInfo.vPos.x < pObj->Get_Info().vPos.x)
+		{
+			m_tInfo.vPos += 1.1f * Vec;
+			m_pPlayer->Move_Pos(1.1f * Vec);
+		}
+		else
+		{
+			m_tInfo.vPos -= 1.1f * Vec;
+			m_pPlayer->Move_Pos(-1.1f * Vec);
+		}
+	}
+	if (Vec.y != 0.f)
+	{
+		if (m_tInfo.vPos.y < pObj->Get_Info().vPos.y)
+		{
+			m_tInfo.vPos += Vec;
+			m_pPlayer->Move_Pos(Vec);
+		}
+		else
+		{
+			m_tInfo.vPos -= Vec;
+			m_pPlayer->Move_Pos(-Vec);
+		}
+	}
+	m_pPlayer->Move_Pos(Vec);
 }

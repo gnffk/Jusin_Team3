@@ -1,5 +1,6 @@
 #pragma once
 #include "CScene.h"
+#include "CLSYObjMouse.h"
 class CSceneLSYFruitNinja final: public CScene
 {
 public:
@@ -14,9 +15,16 @@ public:
 	void	Release()		override;
 
 private:
-	void Spawn();
+	void SpawnThrow();
+	void SpawnScroll();
 
 private:
-	float m_fSpawnTimer;
+	float m_fThrowSpawnTimer;
+	float m_fScrollSpawnTimer;
+
+	CLSYObjMouse* m_pMouse;
+
+	float m_fEndSceneTimer;
+	bool m_bEnd;
 };
 
