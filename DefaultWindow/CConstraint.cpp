@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CConstraint.h"
+#include "CScrollMgr.h"
 
 CConstraint::CConstraint() : m_pUpObject(nullptr), m_pDownObject(nullptr), m_bVisible(true)
 {
@@ -12,6 +13,7 @@ CConstraint::~CConstraint()
 void CConstraint::Initialize()
 {
 	m_StartVector = { 0.f,0.f,0.f };
+	m_Size = { 25, 25, 25 };
 	m_fMax_Angle = 0.f;
 	m_fMin_Angle = 0.f;
 }
@@ -47,9 +49,15 @@ int CConstraint::Late_Update()
 
 void CConstraint::Render(HDC hDC)
 {
+	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
+	MoveToEx(hDC, (int)m_vPoint[0].x + iScrollX, (int)m_vPoint[0].y, nullptr);
+
+	
 	if (m_bVisible) {
 
-		Ellipse(hDC, m_tInfo.vPos.x-25, m_tInfo.vPos.y - 25, m_tInfo.vPos.x+25, m_tInfo.vPos.y+25);
+		Ellipse(hDC, m_tInfo.vPos.x- m_Size.x + iScrollX, m_tInfo.vPos.y - m_Size.y,
+			m_tInfo.vPos.x+ m_Size.x + iScrollX, m_tInfo.vPos.y+ m_Size.y);
 	}
 }
 

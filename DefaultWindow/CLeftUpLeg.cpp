@@ -2,6 +2,7 @@
 #include "CLeftUpLeg.h"
 #include "CKeyMgr.h"
 #include "CPelvis.h"
+#include "CScrollMgr.h"
 
 CLeftUpLeg::CLeftUpLeg()
 {
@@ -34,6 +35,7 @@ void CLeftUpLeg::Initialize()
 int CLeftUpLeg::Update()
 {
 	// 크 -> 자 -> 이 -> 공 -> 부
+	m_fPrevAngle = m_fAngle;
 	Key_Input();
 	D3DXMATRIX		matScale, matRotZ, matTrans, matParMat;
 
@@ -72,21 +74,27 @@ int CLeftUpLeg::Update()
 		m_fAngle = 1.2f;
 		//dynamic_cast<CPelvis*>(m_pParentObject)->Set_SubAngle(0.01f);
 	}
-
+	if (m_fArm) {
+		dynamic_cast<CKMSObj*>(m_fArm)->Set_Angle(m_fAngle);
+	}
 	return 0;
 }
 
 int CLeftUpLeg::Late_Update()
 {
+
 	return 0;
 }
 
 void CLeftUpLeg::Render(HDC hDC)
 {
-	MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y,nullptr);
+	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
+	MoveToEx(hDC, (int)m_vPoint[0].x + iScrollX, (int)m_vPoint[0].y, nullptr);
+
 	for (int i = 0; i < 5; ++i)
 	{
-		LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
+		LineTo(hDC, (int)m_vPoint[i].x + iScrollX, (int)m_vPoint[i].y);
 
 	}
 }

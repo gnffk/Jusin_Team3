@@ -1,18 +1,22 @@
 #pragma once
 #include "CKMSObj.h"
-class CRightDownLeg : public CKMSObj
+class CRightDownArm : public CKMSObj
 {
 public:
-	CRightDownLeg();
-	virtual ~CRightDownLeg();
+	CRightDownArm();
+	virtual ~CRightDownArm();
 
 public:
-
 	void Initialize() override;
+
 	int Update() override;
+
 	int Late_Update() override;
+
 	void Render(HDC hDC) override;
+
 	void Release() override;
+
 	void Key_Input() override;
 
 };

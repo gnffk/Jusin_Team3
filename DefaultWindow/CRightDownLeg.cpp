@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CRightDownLeg.h"
 #include "CKeyMgr.h"
+#include "CScrollMgr.h"
 
 CRightDownLeg::CRightDownLeg()
 {
@@ -12,6 +13,7 @@ CRightDownLeg::~CRightDownLeg()
 
 void CRightDownLeg::Initialize()
 {
+	m_fArm = nullptr;
 	m_fAngle = +0.5f;
 	// 자기 자신 vertex
 
@@ -82,6 +84,10 @@ int CRightDownLeg::Update()
 	if (m_fAngle < 0.f) {
 		m_fAngle = 0.f;
 	}
+
+	if (m_fArm) {
+		dynamic_cast<CKMSObj*>(m_fArm)->Set_Angle(m_fAngle);
+	}
 	return 0;
 }
 
@@ -92,10 +98,13 @@ int CRightDownLeg::Late_Update()
 
 void CRightDownLeg::Render(HDC hDC)
 {
-	MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
+	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
+	MoveToEx(hDC, (int)m_vPoint[0].x + iScrollX, (int)m_vPoint[0].y, nullptr);
+
 	for (int i = 0; i < 5; ++i)
 	{
-		LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
+		LineTo(hDC, (int)m_vPoint[i].x + iScrollX, (int)m_vPoint[i].y);
 
 	}
 }

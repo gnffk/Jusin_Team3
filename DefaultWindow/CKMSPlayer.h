@@ -26,6 +26,10 @@ public:
 	void Set_CollisionLine(CObj* _pCollisionLine) { m_pCollisionLine = _pCollisionLine; };
 
 	void Set_Gravity(bool _bGravity) { m_bGravity = _bGravity; }
+	void Set_RightIs(bool _bRight) { m_bRightIs = _bRight; }
+	void Set_LeftIs(bool _bLeft) { m_bLeftIs = _bLeft; }
+	void Set_AngleIs(bool _bAngle) { m_bAngleIs = _bAngle; }
+
 
 	D3DXVECTOR3 Get_PrevPos() { return m_prePos; }
 public:
@@ -34,5 +38,10 @@ public:
 	bool m_bGravity;
 
 	D3DXVECTOR3 m_prePos;
+
+	bool m_bRightIs;
+	bool m_bLeftIs;
+	bool m_bAngleIs;
+	
 };
 

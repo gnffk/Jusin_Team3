@@ -2,6 +2,7 @@
 #include "CRightUpLeg.h"
 #include "CKeyMgr.h"
 #include "CPelvis.h"
+#include "CScrollMgr.h"
 
 CRightUpLeg::CRightUpLeg()
 {
@@ -14,6 +15,7 @@ CRightUpLeg::~CRightUpLeg()
 void CRightUpLeg::Initialize()
 {
 	m_fAngle = -0.5f;
+	m_fPrevAngle = -0.5f;
 	// 자기 자신 vertex
 	if (m_pParentObject) {
 
@@ -32,7 +34,9 @@ void CRightUpLeg::Initialize()
 }
 
 int CRightUpLeg::Update()
+
 {	// 크 -> 자 -> 이 -> 공 -> 부
+	m_fPrevAngle = m_fAngle;
 	Key_Input();
 	D3DXMATRIX		matScale, matRotZ, matTrans, matParMat;
 
@@ -70,7 +74,9 @@ int CRightUpLeg::Update()
 		m_fAngle = 1.2f;
 		
 	}
-
+	if (m_fArm) {
+		dynamic_cast<CKMSObj*>(m_fArm)->Set_Angle(m_fAngle);
+	}
 	return 0;
 }
 
@@ -81,10 +87,13 @@ int CRightUpLeg::Late_Update()
 
 void CRightUpLeg::Render(HDC hDC)
 {
-	MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
+	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
+	MoveToEx(hDC, (int)m_vPoint[0].x + iScrollX, (int)m_vPoint[0].y, nullptr);
+
 	for (int i = 0; i < 5; ++i)
 	{
-		LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
+		LineTo(hDC, (int)m_vPoint[i].x + iScrollX, (int)m_vPoint[i].y);
 
 	}
 }
@@ -97,14 +106,14 @@ void CRightUpLeg::Key_Input()
 {
 	if (CKeyMgr::Get_Instance()->Key_Pressing('O')) {
 		//cout << m_fAngle << endl;
-		m_fAngle -= D3DXToRadian(1.f);
+		m_fAngle -= D3DXToRadian(3.f);
 
 	
 	}
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing('P')) {
 		//cout << m_fAngle << endl;
-		m_fAngle += D3DXToRadian(1.f);
+		m_fAngle += D3DXToRadian(3.f);
 		
 	}
 }

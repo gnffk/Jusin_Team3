@@ -13,5 +13,10 @@ public:
 	void Release() override;
 	void Key_Input() override;
 
+	void Set_CollisionIs(bool is) { m_bCollisioniS = is; }
+
+public:
+	bool m_bCollisioniS;
+
 };
 

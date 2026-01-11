@@ -133,6 +133,18 @@
     <Filter Include="KMS\01. Obj\Player\Body\Body">
       <UniqueIdentifier>{4eb295a7-1a2e-4c30-8b13-1544dc1a45f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body\Head">
+      <UniqueIdentifier>{edc9c1eb-a2f1-4cf9-8d18-09c8a10e85eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body\Body\Right">
+      <UniqueIdentifier>{27cfbd27-2905-4901-bb46-99c7875a8de2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Player\Body\Body\Left">
+      <UniqueIdentifier>{858b4947-56f0-4b89-8d04-7f2fa5769b9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMS\01. Obj\Box">
+      <UniqueIdentifier>{42dcbeb4-03ba-47c1-b79a-ccf07fdbf4c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -270,6 +282,30 @@
     <ClInclude Include="LSYDefine.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="CSceneLSYFruitNinja.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CBody.h">
+      <Filter>KMS\01. Obj\Player\Body\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="CHead.h">
+      <Filter>KMS\01. Obj\Player\Body\Head</Filter>
+    </ClInclude>
+    <ClInclude Include="CLeftUpArm.h">
+      <Filter>KMS\01. Obj\Player\Body\Body\Left</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftDownArm.h">
+      <Filter>KMS\01. Obj\Player\Body\Body\Left</Filter>
+    </ClInclude>
+    <ClInclude Include="CRightUpArm.h">
+      <Filter>KMS\01. Obj\Player\Body\Body\Right</Filter>
+    </ClInclude>
+    <ClInclude Include="CRightDownArm.h">
+      <Filter>KMS\01. Obj\Player\Body\Body\Right</Filter>
+    </ClInclude>
+    <ClInclude Include="CKMSBox.h">
+      <Filter>KMS\01. Obj\Box</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -391,6 +427,30 @@
     </ClCompile>
     <ClCompile Include="CLSYObjMouse.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneLSYFruitNinja.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CBody.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="CHead.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Head</Filter>
+    </ClCompile>
+    <ClCompile Include="CLeftUpArm.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Body\Left</Filter>
+    </ClCompile>
+    <ClCompile Include="LeftDownArm.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Body\Left</Filter>
+    </ClCompile>
+    <ClCompile Include="CRightUpArm.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Body\Right</Filter>
+    </ClCompile>
+    <ClCompile Include="CRightDownArm.cpp">
+      <Filter>KMS\01. Obj\Player\Body\Body\Right</Filter>
+    </ClCompile>
+    <ClCompile Include="CKMSBox.cpp">
+      <Filter>KMS\01. Obj\Box</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

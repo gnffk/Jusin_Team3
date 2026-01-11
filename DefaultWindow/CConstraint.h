@@ -22,6 +22,8 @@ public:
 
 	void Set_MaxAngle(float _MaxAngle) { m_fMax_Angle = _MaxAngle; }
 	void Set_MinAngle(float _MinAngle) { m_fMin_Angle = _MinAngle; }
+
+	void Set_Size(D3DXVECTOR3 _Size) { m_Size = _Size; }
 public:
 	CObj* m_pUpObject;
 	CObj* m_pDownObject;
@@ -29,5 +31,7 @@ public:
 	float m_fMax_Angle;
 	float m_fMin_Angle;
 	bool  m_bVisible;
+
+	D3DXVECTOR3 m_Size;
 };
 

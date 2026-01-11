@@ -1,37 +1,33 @@
 #include "pch.h"
-#include "CLeftShose.h"
+#include "CRightUpArm.h"
 #include "CScrollMgr.h"
 
-CLeftShose::CLeftShose()
+CRightUpArm::CRightUpArm()
 {
 }
 
-CLeftShose::~CLeftShose()
+CRightUpArm::~CRightUpArm()
 {
 }
 
-void CLeftShose::Initialize()
+void CRightUpArm::Initialize()
 {
-	m_bCollisioniS = false;
 	m_fAngle = 0.f;
-	// 자기 자신 vertex
-	m_eKMSObjType = KMSOBJ_LEFTSHOES;
-	m_vPoint[0] = { -25.f, +0.f, 0.f };
-	m_vPoint[1] = { 50.f, +0.f, 0.f };
-	m_vPoint[2] = { 50.f, +20.f, 0.f };
-	m_vPoint[3] = { -25.f, 20.f, 0.f };
-	m_vPoint[4] = { -25.f, +0.f, 0.f };
+	m_eKMSObjType = KMSOBJ_BODY;
+	m_vPoint[0] = { -15.f, 0.f, 0.f };
+	m_vPoint[1] = { 15.f, 0.f, 0.f };
+	m_vPoint[2] = { 15.f, 100.f, 0.f };
+	m_vPoint[3] = { -15.f, 100.f, 0.f };
+	m_vPoint[4] = { -15.f, -0.f, 0.f };
 
-	m_OriginVector = { 0.f, 100.f, 0.f };
+	m_OriginVector = { 0.f, -50.f, 0.f };
 
 	for (int i = 0; i < 5; ++i)
 		m_vOriginPoint[i] = m_vPoint[i];
 }
 
-int CLeftShose::Update()
+int CRightUpArm::Update()
 {
-	Key_Input();
-	// 크 -> 자 -> 이 -> 공 -> 부
 	D3DXMATRIX		matScale, matRotZ, matTrans, matParRotZ, matParMat;
 	D3DXVECTOR3		VecParPos;
 	float			ParAngle = 0;
@@ -41,7 +37,7 @@ int CLeftShose::Update()
 	}
 
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
-	D3DXMatrixRotationZ(&matRotZ, m_fAngle);
+	D3DXMatrixRotationZ(&matRotZ, -m_fAngle);
 
 	D3DXMATRIX orbitXMat, orbitYMat, orbitZMat, orbitMat, orbitOffsetMat;
 
@@ -66,43 +62,16 @@ int CLeftShose::Update()
 
 
 		D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
-
-
 	}
-
-	if (m_pConstraint) {
-		D3DXVECTOR3 Constraint_Pos = { 0.f,0.f,0.f };
-
-		D3DXVec3TransformCoord(&(Constraint_Pos), &(Constraint_Pos), &m_tInfo.matWorld);
-
-		dynamic_cast<CKMSObj*>(m_pConstraint)->Set_Pos(Constraint_Pos);
-	}
-
-
 	return 0;
 }
 
-int CLeftShose::Late_Update()
+int CRightUpArm::Late_Update()
 {
-	
-	//for (int i = 0; i < 5; ++i)
-	//{
-	//		if ( m_vPoint[i].y > 555.f) {
-	//			if (dynamic_cast<CKMSObj*>(RootObj)->Get_Info().vPos.x > m_tInfo.vPos.x) {
-	//				dynamic_cast<CKMSObj*>(m_pParentObject)->Plus_Angle(-0.01f);
-	//			}
-	//			else {
-	//				dynamic_cast<CKMSObj*>(m_pParentObject)->Plus_Angle(0.01f);
-	//			}
-	//	
-	//	//		dynamic_cast<CKMSObj*>(m_pParentObject)->Get_Point()[1]
-	//		}
-	//}
-	
 	return 0;
 }
 
-void CLeftShose::Render(HDC hDC)
+void CRightUpArm::Render(HDC hDC)
 {
 	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
@@ -115,11 +84,10 @@ void CLeftShose::Render(HDC hDC)
 	}
 }
 
-void CLeftShose::Release()
+void CRightUpArm::Release()
 {
 }
 
-void CLeftShose::Key_Input()
+void CRightUpArm::Key_Input()
 {
-	
 }

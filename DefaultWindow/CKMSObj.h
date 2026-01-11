@@ -29,8 +29,13 @@ public:
 	float Get_Angle() { return m_fAngle; }
 	void Plus_Angle(float _Angle) { m_fAngle += _Angle; }
 	void Set_Angle(float _Angle) { m_fAngle = _Angle; }
-
+	float Get_PrevAngle() { return m_fPrevAngle; }
 	KMSOBJTYPE GetKMSObjType() { return m_eKMSObjType; }
+
+	void Set_Arm(CObj* _fArm) { m_fArm = _fArm; }
+public:
+	CObj* m_fArm;
+
 public:
 	virtual void Key_Input() PURE;
 protected:
@@ -42,6 +47,7 @@ protected:
 
 
 	float m_fAngle;
+	float m_fPrevAngle;
 	float m_fGravity;
 	D3DXVECTOR3	m_StartVector;
 	D3DXVECTOR3	m_OriginVector;

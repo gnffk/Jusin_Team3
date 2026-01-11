@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CPelvis.h"
 #include "CKMSObj.h"
+#include "CScrollMgr.h"
 
 CPelvis::CPelvis()
 {
@@ -46,9 +47,9 @@ int CPelvis::Update()
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
 	D3DXMatrixRotationZ(&matRotZ, m_fAngle);
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x,m_tInfo.vPos.y,m_tInfo.vPos.z);
-	
-	cout << "RightAngle :" << m_fRightAngle << " LeftAngle :" << m_fLeftAngle << endl;
-	cout << "Angle : " << m_fAngle << endl;
+	//
+	//cout << "RightAngle :" << m_fRightAngle << " LeftAngle :" << m_fLeftAngle << endl;
+	//cout << "Angle : " << m_fAngle << endl;
 	
 	m_tInfo.matWorld = matScale * matRotZ * matTrans  * matParMat;
 
@@ -74,10 +75,14 @@ int CPelvis::Late_Update()
 
 void CPelvis::Render(HDC hDC)
 {
-	MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
+	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
+	MoveToEx(hDC, (int)m_vPoint[0].x + iScrollX, (int)m_vPoint[0].y, nullptr);
+
 	for (int i = 0; i < 5; ++i)
 	{
-		LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
+		LineTo(hDC, (int)m_vPoint[i].x + iScrollX, (int)m_vPoint[i].y);
+
 	}
 
 }

@@ -6,6 +6,7 @@ class CKMSCollisionMgr
 {
 public:
 	static void CheckLine(CObj* _Body, CObj* _Line);
+	static int CheckCorrect(CObj* _Body, CObj* _Line);
 	
 };
 

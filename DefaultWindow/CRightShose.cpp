@@ -3,6 +3,7 @@
 #include "CKMSCollisionMgr.h"
 #include "CAbstractFactory.h"
 #include "CKMSLine.h"
+#include "CScrollMgr.h"
 
 CRightShose::CRightShose()
 {
@@ -14,6 +15,7 @@ CRightShose::~CRightShose()
 
 void CRightShose::Initialize()
 {
+	m_bCollisioniS = false;
 	m_fAngle = 0.f;
 	// 자기 자신 vertex
 	m_eKMSObjType = KMSOBJ_RIGHTSHOES;
@@ -31,6 +33,7 @@ void CRightShose::Initialize()
 
 int CRightShose::Update()
 {
+	
 	Key_Input();
 	// 크 -> 자 -> 이 -> 공 -> 부
 	D3DXMATRIX		matScale, matRotZ, matTrans, matParRotZ, matParMat;
@@ -89,15 +92,31 @@ int CRightShose::Update()
 
 int CRightShose::Late_Update()
 {
+	//for (int i = 0; i < 5; ++i)
+	//{
+	//	if (m_vPoint[i].y > 555.f) {
+	//		if (dynamic_cast<CKMSObj*>(RootObj)->Get_Info().vPos.x > m_tInfo.vPos.x) {
+	//			dynamic_cast<CKMSObj*>(m_pParentObject)->Plus_Angle(-0.01f);
+	//		}
+	//		else {
+	//			dynamic_cast<CKMSObj*>(m_pParentObject)->Plus_Angle(0.01f);
+	//		}
+
+	//		//		dynamic_cast<CKMSObj*>(m_pParentObject)->Get_Point()[1]
+	//	}
+	//}
 	return 0;
 }
 
 void CRightShose::Render(HDC hDC)
 {
-	MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
+	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
+	MoveToEx(hDC, (int)m_vPoint[0].x + iScrollX, (int)m_vPoint[0].y, nullptr);
+
 	for (int i = 0; i < 5; ++i)
 	{
-		LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
+		LineTo(hDC, (int)m_vPoint[i].x + iScrollX, (int)m_vPoint[i].y);
 
 	}
 }
