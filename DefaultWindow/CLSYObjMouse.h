@@ -20,11 +20,21 @@ private:
 	POINT m_ptCurr;
 	int m_iCnt;
 
+	bool m_bPressed;
+
 	bool m_bMarking;
 
 
 	//CLSYObjFruit* m_pTmpFruit;
 	CLSYObjKnifeMark* m_pKnifeMark;
+
+	float m_fCoolTime;
 	
+	RECT m_tCoolTimeEdgeRect;
+	RECT m_tCoolTimeFillRect;
+
+	bool m_bSkill;
+	float m_fSkillTimer;
+	float m_fSkillIntervalTimer;
 };
 

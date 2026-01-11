@@ -5,8 +5,12 @@ class CLSYObjFruit final: public CLSYObj
 public:
 	enum FRUIT_OPT
 	{
+		FROPT_ARROW,
+		FROPT_JUSIN,
 		FROPT_TEST,
+
 		FROPT_PART,
+		FROPT_DRAW,
 		FRUIT_OPT_END
 	};
 public:
@@ -58,7 +62,6 @@ private:
 
 	bool m_bCut;
 
-	bool m_bDead;
 
 	bool m_bThrow;
 

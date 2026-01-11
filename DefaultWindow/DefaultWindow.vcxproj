@@ -74,6 +74,10 @@
     <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(DXSDK_DIR)lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -158,6 +162,7 @@
     <ClInclude Include="CLSYObjMouse.h" />
     <ClInclude Include="CSceneLSYFruitNinja.h" />
     <ClInclude Include="KJJ_CheckPoint.h" />
+    <ClInclude Include="CSceneLSYLineEidt.h" />
     <ClInclude Include="LSYDefine.h" />
     <ClInclude Include="CLeftDownLeg.h" />
     <ClInclude Include="CLeftShose.h" />
@@ -221,6 +226,7 @@
     <ClCompile Include="CRightShose.cpp" />
     <ClCompile Include="CRightUpLeg.cpp" />
     <ClCompile Include="CScene.cpp" />
+    <ClCompile Include="CSceneLSYLineEidt.cpp" />
     <ClCompile Include="CSceneLSYTest.cpp" />
     <ClCompile Include="CSceneMgr.cpp" />
     <ClCompile Include="CScrollMgr.cpp" />

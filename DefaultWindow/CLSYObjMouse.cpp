@@ -4,11 +4,16 @@
 #include "CObjMgr.h"
 #include "CLSYObjKnifeMark.h"
 #include "CAbstractFactory.h"
+#include "CDeltaMgr.h"
 
 CLSYObjMouse::CLSYObjMouse():
 	m_iCnt(0),
 	m_bMarking(false),
-	m_pKnifeMark(nullptr)
+	m_fCoolTime(0.f),
+	m_pKnifeMark(nullptr),
+	m_bSkill(false),
+	m_fSkillIntervalTimer(0.f),
+	m_fSkillTimer(0.f)
 {
 	ZeroMemory(&m_ptBefore, sizeof(m_ptBefore));
 	ZeroMemory(&m_ptCurr, sizeof(m_ptCurr));
@@ -23,171 +28,154 @@ void CLSYObjMouse::Initialize()
 	m_tRectSides = { 10, 10 };
 	m_tInfo.vLook = { 0.f, -1.f, 0.f };
 
-	CLSYObjKnifeMark* pKnifeMark = dynamic_cast<CLSYObjKnifeMark*>(CAbstractFactory<CLSYObjKnifeMark>::Create());
-	CObjMgr::Get_Instance()->AddObject(OBJ_LSY_MOUSE, pKnifeMark);
-	m_pKnifeMark = pKnifeMark;
+	//ShowCursor(false);
 }
 
 int CLSYObjMouse::Update()
 {
+	
 	POINT		ptMouse{};
 	GetCursorPos(&ptMouse);
 	ScreenToClient(g_hWnd, &ptMouse);
 	m_tInfo.vPos.x = ptMouse.x;
 	m_tInfo.vPos.y = ptMouse.y;
 
+
+	if (m_fCoolTime <= 1.f)
+	{
+		m_fCoolTime += 0.002f;
+	}
+
+	int coolTimeHalfWidth = 5;
+	int coolTimeHalfHeight = 20;
+	int coolTimeMoveX = 20;
+	int coolTimeMoveY = 10;
+
+	m_tCoolTimeEdgeRect.left = coolTimeMoveX + m_tInfo.vPos.x - coolTimeHalfWidth;
+	m_tCoolTimeEdgeRect.right = coolTimeMoveX + m_tInfo.vPos.x + coolTimeHalfWidth;
+	m_tCoolTimeEdgeRect.top = coolTimeMoveY + m_tInfo.vPos.y - coolTimeHalfHeight;
+	m_tCoolTimeEdgeRect.bottom = coolTimeMoveY + m_tInfo.vPos.y + coolTimeHalfHeight;
+
+	m_tCoolTimeFillRect.left = coolTimeMoveX + m_tInfo.vPos.x - coolTimeHalfWidth;
+	m_tCoolTimeFillRect.right = coolTimeMoveX + m_tInfo.vPos.x + coolTimeHalfWidth;
+	m_tCoolTimeFillRect.top = coolTimeMoveY + m_tInfo.vPos.y + coolTimeHalfHeight - (coolTimeHalfHeight * 2.f * m_fCoolTime);
+	m_tCoolTimeFillRect.bottom = coolTimeMoveY + m_tInfo.vPos.y + coolTimeHalfHeight;
 	
 
+	if (m_bSkill)
+	{
+		m_fSkillTimer += CDeltaMgr::Get_Instance()->Get_Delta();
+		if (m_fSkillTimer > 0.5f)
+		{
+			m_bSkill = false;
+			m_fSkillTimer = 0.f;
+		}
+
+		m_fSkillIntervalTimer += CDeltaMgr::Get_Instance()->Get_Delta();
+		if (m_fSkillIntervalTimer > 0.01f)
+		{
+			m_fSkillIntervalTimer = 0.f;
+
+			int midX = WINCX >> 1;
+			int midY = WINCY >> 1;
+			int halfPadding = 400;
+			int left = midX - halfPadding;
+			int right = midX + halfPadding;
+			int top = midY - halfPadding;
+			int bottom = midY + halfPadding;
+
+			int randVal;
+
+			randVal = rand() % halfPadding;
+			left += randVal;
+
+			randVal = rand() % halfPadding;
+			right -= randVal;
+
+			randVal = rand() % halfPadding;
+			top += randVal;
+
+			randVal = rand() % halfPadding;
+			bottom -= randVal;
+
+			//cout << "left:" << left << "top;:" << top << "right:" << right << "bottom:" << bottom << endl;
+
+			
+
+			CLSYObjKnifeMark* pKnifeMark = dynamic_cast<CLSYObjKnifeMark*>(CAbstractFactory<CLSYObjKnifeMark>::Create());
+			D3DXVECTOR3 posMark;
+			POINT ptMarkEnd;
+			if (rand() % 2)
+			{
+				posMark = { (float)left, (float)bottom, 0.f };
+				ptMarkEnd = { right,top };
+			}
+			else
+			{
+				posMark = { (float)right, (float)bottom, 0.f };
+				ptMarkEnd = { left,top };
+			}
+			pKnifeMark->Set_Pos(posMark);
+			pKnifeMark->Set_EndPt(ptMarkEnd);
+			pKnifeMark->Slicing(ptMarkEnd);
+			CObjMgr::Get_Instance()->AddObject(OBJ_LSY_MOUSE, pKnifeMark);
+		}
+	}
 	
-	if (false)
+	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LBUTTON))
 	{
-		if (!(m_ptCurr.x == ptMouse.x && m_ptCurr.y == ptMouse.y))
+		if (!m_bPressed)
 		{
-			++m_iCnt;
+			m_bPressed = true;
 
-			if (m_iCnt == 1)
+			
+			//Keydown
 			{
-				m_iCnt = 0;
-
-				m_ptBefore = m_ptCurr;
-				m_ptCurr = ptMouse;
-				LONG width = m_ptCurr.x - m_ptBefore.x;
-				LONG height = m_ptCurr.y - m_ptBefore.y;
-				float r = atan2f(height, width);
-				m_fAngle = D3DXToDegree(r) + 90.f;
-				cout << "--" << endl;
-				cout << "m_ptBefore" << m_ptBefore.x << ", " << m_ptBefore.y << endl;
-				cout << "m_ptCurr" << m_ptCurr.x << ", " << m_ptCurr.y << endl;
-				cout << "m_fAngle" << m_fAngle << endl;
-			}
-		}
-	}
-
-	if (false)
-	{
-		if (!(m_ptCurr.x == ptMouse.x && m_ptCurr.y == ptMouse.y))
-		{
-			LONG width = ptMouse.x - m_ptCurr.x;
-			LONG height = ptMouse.y - m_ptCurr.y;
-			float distance = sqrtf(width * width + height * height);
-
-			if (distance > 10)
-			{
-				m_ptBefore = m_ptCurr;
-				m_ptCurr = ptMouse;
-				LONG width = m_ptCurr.x - m_ptBefore.x;
-				LONG height = m_ptCurr.y - m_ptBefore.y;
-				float r = atan2f(height, width);
-				m_fAngle = D3DXToDegree(r) + 90.f;
-			}
-		}
-	}
-
-
-	if (CKeyMgr::Get_Instance()->Key_Down(VK_LBUTTON))
-	{
-		int x = 0;
-		if (!m_bMarking)
-		{
-			m_bMarking = true;
-
-			{
-				m_pKnifeMark->Set_Pos(m_tInfo.vPos);
-
-				m_ptBefore = m_ptCurr;
-				m_ptCurr = ptMouse;
-			}
-		}
-	}
-
-	if (CKeyMgr::Get_Instance()->Key_Up(VK_LBUTTON))
-	{
-		if (m_bMarking)
-		{
-			m_bMarking = false;
-
-			{
-				//if (true || PtInRect(&m_pTmpFruit->Get_Rect(), ptMouse))
-				//{
-				//	if (!m_pTmpFruit->Get_Cut())
-				//	{
-				//		D3DXVECTOR3 posMark = m_pKnifeMark->Get_Info().vPos;
-				//		POINT ptMark{ (LONG) posMark.x, (LONG) posMark.y};
-				//		m_pTmpFruit->Slice(ptMark, ptMouse);
-				//	}
-				//}
-
-
-
-				list<CObj*> fruits = *CObjMgr::Get_Instance()->Get_ObjList(OBJ_LSY_FRUIT);
-				for (auto iter = fruits.begin(); iter != fruits.end(); ++iter)
+				if (m_fCoolTime > 1.f)
 				{
-					CLSYObjFruit* pFruits = dynamic_cast<CLSYObjFruit*>(*iter);
-					D3DXVECTOR3 posMark = m_pKnifeMark->Get_Info().vPos;
-					POINT ptMark{ (LONG)posMark.x, (LONG)posMark.y };
-					pFruits->Slice(ptMark, ptMouse);
+					m_bSkill = true;
+					m_fCoolTime = 0.f;
+
+					
+
 				}
-
-
-				cout << "sadf " << endl;
-
-
-
-			}
-		}
-	}
-	
-	if (m_bMarking)
-	{
-		if (!(m_ptCurr.x == ptMouse.x && m_ptCurr.y == ptMouse.y))
-		{
-			m_pKnifeMark->Set_EndPt(ptMouse);
-
-
-
-
-
-
-			LONG width = ptMouse.x - m_ptCurr.x;
-			LONG height = ptMouse.y - m_ptCurr.y;
-			float distance = sqrtf(width * width + height * height);
-
-			
-			
-			
-
-			if (false && distance > 5)
-			{
-				cout << "mark!" << endl;
-				m_ptBefore = m_ptCurr;
-				m_ptCurr = ptMouse;
-				LONG width = m_ptCurr.x - m_ptBefore.x;
-				LONG height = m_ptCurr.y - m_ptBefore.y;
-				float r = atan2f(height, width);
-				m_fAngle = D3DXToDegree(r) + 90.f;
-
+				else
 				{
 					CLSYObjKnifeMark* pKnifeMark = dynamic_cast<CLSYObjKnifeMark*>(CAbstractFactory<CLSYObjKnifeMark>::Create());
-					pKnifeMark->Set_Pos(m_tInfo.vPos);
-					pKnifeMark->Set_Angle(m_fAngle);
-					//pKnifeMark->Get_VertexList().push_back({
-					//	{-5.f, -distance, 0.f},
-					//	{5.f, -distance, 0.f},
-					//	{5.f, distance, 0.f},
-					//	{-5.f, distance, 0.f},
-					//	{-5.f, -distance, 0.f}
-					//	});
 					CObjMgr::Get_Instance()->AddObject(OBJ_LSY_MOUSE, pKnifeMark);
+					m_pKnifeMark = pKnifeMark;
 
-
-					//if (PtInRect(&m_pTmpFruit->Get_Rect(), ptMouse))
-					//{
-					//	if (!m_pTmpFruit->Get_Cut())
-					//	{
-					//		m_pTmpFruit->CalcKnifeMark(m_ptCurr, m_ptBefore);
-					//	}
-					//}
+					cout << "Down" << endl;
+					m_pKnifeMark->Reset();
+					m_pKnifeMark->Set_Pos(m_tInfo.vPos);
 				}
+			}
+		}
+
+		// Keypressing
+		{
+			cout << "pressing" << endl;
+			if (m_pKnifeMark)
+			{
+				m_pKnifeMark->Set_EndPt(ptMouse);
+			}
+		}
+	}
+	else
+	{
+		if (m_bPressed)
+		{
+			m_bPressed = false;
+
+			// Keyup
+			{
+				cout << "UP" << endl;
+				if (m_pKnifeMark)
+				{
+					m_pKnifeMark->Slicing(ptMouse);
+				}
+				
+				m_pKnifeMark = nullptr;
 			}
 		}
 	}
@@ -204,6 +192,21 @@ int CLSYObjMouse::Late_Update()
 
 void CLSYObjMouse::Render(HDC hDC)
 {
+	Rectangle(hDC, m_tCoolTimeEdgeRect.left, m_tCoolTimeEdgeRect.top, m_tCoolTimeEdgeRect.right, m_tCoolTimeEdgeRect.bottom);
+	
+	if (m_fCoolTime < 1.f)
+	{
+		HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+		FillRect(hDC, &m_tCoolTimeFillRect, brush);
+		DeleteObject(brush);
+	}
+	else
+	{
+		HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
+		FillRect(hDC, &m_tCoolTimeFillRect, brush);
+		DeleteObject(brush);
+	}
+	
 	CLSYObj::Render(hDC);
 }
 

@@ -19,9 +19,16 @@ public:
 	void	Render(HDC hDC)	override;
 	void	Release()		override;
 
+public:
+	void Slicing(POINT& ptMouse);
+	void Reset();
+
 private:
 	float m_fDeathTimer;
 
 	POINT m_ptEnd;
+
+	bool m_bThick;
+	bool m_bRewind;
 };
 

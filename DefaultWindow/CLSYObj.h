@@ -5,6 +5,7 @@ class CLSYObj :public CObj
 {
 public:
 	CLSYObj():
+		m_bDead(false),
 		m_fAngle(0.f),
 		m_iOption(0)
 	{
@@ -13,6 +14,10 @@ public:
 	};
 
 public:
+	bool Get_Dead()
+	{
+		return m_bDead;
+	}
 	RECT& Get_Rect() { return m_tRect; }
 
 	void Set_Angle(float fAngle) { m_fAngle = fAngle; }
@@ -56,5 +61,6 @@ protected:
 	//D3DXVECTOR3 m_posRectOrigin;
 
 
+	bool m_bDead;
 };
 
