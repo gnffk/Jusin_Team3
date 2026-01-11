@@ -36,10 +36,10 @@ void CKMSBox::Render(HDC hDC)
 
     DeleteObject(brush);
 
-    for (int i = 0; i < 20; ++i) {
+    for (int i = 0; i < 30; ++i) {
      
       
-         Rectangle(hDC, 100.f* i + 200  + iScrollX, 540.f, 300.f * i + iScrollX, 570.f);
+         Rectangle(hDC, 100.f* i +  iScrollX, 540.f, 300.f * i + iScrollX, 570.f);
         
  
        
