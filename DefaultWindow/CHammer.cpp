@@ -155,10 +155,10 @@ int CHammer::Late_Update()
 
 	m_fHead_Distance -= vMouse_Movement.y / 3;
 
-	if (m_fHead_Distance < 30.f)
-		m_fHead_Distance = 30.f;
-	else if (m_fHead_Distance > 70.f)
-		m_fHead_Distance = 70.f;
+	if (m_fHead_Distance < 20.f)
+		m_fHead_Distance = 20.f;
+	else if (m_fHead_Distance > 80.f)
+		m_fHead_Distance = 80.f;
 
 	m_bIs_Col = false;
 	return 0;

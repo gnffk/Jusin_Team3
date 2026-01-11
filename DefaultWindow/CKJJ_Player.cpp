@@ -61,7 +61,7 @@ int CKJJ_Player::Late_Update()
 
 	if (bIs_falling)
 	{
-		m_vecMovement.push_back({ 0.f,0.5f,0.f });		// 중력
+		m_vecMovement.push_back({ 0.f,0.3f,0.f });		// 중력
 	}
 
 	for (vector<D3DXVECTOR3>::iterator iter = m_vecMovement.begin();
