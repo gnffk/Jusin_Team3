@@ -37,12 +37,12 @@ int CKMSLine::Late_Update()
 
 void CKMSLine::Render(HDC hDC)
 {
-	MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
-	for (int i = 0; i < 5; ++i)
-	{
-		LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
+	//MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
+	//for (int i = 0; i < 5; ++i)
+	//{
+	//	LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
 
-	}
+	//}
 }
 
 void CKMSLine::Release()
