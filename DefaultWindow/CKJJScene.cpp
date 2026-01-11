@@ -5,12 +5,18 @@
 #include "CKJJ_Player.h"
 #include "CBox.h"
 #include "KJJ_CollisionMgr.h"
+#include "CSceneMgr.h"
+#include "KJJ_CheckPoint.h"	
 
 void CKJJScene::Initialize()
 {
 	CObj* pPlayer = new CKJJ_Player;
 	pPlayer->Initialize();
 	CObjMgr::Get_Instance()->AddObject(OBJ_PLAYER, pPlayer);
+
+	CObj* pCheckPoint = new KJJ_CheckPoint;
+	pCheckPoint->Initialize();
+	CObjMgr::Get_Instance()->AddObject(OBJ_BOX, pCheckPoint);
 
 	CBox* pFloor = new CBox;
 	pFloor->Set_Size(600, 100, 0);
@@ -38,6 +44,11 @@ void CKJJScene::Initialize()
 int CKJJScene::Update()
 {
 	CObjMgr::Get_Instance()->Update();
+	if (CObjMgr::Get_Instance()->Get_ObjList(OBJ_PLAYER)->size() == 0)
+	{
+		CObjMgr::Get_Instance()->Delete_ID(OBJ_BOX);
+		CSceneMgr::Get_Instance()->Scene_Change(SC_LSY_FRUIT_NINJA);
+	}
 	return 0;
 }
 

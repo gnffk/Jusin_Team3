@@ -133,6 +133,9 @@
     <Filter Include="KMS\01. Obj\Player\Body\Body">
       <UniqueIdentifier>{4eb295a7-1a2e-4c30-8b13-1544dc1a45f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="KJJ\01. Obj\04. CheckPoint">
+      <UniqueIdentifier>{50f023cc-6c3f-4b4a-a7cf-5cb2daab4c9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -270,6 +273,12 @@
     <ClInclude Include="LSYDefine.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="CSceneLSYFruitNinja.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="KJJ_CheckPoint.h">
+      <Filter>KJJ\01. Obj\04. CheckPoint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -391,6 +400,12 @@
     </ClCompile>
     <ClCompile Include="CLSYObjMouse.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneLSYFruitNinja.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="KJJ_CheckPoint.cpp">
+      <Filter>KJJ\01. Obj\04. CheckPoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

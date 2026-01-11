@@ -198,13 +198,13 @@ void CHammer::Collision(CKJJObj* pObj, D3DXVECTOR3 Vec)
 	{
 		if (m_tInfo.vPos.x < pObj->Get_Info().vPos.x)
 		{
-			m_tInfo.vPos += Vec;
-			m_pPlayer->Move_Pos(Vec);
+			m_tInfo.vPos += 1.1f * Vec;
+			m_pPlayer->Move_Pos(1.1f * Vec);
 		}
 		else
 		{
-			m_tInfo.vPos -= Vec;
-			m_pPlayer->Move_Pos(-Vec);
+			m_tInfo.vPos -= 1.1f * Vec;
+			m_pPlayer->Move_Pos(-1.1f * Vec);
 		}
 	}
 	if (Vec.y != 0.f)

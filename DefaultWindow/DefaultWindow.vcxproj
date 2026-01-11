@@ -157,6 +157,7 @@
     <ClInclude Include="CLSYObjKnifeMark.h" />
     <ClInclude Include="CLSYObjMouse.h" />
     <ClInclude Include="CSceneLSYFruitNinja.h" />
+    <ClInclude Include="KJJ_CheckPoint.h" />
     <ClInclude Include="LSYDefine.h" />
     <ClInclude Include="CLeftDownLeg.h" />
     <ClInclude Include="CLeftShose.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="CScrollMgr.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
     <ClCompile Include="DefaultWindow.cpp" />
+    <ClCompile Include="KJJ_CheckPoint.cpp" />
     <ClCompile Include="KJJ_CollisionMgr.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
