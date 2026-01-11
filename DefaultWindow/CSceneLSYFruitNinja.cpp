@@ -24,6 +24,7 @@ CSceneLSYFruitNinja::~CSceneLSYFruitNinja()
 
 void CSceneLSYFruitNinja::Initialize()
 {
+	CObjMgr::Get_Instance()->Release();
 	CLSYObjMouse* pMouse = dynamic_cast<CLSYObjMouse*>(CAbstractFactory<CLSYObjMouse>::Create());
 	CObjMgr::Get_Instance()->AddObject(OBJ_LSY_MOUSE, pMouse);
 	m_pMouse = pMouse;

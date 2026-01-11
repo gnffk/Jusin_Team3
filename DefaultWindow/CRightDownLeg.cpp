@@ -115,6 +115,7 @@ void CRightDownLeg::Release()
 
 void CRightDownLeg::Key_Input()
 {
+
 	if (CKeyMgr::Get_Instance()->Key_Pressing('P')) {
 		//cout << m_fAngle << endl;
 		m_fAngle += D3DXToRadian(3.f);

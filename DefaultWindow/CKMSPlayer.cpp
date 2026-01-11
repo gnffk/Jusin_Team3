@@ -3,6 +3,8 @@
 #include "CKeyMgr.h"
 #include "CKMSCollisionMgr.h"
 #include "CScrollMgr.h"
+#include "CSceneMgr.h"
+#include "CObjMgr.h"
 
 CKMSPlayer::CKMSPlayer() // 얜 부모
 {
@@ -64,7 +66,7 @@ int CKMSPlayer::Update()
 
 	
 	// 만약에 모두가 true 이면 실행 X
-	if (!m_bLeftIs || !m_bRightIs || !m_bAngleIs) {
+	if (m_bGravity) {
 		m_tInfo.vPos.y -= m_tInfo.vDir.y * m_fGravity * 0.7f;
 	}
 	//m_tInfo.vPos -= Dis/10;
@@ -89,6 +91,8 @@ int CKMSPlayer::Update()
 	cout << "Prev.x : " << m_prePos.x<< " Cur.x" << m_tInfo.vPos.x<< endl;
 	cout << "차이값 : " << Dis.x << endl;
 	CScrollMgr::Get_Instance()->Set_ScrollX(Dis.x);
+
+	
 
 	return OBJ_NOEVENT;
 }
@@ -142,31 +146,35 @@ void CKMSPlayer::Key_Input()
 	//}
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing('R')) {
-		m_tInfo.vPos = { 400.f, 300.f, 0.f };
+		m_tInfo.vPos = { m_tInfo.vPos.x, 300.f, 0.f };
 
 		m_tInfo.vLook = { 0.f, -1.f, 0.f };
 		m_fAngle = 0.f;
 		m_fSpeed = 2.f;
+		m_bGravity = true;
+	}
+
+	if (CKeyMgr::Get_Instance()->Key_Pressing('T')) {
+		m_tInfo.vPos = { m_tInfo.vPos.x, 300.f, 0.f };
+		m_tInfo.vPos.x += 10.f;
+		m_tInfo.vLook = { 0.f, -1.f, 0.f };
+		m_fAngle = 0.f;
+		m_fSpeed = 2.f;
+		m_bGravity = true;
 	}
 
 
-	if (GetAsyncKeyState(VK_DOWN))
-	{
-		m_tInfo.vDir.x = m_tInfo.vLook.x * cosf(m_fAngle) - m_tInfo.vLook.y * sinf(m_fAngle) * -1;
-		m_tInfo.vDir.y = m_tInfo.vLook.x * sinf(m_fAngle) + m_tInfo.vLook.y * cosf(m_fAngle);
-
-		D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
-
-		m_tInfo.vPos -= m_tInfo.vDir * m_fSpeed;
-	}
 }
 
 
 void CKMSPlayer::Add_Point() {
-	m_tInfo.vDir.x = m_tInfo.vLook.x * cosf(m_fAngle) - m_tInfo.vLook.y * sinf(m_fAngle) ;
-	m_tInfo.vDir.y = m_tInfo.vLook.x * sinf(m_fAngle) + m_tInfo.vLook.y * cosf(m_fAngle);
-	//cout << "Dir x : " << m_tInfo.vDir.x << " Dir y : " << m_tInfo.vDir.y << endl;
-	D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
+	if (m_bGravity) {
+		m_tInfo.vDir.x = m_tInfo.vLook.x * cosf(m_fAngle) - m_tInfo.vLook.y * sinf(m_fAngle);
+		m_tInfo.vDir.y = m_tInfo.vLook.x * sinf(m_fAngle) + m_tInfo.vLook.y * cosf(m_fAngle);
+		//cout << "Dir x : " << m_tInfo.vDir.x << " Dir y : " << m_tInfo.vDir.y << endl;
+		D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
 
-	m_tInfo.vPos += m_tInfo.vDir * m_fSpeed * 10;
+		m_tInfo.vPos += m_tInfo.vDir * m_fSpeed * 10;
+	}
+
 }

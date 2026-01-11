@@ -117,6 +117,8 @@ void CLeftDownLeg::Release()
 
 void CLeftDownLeg::Key_Input()
 {
+	
+
 	if (CKeyMgr::Get_Instance()->Key_Pressing('W')) {
 		//cout << m_fAngle << endl;
 		m_fAngle += D3DXToRadian(3.f);

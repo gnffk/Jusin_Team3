@@ -8,6 +8,7 @@
 #include "CSceneLSYTest.h"
 #include "CSceneLSYFruitNinja.h"
 #include "CSceneLSYLineEidt.h"
+#include "CObjMgr.h"
 CSceneMgr* CSceneMgr::m_pInstance = nullptr;
 
 CSceneMgr::CSceneMgr() : m_pScene(nullptr), m_ePreScene(SC_END), m_eCurScene(SC_MINSU)
@@ -25,6 +26,7 @@ void CSceneMgr::Scene_Change(SCENEID eID)
 
 	if (m_ePreScene != m_eCurScene)	// 씬 변경이 가능
 	{
+	
 		Safe_Delete(m_pScene);
 
 		switch (m_eCurScene)

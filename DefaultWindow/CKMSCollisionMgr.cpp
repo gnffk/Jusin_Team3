@@ -294,6 +294,12 @@ void CKMSCollisionMgr::CheckLine(CObj* _Body, CObj* _Line)
 			}
 		}
 
+		if (dynamic_cast<CKMSObj*>(_Body)->GetKMSObjType() == KMSOBJ_BODY) {
+			if (i.y >= 590.f) {
+
+				dynamic_cast<CKMSPlayer*>(dynamic_cast<CKMSObj*>(_Body)->Get_RootObject())->Set_Gravity(false);
+			}
+		}
 		Count++;
 	}
 	

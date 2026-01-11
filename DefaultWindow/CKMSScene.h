@@ -18,5 +18,6 @@ public:
 public:
 	CObj* p_Line;
 	CObj* p_LeftShose;
+	CObj* p_Player;
 };
 

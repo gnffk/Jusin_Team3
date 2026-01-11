@@ -19,6 +19,7 @@ CKJJScene2::~CKJJScene2()
 
 void CKJJScene2::Initialize()
 {
+	CObjMgr::Get_Instance()->Release();
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Mario.bmp", L"Mario");
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Jar.bmp", L"Jar");
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/KJJBack.bmp", L"KJJBack");

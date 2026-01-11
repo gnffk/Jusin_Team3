@@ -16,6 +16,7 @@ CLogo::~CLogo()
 
 void CLogo::Initialize()
 {
+	CObjMgr::Get_Instance()->Release();
 }
 
 int CLogo::Update()

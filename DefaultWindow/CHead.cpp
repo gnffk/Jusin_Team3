@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CHead.h"
 #include "CScrollMgr.h"
+#include "CKeyMgr.h"
 
 CHead::CHead()
 {
@@ -85,6 +86,8 @@ void CHead::Render(HDC hDC)
 		LineTo(hDC, (int)m_vPoint[i].x + iScrollX, (int)m_vPoint[i].y);
 
 	}
+
+
 }
 
 void CHead::Release()
@@ -93,4 +96,5 @@ void CHead::Release()
 
 void CHead::Key_Input()
 {
+	
 }

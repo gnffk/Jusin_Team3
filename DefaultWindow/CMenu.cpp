@@ -108,6 +108,7 @@ void CMenu::Late_Update()
 
 void CMenu::Render(HDC hDC)
 {
+	SetTextColor(hDC, RGB(0, 0, 0));
 	Rectangle(hDC, m_msRect.left, m_msRect.top, m_msRect.right, m_msRect.bottom);
 	Rectangle(hDC, m_jjRect.left, m_jjRect.top, m_jjRect.right, m_jjRect.bottom);
 	Rectangle(hDC, m_syRect.left, m_syRect.top, m_syRect.right, m_syRect.bottom);

@@ -2,6 +2,7 @@
 #include "CPelvis.h"
 #include "CKMSObj.h"
 #include "CScrollMgr.h"
+#include "CKeyMgr.h"
 
 CPelvis::CPelvis()
 {
@@ -33,6 +34,7 @@ void CPelvis::Initialize()
 
 int CPelvis::Update()
 {
+	Key_Input();
 	// 크 -> 자 -> 이 -> 공 -> 부
 	D3DXMATRIX		matScale, matRotZ, matTrans, matParRotZ, matParMat;
 	D3DXVECTOR3		VecParPos;
@@ -93,6 +95,7 @@ void CPelvis::Release()
 
 void CPelvis::Key_Input()
 {
+	
 }
 
 

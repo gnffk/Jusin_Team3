@@ -23,6 +23,7 @@
 #include "CRightDownArm.h"
 
 #include "CKMSBox.h"
+#include "CSceneMgr.h"
 CKMSScene::CKMSScene()
 {
 }
@@ -37,11 +38,15 @@ void CKMSScene::Initialize()
     p_Line = CAbstractFactory<CKMSLine>::Create();
 	CObjMgr::Get_Instance()->AddObject(OBJ_RUNLINE, p_Line);
 
-	CObjMgr::Get_Instance()->AddObject(OBJ_RUNLINE, CAbstractFactory<CKMSBox>::Create());
 
-	CObj* p_Player = CAbstractFactory<CKMSPlayer>::Create();
+
+	p_Player = CAbstractFactory<CKMSPlayer>::Create();
 	CObjMgr::Get_Instance()->AddObject(OBJ_PLAYER,p_Player);
 	dynamic_cast<CKMSPlayer*>(p_Player)->Set_CollisionLine(p_Line);
+
+	CObj* p_box = CAbstractFactory<CKMSBox>::Create();
+	CObjMgr::Get_Instance()->AddObject(OBJ_RUNLINE, p_box);
+	dynamic_cast<CKMSBox*>(p_box)->Set_Obj(p_Player);
 
 	CObj* p_Pelvis = CAbstractFactory<CPelvis>::Create();
 	dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_Pelvis);
@@ -133,23 +138,28 @@ void CKMSScene::Initialize()
 	CObj* p_Body = CAbstractFactory<CBody>::Create();
 	dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_Body);
 	dynamic_cast<CKMSObj*>(p_Body)->Set_ParentObject(p_Pelvis);
+	dynamic_cast<CKMSObj*>(p_Body)->Set_RootObject(p_Player);
 
 	CObj* p_Head = CAbstractFactory<CHead>::Create();
 	dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_Head);
 	dynamic_cast<CKMSObj*>(p_Head)->Set_ParentObject(p_Body);
+	dynamic_cast<CKMSObj*>(p_Head)->Set_RootObject(p_Player);
 	// Left Arm
+
 	
 		// Left Up Arm
 		CObj* p_LeftUpArm = CAbstractFactory<CLeftUpArm>::Create();
 		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftUpArm);
 		dynamic_cast<CKMSObj*>(p_LeftUpArm)->Set_ParentObject(p_Body);
 		dynamic_cast<CKMSObj*>(p_LeftUpLeg)->Set_Arm(p_LeftUpArm);
+		dynamic_cast<CKMSObj*>(p_LeftUpArm)->Set_RootObject(p_Player);
 
 		// Left Down Arm
 		CObj* p_LeftDownArm = CAbstractFactory<LeftDownArm>::Create();
 		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_LeftDownArm);
 		dynamic_cast<CKMSObj*>(p_LeftDownArm)->Set_ParentObject(p_LeftUpArm);
 		dynamic_cast<CKMSObj*>(p_LeftDownLeg)->Set_Arm(p_LeftDownArm);
+		dynamic_cast<CKMSObj*>(p_LeftDownArm)->Set_RootObject(p_Player);
 
 		// Constraint - Left Up  <-> Left Down
 		CObj* p_LeftUpDownArmConstraint = CAbstractFactory<CConstraint>::Create();
@@ -170,12 +180,14 @@ void CKMSScene::Initialize()
 		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_RightUpArm);
 		dynamic_cast<CKMSObj*>(p_RightUpArm)->Set_ParentObject(p_Body);
 		dynamic_cast<CKMSObj*>(p_RightUpLeg)->Set_Arm(p_RightUpArm);
+		dynamic_cast<CKMSObj*>(p_RightUpArm)->Set_RootObject(p_Player);
 
 		// Right Down Arm
 		CObj* p_RightDownArm = CAbstractFactory<CRightDownArm>::Create();
 		dynamic_cast<CKMSObj*>(p_Player)->Add_SubObject(p_RightDownArm);
 		dynamic_cast<CKMSObj*>(p_RightDownArm)->Set_ParentObject(p_RightUpArm);
 		dynamic_cast<CKMSObj*>(p_RightDownLeg)->Set_Arm(p_RightDownArm);
+		dynamic_cast<CKMSObj*>(p_RightDownArm)->Set_RootObject(p_Player);
 
 		// Constraint - Right Up  <-> Right Down
 		CObj* p_RightUpDownArmConstraint = CAbstractFactory<CConstraint>::Create();
@@ -213,6 +225,12 @@ int CKMSScene::Update()
 void CKMSScene::Late_Update()
 {
 	CObjMgr::Get_Instance()->Late_Update();
+	
+	if (p_Player->Get_Info().vPos.x >= 2500.f) {
+		CObjMgr::Get_Instance()->Release();
+		CSceneMgr::Get_Instance()->Scene_Change(SC_LOGO);
+
+	}
 }
 
 void CKMSScene::Render(HDC hDC)
