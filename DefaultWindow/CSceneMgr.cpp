@@ -3,6 +3,7 @@
 #include "CMenu.h"
 #include "CLogo.h"
 #include "CKJJScene.h"
+#include "CKJJScene2.h"
 #include "CKMSScene.h"
 #include "CSceneLSYTest.h"
 #include "CSceneLSYFruitNinja.h"
@@ -54,9 +55,13 @@ void CSceneMgr::Scene_Change(SCENEID eID)
 			break;
 
 		case SC_KJJ:
-
 			m_pScene = new CKJJScene;
 			break;
+			
+		case SC_KJJ2:
+			m_pScene = new CKJJScene2;
+			break;
+
 		case SC_MINSU:
 			m_pScene = new CKMSScene;
 			break;

@@ -48,11 +48,12 @@ void CKJJScene::Initialize()
 
 int CKJJScene::Update()
 {
+	//system("cls");
 	CObjMgr::Get_Instance()->Update();
 	if (CObjMgr::Get_Instance()->Get_ObjList(OBJ_PLAYER)->size() == 0)
 	{
 		CObjMgr::Get_Instance()->Delete_ID(OBJ_BOX);
-		CSceneMgr::Get_Instance()->Scene_Change(SC_LSY_FRUIT_NINJA);
+		CSceneMgr::Get_Instance()->Scene_Change(SC_KJJ2);
 	}
 	return 0;
 }

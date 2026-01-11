@@ -11,13 +11,18 @@ KJJ_CheckPoint::KJJ_CheckPoint()
     m_tInfo.vPos = { 140.f, 400.f, 0.f };
     m_vScale = { 1.f,1.f,1.f };
 
+
+
+    m_vAxisX = { m_vSize.x / 2.f,0.f,0.f };
+    m_vAxisY = { 0.f,-m_vSize.y / 2.f, 0.f };
+}
+
+void KJJ_CheckPoint::Initialize()
+{
     m_vPoint[0] = { -m_vSize.x / 2.f, -m_vSize.y / 2.f, 0.f };
     m_vPoint[1] = { m_vSize.x / 2.f, -m_vSize.y / 2.f, 0.f };
     m_vPoint[2] = { m_vSize.x / 2.f, m_vSize.y / 2.f, 0.f };
     m_vPoint[3] = { -m_vSize.x / 2.f, m_vSize.y / 2.f, 0.f };
-
-    m_vAxisX = { m_vSize.x / 2.f,0.f,0.f };
-    m_vAxisY = { 0.f,-m_vSize.y / 2.f, 0.f };
 
     CKJJObj::Update_matWorld();
 
@@ -26,12 +31,6 @@ KJJ_CheckPoint::KJJ_CheckPoint()
         m_vOriginPoint[i] = m_vPoint[i];
         D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
     }
-
-}
-
-void KJJ_CheckPoint::Initialize()
-{
-
 }
 
 int KJJ_CheckPoint::Update()

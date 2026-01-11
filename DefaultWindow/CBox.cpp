@@ -68,6 +68,6 @@ void CBox::Release()
 
 void CBox::Collision(CKJJObj* pObj, D3DXVECTOR3 Vec)
 {
-    cout << "Ãæ?" << endl;
+    //cout << "Ãæ?" << endl;
 }
 

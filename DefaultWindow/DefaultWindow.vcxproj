@@ -152,6 +152,7 @@
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CKJJObj.h" />
     <ClInclude Include="CKJJScene.h" />
+    <ClInclude Include="CKJJScene2.h" />
     <ClInclude Include="CKJJ_Player.h" />
     <ClInclude Include="CKMSCollisionMgr.h" />
     <ClInclude Include="CKMSLine.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CKJJObj.cpp" />
     <ClCompile Include="CKJJScene.cpp" />
+    <ClCompile Include="CKJJScene2.cpp" />
     <ClCompile Include="CKJJ_Player.cpp" />
     <ClCompile Include="CKMSCollisionMgr.cpp" />
     <ClCompile Include="CKMSLine.cpp" />

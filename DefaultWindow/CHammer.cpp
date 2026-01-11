@@ -14,12 +14,12 @@ CHammer::CHammer() :
 {
 	m_fAngle =-90.f;
 	m_fHead_Distance = 100.f;
-	m_fHammer_Length = 100.f;
+	m_fHammer_Length = 60.f;
 
 	m_tInfo.vPos = { m_fHead_Distance,0.f,0.f };
 
 	m_vSize = { 6.f, 10.f, 0.f };
-	m_vScale = { 2.f,2.f,2.f };
+	m_vScale = { 1.5f,1.5f,1.5f };
 }
 
 CHammer::~CHammer()
@@ -155,10 +155,10 @@ int CHammer::Late_Update()
 
 	m_fHead_Distance -= vMouse_Movement.y / 3;
 
-	if (m_fHead_Distance < 40.f)
-		m_fHead_Distance = 40.f;
-	else if (m_fHead_Distance > 150.f)
-		m_fHead_Distance = 150.f;
+	if (m_fHead_Distance < 30.f)
+		m_fHead_Distance = 30.f;
+	else if (m_fHead_Distance > 70.f)
+		m_fHead_Distance = 70.f;
 
 	m_bIs_Col = false;
 	return 0;

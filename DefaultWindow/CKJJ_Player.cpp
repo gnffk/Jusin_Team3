@@ -139,6 +139,7 @@ void CKJJ_Player::Collision(CKJJObj* pObj, D3DXVECTOR3 Vec)
 		return;
 	}
 	m_tInfo.vDir = { 0.f,0.f,0.f };
+	m_fSpeed = 0.f;
 	if (Vec.x != 0.f)
 	{
 		if (m_tInfo.vPos.x < pObj->Get_Info().vPos.x)
