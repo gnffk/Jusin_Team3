@@ -98,8 +98,9 @@ void CSceneLSYFruitNinja::Render(HDC hDC)
 
 void CSceneLSYFruitNinja::Release()
 {
-	CObjMgr::Get_Instance()->Delete_ID(OBJ_LSY_MOUSE);
-	CObjMgr::Get_Instance()->Delete_ID(OBJ_LSY_FRUIT);
+	//CObjMgr::Get_Instance()->Delete_ID(OBJ_LSY_MOUSE);
+	//CObjMgr::Get_Instance()->Delete_ID(OBJ_LSY_FRUIT);
+	CObjMgr::Get_Instance()->Release();
 }
 
 void CSceneLSYFruitNinja::SpawnThrow()
