@@ -7,7 +7,7 @@
 #include "CSceneLSYTest.h"
 #include "CSceneLSYFruitNinja.h"
 #include "CSceneLSYLineEidt.h"
-CSceneMgr* CSceneMgr::m_pInstance = nullptr;
+CSceneMgr* CSceneMgr::m_pInstance = nullptr; 
 
 CSceneMgr::CSceneMgr() : m_pScene(nullptr), m_ePreScene(SC_END), m_eCurScene(SC_MINSU)
 {
